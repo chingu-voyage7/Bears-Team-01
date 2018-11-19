@@ -8,7 +8,7 @@ const helmet = require('helmet');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -44,7 +44,7 @@ app.use(cookieParser());
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
-app.use('/api/user', userRoutes);
+app.use('/api/user', userRouter);
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
