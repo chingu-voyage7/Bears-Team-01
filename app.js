@@ -7,8 +7,8 @@ const helmet = require('helmet');
 // Import routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const authRouter = require('./routes/authRoutes');
-const userRouter = require('./routes/userRoutes');
+const authRouter = require('./routes/authRouter');
+const userRouter = require('./routes/userRouter');
 
 const app = express();
 
