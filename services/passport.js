@@ -20,7 +20,8 @@ passport.use(
     {
       clientID: googleClientID,
       clientSecret: googleClientSecret,
-      callbackURL: '/auth/google/callback',
+      // callbackURL: '/auth/google/callback',
+      callbackURL: 'http://localhost:5000/auth/google/callback', // CHANGE BACK TO RELATIVE PATH WHEN DEPLOYING
       proxy: true
     },
 
