@@ -8,6 +8,7 @@ const helmet = require('helmet');
 // Import routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const beersRouter = require('./routes/beers');
 
 const app = express();
 
@@ -42,6 +43,7 @@ app.use(cookieParser());
 // Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/beers', beersRouter);
 
 
 // The "catchall" handler: for any request that doesn't
