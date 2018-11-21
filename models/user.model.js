@@ -5,7 +5,7 @@ const UserSchema = mongoose.Schema({
   authId: {type: String, required: true},
   username: {type: String, required: true},
   picture: String,
-  isAdmin: {type: Boolean, required: true}
+  isAdmin: Boolean
 })
 
-module.exports = mongoose.model("Beer", UserSchema);
+module.exports = mongoose.model("User", UserSchema);
