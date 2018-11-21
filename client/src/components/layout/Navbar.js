@@ -35,7 +35,7 @@ class Navbar extends Component {
                   <button onClick={this.handleToggleModal} className="btn btn-link nav-link">Sign Up</button>
                 </li>
                 <li className="nav-item">
-                  <button className="btn btn-link nav-link" to="/login">Login</button>
+                  <Link className="btn btn-link nav-link" to="/login">Login</Link>
                 </li>
               </ul>
             </div>
