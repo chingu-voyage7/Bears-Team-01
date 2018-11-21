@@ -9,6 +9,9 @@ class Navbar extends Component {
   handleToggleModal = () => {
     this.setState(() => ({ isActive: !this.state.isActive }));
   }
+  handleRequestClose = () => {
+    this.setState(() => ({ isActive: false }));
+  }
   render() {
     return (
       <div>
@@ -29,7 +32,7 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <button onClick={this.handleToggleModal} className="nav-link" to="/register">Sign Up</button>
+                  <button onClick={this.handleToggleModal} className="nav-link">Sign Up</button>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">Login</Link>
@@ -40,6 +43,7 @@ class Navbar extends Component {
         </nav>
         <RegisterModal 
           isOpen={this.state.isActive}
+          handleRequestClose={this.handleRequestClose}
         />
       </div>
     )

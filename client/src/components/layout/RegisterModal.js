@@ -8,7 +8,7 @@ const RegisterModal = (props) => (
       contentLabel="Register"
       ariaHideApp={false}
     >
-      <button>X</button>
+    <button onClick={props.handleRequestClose}>X</button>
       <h2>Sign Up</h2>
       <button>Sign up with Gmail</button>
       <button>Sign up with Facebook</button>
