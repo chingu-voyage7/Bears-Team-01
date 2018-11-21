@@ -4,7 +4,6 @@ import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Welcome from './components/WelcomePage';
 import Login from './components/LoginPage';
-import Register from './components/RegisterPage';
 
 import './App.css';
 
@@ -18,7 +17,6 @@ class App extends Component {
               <Switch>
                <Route path="/" component={Welcome} exact={true} />
                <Route path="/login" component={Login} exact={true} />
-               <Route path="/register" component={Register} exact={true} />
               </Switch>
              </div>
           <Footer />

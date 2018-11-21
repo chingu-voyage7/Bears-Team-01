@@ -4,10 +4,11 @@ import Modal from 'react-modal';
 const RegisterModal = (props) => (
   <div>
     <Modal
-      isOpen={true}
+      isOpen={props.isOpen}
       contentLabel="Register"
       ariaHideApp={false}
     >
+      <button>X</button>
       <h2>Sign Up</h2>
       <button>Sign up with Gmail</button>
       <button>Sign up with Facebook</button>

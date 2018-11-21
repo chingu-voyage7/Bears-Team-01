@@ -3,6 +3,12 @@ import { Link } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
 
 class Navbar extends Component {
+  state = {
+    isActive: false
+  }
+  handleToggleModal = () => {
+    this.setState(() => ({ isActive: !this.state.isActive }));
+  }
   render() {
     return (
       <div>
@@ -23,7 +29,7 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/register">Sign Up</Link>
+                  <button onClick={this.handleToggleModal} className="nav-link" to="/register">Sign Up</button>
                 </li>
                 <li className="nav-item">
                   <Link className="nav-link" to="/login">Login</Link>
@@ -32,7 +38,9 @@ class Navbar extends Component {
             </div>
           </div>
         </nav>
-        <RegisterModal />
+        <RegisterModal 
+          isOpen={this.state.isActive}
+        />
       </div>
     )
   }
