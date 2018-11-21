@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import RegisterModal from './RegisterModal';
 
 class Navbar extends Component {
+  state = {
+    isActive: false
+  }
+  handleToggleModal = () => {
+    this.setState(() => ({ isActive: !this.state.isActive }));
+  }
+  handleRequestClose = () => {
+    this.setState(() => ({ isActive: false }));
+  }
   render() {
     return (
       <div>
@@ -22,15 +32,19 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/register">Sign Up</Link>
+                  <button onClick={this.handleToggleModal} className="btn btn-link nav-link">Sign Up</button>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">Login</Link>
+                  <Link className="btn btn-link nav-link" to="/login">Login</Link>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
+        <RegisterModal 
+          isOpen={this.state.isActive}
+          handleRequestClose={this.handleRequestClose}
+        />
       </div>
     )
   }
