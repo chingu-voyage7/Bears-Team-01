@@ -41,6 +41,7 @@ router.post('/', (req, res, next) => {
     });
   }
   const beer = new Beer({
+    beerName: req.body.beerName,
     brewer: {
       name: req.body.brewer.name,
       location: req.body.brewer.location,

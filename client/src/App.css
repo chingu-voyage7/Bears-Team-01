@@ -52,7 +52,7 @@ hr {
 .text-orange {
   color: orange;
 /*== Register and Login Modals ==*/
-
+}
 .ReactModalPortal > div {
   opacity: 0;
 }
