@@ -1,3 +1,5 @@
+/*== Global ===*/
+
 html {
   height: 100%;
   box-sizing: border-box;
@@ -29,7 +31,6 @@ footer {
 .container {
   min-height: 100%;
 }
-
 .beer {
   background:#202020;
   color: #e8e8e8;
@@ -50,4 +51,39 @@ hr {
 }
 .text-orange {
   color: orange;
+/*== Register and Login Modals ==*/
+
+.ReactModalPortal > div {
+  opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  transition: opacity 1ms ease-in;
+}
+
+.ReactModalPortal .ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModalPortal .ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.Modal {
+  background: #e9e9e9;
+  min-width: 20rem;
+  max-width: 50rem;
+  outline: none;
+  text-align: center;
+}
+
+.close-button {
+  float: right;
+}
+
+.content {
+  padding: 2.5rem;
 }
