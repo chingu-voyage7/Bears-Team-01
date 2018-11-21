@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import RegisterModal from './RegisterModal';
 
 class Navbar extends Component {
   render() {
@@ -31,6 +32,7 @@ class Navbar extends Component {
             </div>
           </div>
         </nav>
+        <RegisterModal />
       </div>
     )
   }
