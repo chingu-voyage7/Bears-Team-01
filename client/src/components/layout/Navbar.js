@@ -32,10 +32,10 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <button onClick={this.handleToggleModal} className="nav-link">Sign Up</button>
+                  <button onClick={this.handleToggleModal} className="btn btn-link nav-link">Sign Up</button>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">Login</Link>
+                  <button className="btn btn-link nav-link" to="/login">Login</button>
                 </li>
               </ul>
             </div>
