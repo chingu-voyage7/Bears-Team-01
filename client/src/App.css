@@ -29,3 +29,25 @@ footer {
 .container {
   min-height: 100%;
 }
+
+.beer {
+  background:#202020;
+  color: #e8e8e8;
+  /* margin: 10px; */
+  padding: 10px;
+}
+.beer p {
+  margin: 0;
+}
+.beer > p:first-of-type {
+  font-size: 1.3em;
+}
+.beer-info p {
+  color: #b8b7b7;
+}
+hr {
+  background: #e8e8e8;
+}
+.text-orange {
+  color: orange;
+}
