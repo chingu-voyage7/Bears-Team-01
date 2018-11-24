@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
+import LoginModal from './LoginModal';
 
 class Navbar extends Component {
   state = {
-    isActive: false
+    registerIsActive: false,
+    loginIsActive: false
   }
   handleRegisterToggle = () => {
-    this.setState(() => ({ isActive: !this.state.isActive }));
+    this.setState(() => ({ registerIsActive: !this.state.registerIsActive }));
+  }  
+  handleLoginToggle = () => {
+    this.setState(() => ({ loginIsActive: !this.state.registerIsActive }));
   }
   handleRequestClose = () => {
-    this.setState(() => ({ isActive: false }));
+    this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
   }
   render() {
     return (
@@ -35,14 +40,18 @@ class Navbar extends Component {
                   <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link">Sign Up</button>
                 </li>
                 <li className="nav-item">
-                  <Link className="btn btn-link nav-link" to="/login">Login</Link>
+                <button onClick={this.handleLoginToggle} className="btn btn-link nav-link">Login</button>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
         <RegisterModal 
-          isOpen={this.state.isActive}
+          isOpen={this.state.registerIsActive}
+          handleRequestClose={this.handleRequestClose}
+        />
+        <LoginModal 
+          isOpen={this.state.loginIsActive}
           handleRequestClose={this.handleRequestClose}
         />
       </div>
