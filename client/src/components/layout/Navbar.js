@@ -12,7 +12,7 @@ class Navbar extends Component {
     this.setState(() => ({ registerIsActive: !this.state.registerIsActive }));
   }  
   handleLoginToggle = () => {
-    this.setState(() => ({ loginIsActive: !this.state.registerIsActive }));
+    this.setState(() => ({ loginIsActive: !this.state.loginIsActive }));
   }
   handleRequestClose = () => {
     this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
@@ -30,7 +30,7 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="mobile-nav">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/drink"> Browse
+                  <Link className="nav-link" to="/browse">Browse
                   </Link>
                 </li>
               </ul>
