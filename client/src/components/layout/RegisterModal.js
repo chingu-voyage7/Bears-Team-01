@@ -6,6 +6,7 @@ const RegisterModal = (props) => (
     <div className="container">
       <ReactModal
         className="Modal"
+        overlayClassName="Overlay"
         isOpen={props.isOpen}
         onRequestClose={props.handleRequestClose}
         contentLabel="Register"
