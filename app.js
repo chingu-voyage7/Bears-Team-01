@@ -3,12 +3,14 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet');
+const passport = require('passport');
 
 
 // Import routes
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const beersRouter = require('./routes/beers');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -36,14 +38,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(passport.initialize());
+app.use(passport.session());
 // Serve static files from the React app
 // app.use(express.static(path.join(__dirname, 'client/build')));
-
 
 // Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/beers', beersRouter);
+app.use('/auth/google', authRouter);
 
 
 // The "catchall" handler: for any request that doesn't
