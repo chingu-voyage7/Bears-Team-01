@@ -6,7 +6,7 @@ class Navbar extends Component {
   state = {
     isActive: false
   }
-  handleToggleModal = () => {
+  handleRegisterToggle = () => {
     this.setState(() => ({ isActive: !this.state.isActive }));
   }
   handleRequestClose = () => {
@@ -32,7 +32,7 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <button onClick={this.handleToggleModal} className="btn btn-link nav-link">Sign Up</button>
+                  <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link">Sign Up</button>
                 </li>
                 <li className="nav-item">
                   <Link className="btn btn-link nav-link" to="/login">Login</Link>
