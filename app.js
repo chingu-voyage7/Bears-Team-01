@@ -43,6 +43,8 @@ app.use(passport.session());
 // Serve static files from the React app
 // app.use(express.static(path.join(__dirname, 'client/build')));
 
+require('./services/passport');
+
 // Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
