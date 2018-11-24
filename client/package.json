@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "all": "0.0.0",
+    "body-parser": "^1.18.3",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-modal": "^3.6.1",
