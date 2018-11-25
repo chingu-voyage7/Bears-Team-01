@@ -1,13 +1,15 @@
 import React from 'react';
 
-const RateCategory = ({ categoryName, handleSelectChange }) => {
+const RateCategory = ({ categoryName, handleSelectChange, selectValue }) => {
   const firstLetterLowerCased =
     categoryName[0].toLowerCase() + categoryName.slice(1);
   return (
     <div>
       <label>
         {categoryName}
-        <select name={firstLetterLowerCased}>{makeOptions(1, 5, 0.5)}</select>
+        <select value={selectValue} name={firstLetterLowerCased}>
+          {makeOptions(1, 5, 0.5)}
+        </select>
       </label>
     </div>
   );
