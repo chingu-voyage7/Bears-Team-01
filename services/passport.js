@@ -31,9 +31,9 @@ passport.use(
         };
         const user = await new User(profileInfo).save();
 
-        done(null, user);
+        return done(null, user);
       } catch (e) {
-        done(e, null);
+        return done(e, null);
       }
     }
   )
@@ -43,8 +43,12 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
-    done(null, user);
-  });
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+
+    return done(null, user);
+  } catch (e) {
+    return done(e, null);
+  }
 });
