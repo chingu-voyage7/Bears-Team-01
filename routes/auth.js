@@ -12,10 +12,13 @@ router.get(
 
 router.get(
   '/callback',
-  passport.authenticate('google'),
+  passport.authenticate('google', { failureRedirect: '/failedLogin' }),
   (req, res) => {
-    // res.redirect('/');
-    res.redirect('http://localhost:3000');
+    if (process.env.NODE_ENV === 'production') {
+      return res.redirect('/');
+    } else {
+      return res.redirect('http://localhost:3000');
+    }
   }
 );
 
