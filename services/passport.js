@@ -5,16 +5,6 @@ const { googleClientID, googleClientSecret } = require('../config/keys');
 
 const User = require('../models/user.model');
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser((id, done) => {
-  User.findById(id).then(user => {
-    done(null, user);
-  });
-});
-
 passport.use(
   new GoogleStrategy(
     {
@@ -27,13 +17,19 @@ passport.use(
 
     async (accessToken, refreshToken, profile, done) => {
       try {
+        // console.log('google user profile is', profile);
+        const profileInfo = {
+          profileID: profile.id,
+          name: profile.displayName,
+          email: profile.emails[0].value
+        };
         const existingUser = await User.findOne({ profileID: profile.id });
 
         if (existingUser) {
           return done(null, existingUser);
         }
 
-        const user = await new User({ profileID: profile.id }).save();
+        const user = await new User(profileInfo).save();
         done(null, user);
       } catch (e) {
         done(e);
@@ -41,3 +37,13 @@ passport.use(
     }
   )
 );
+
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
