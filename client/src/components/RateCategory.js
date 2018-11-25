@@ -1,8 +1,8 @@
 import React from 'react';
 
 const RateCategory = ({ categoryName, handleSelectChange, selectValue }) => {
-  const firstLetterLowerCased =
-    categoryName[0].toLowerCase() + categoryName.slice(1);
+  const firstLetterUpperCased =
+    categoryName[0].toUpperCase() + categoryName.slice(1);
   return (
     <div>
       <label>
@@ -10,7 +10,7 @@ const RateCategory = ({ categoryName, handleSelectChange, selectValue }) => {
         <select
           value={selectValue}
           onChange={handleSelectChange}
-          name={firstLetterLowerCased}
+          name={firstLetterUpperCased}
         >
           {makeOptions(1, 5, 0.5)}
         </select>
