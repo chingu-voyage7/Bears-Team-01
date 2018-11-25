@@ -5,6 +5,7 @@ const Beer = require("../models/beer.model.js");
 
 // Get all beers
 router.get('/', function(req, res, next) {
+  console.log('beers route');
   Beer.find()
   .then(beers => {
     res.send(beers);
