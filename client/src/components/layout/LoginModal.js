@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
+import makeGoogleAuthRequest from '../../utilityFns/makeGoogleAuthRequest';
 
 const LoginModal = (props) => (
   <div>
@@ -16,7 +17,7 @@ const LoginModal = (props) => (
        <button className="btn btn-link nav-link text-muted close-button" onClick={props.handleRequestClose}>x</button>
         <div className="content">
           <h2 className="display-5 text-center">Login</h2>
-          <button className="btn btn-danger btn-block">Login with Gmail</button>
+          <button onClick={makeGoogleAuthRequest} className="btn btn-danger btn-block">Login with Gmail</button>
           <button className="btn btn-primary btn-block">Login with Facebook</button>
         </div>
       </ReactModal>
