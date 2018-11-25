@@ -17,7 +17,7 @@ router.get(
     if (process.env.NODE_ENV === 'production') {
       return res.redirect('/');
     } else {
-      return res.redirect('http://localhost:3000');
+      return res.redirect('http://localhost:3000'); // TODO: doesn't work with fetch request, why??
     }
   }
 );
