@@ -7,7 +7,11 @@ const RateCategory = ({ categoryName, handleSelectChange, selectValue }) => {
     <div>
       <label>
         {categoryName}
-        <select value={selectValue} name={firstLetterLowerCased}>
+        <select
+          value={selectValue}
+          onChange={handleSelectChange}
+          name={firstLetterLowerCased}
+        >
           {makeOptions(1, 5, 0.5)}
         </select>
       </label>
