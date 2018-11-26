@@ -33,10 +33,14 @@ router.get(
 
 router.get(
   '/facebook/callback', 
-  passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/failedLogin'
-  })
+  passport.authenticate('facebook', { failureRedirect: '/failedLogin' }),
+  (req, res) => {
+    if (process.env.NODE_ENV === 'production') {
+      return res.redirect('/');
+    } else {
+      return res.redirect('http://localhost:3000'); 
+    }
+  }
 );
 
 module.exports = router;
