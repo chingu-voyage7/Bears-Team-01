@@ -23,6 +23,14 @@ export default class BeerReview extends Component {
 
   handleTextAreaChange = e => this.setState({ textValue: e.target.value });
 
+  handleButtonClick = e => {
+    // get all values from this.state
+    // make POST request to back-end
+    // make sure to display success/failed message
+    console.log('lala');
+    return false; // stub
+  };
+
   render() {
     return (
       <div className="rate-beer-container">
@@ -43,7 +51,7 @@ export default class BeerReview extends Component {
           onChange={this.handleTextAreaChange}
         />
         <button
-          onClick={this.handleClick}
+          onClick={this.handleButtonClick}
           className="btn btn-primary btn-block"
         >
           Submit
