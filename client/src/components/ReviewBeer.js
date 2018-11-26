@@ -3,7 +3,7 @@ import RateCategory from './RateCategory';
 import { RATE_CATEGORIES } from '../constants';
 import postBeerReview from '../utilityFns/postBeerReview';
 
-export default class BeerReview extends Component {
+export default class ReviewBeer extends Component {
   state = {
     categoryValues: {
       look: '',
