@@ -6,11 +6,11 @@ const RateCategory = ({ categoryName, handleSelectChange, selectValue }) => {
   return (
     <div>
       <label>
-        {categoryName}
+        {firstLetterUpperCased}
         <select
           value={selectValue}
           onChange={handleSelectChange}
-          name={firstLetterUpperCased}
+          name={categoryName}
         >
           {makeOptions(1, 5, 0.5)}
         </select>
@@ -19,15 +19,19 @@ const RateCategory = ({ categoryName, handleSelectChange, selectValue }) => {
   );
 };
 
-const makeOptions = (start, end, step) => {
-  const optionsArr = [];
+function makeOptions(start, end, step) {
+  const optionsArr = [<option key="option0" value="" />];
 
-  for (let i = start; i > end; i += step) {
-    optionsArr.push(<option value={i}>{i}</option>);
+  for (let i = start; i <= end; i += step) {
+    optionsArr.push(
+      <option key={`option${i}`} value={i}>
+        {i}
+      </option>
+    );
   }
 
   return optionsArr;
-};
+}
 
 // too verbose and not easily readable
 // const makeOptions = (start, end, step, optionsArr) => {

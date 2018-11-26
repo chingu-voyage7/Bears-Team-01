@@ -114,3 +114,27 @@ hr {
 .close-button {
   float: right;
 }
+
+/*== Rate Beer styles ==*/
+
+.rate-beer-container {
+  height: 10em;
+}
+
+.rating-categories {
+  display: flex;
+}
+
+.rating-categories label {
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-categories div {
+  margin: 5px;
+}
+
+.rate-beer-container textarea {
+  width: 25em;
+  height: 15em;
+}
