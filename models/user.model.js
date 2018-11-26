@@ -12,6 +12,12 @@ const UserSchema = mongoose.Schema({
     smell: Array,
     taste: Array,
     feel: Array
+  },
+  facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String
   }
 })
 
