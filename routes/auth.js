@@ -4,14 +4,14 @@ const router = express.Router();
 
 // Google OAuth routes
 router.get(
-  '/',
+  '/google',
   passport.authenticate('google', {
     scope: ['profile', 'email']
   })
 );
 
 router.get(
-  '/callback',
+  '/google/callback',
   passport.authenticate('google', { failureRedirect: '/failedLogin' }),
   (req, res) => {
     if (process.env.NODE_ENV === 'production') {
@@ -25,12 +25,12 @@ router.get(
 //Facebook authentication routes
 
 router.get(
-  '/auth/facebook', 
+  '/facebook', 
   passport.authenticate('facebook')
 );
 
 router.get(
-  '/auth/facebook/callback', 
+  '/facebook/callback', 
   passport.authenticate('facebook', {
     successRedirect: '/profile',
     failureRedirect: '/failedLogin'
