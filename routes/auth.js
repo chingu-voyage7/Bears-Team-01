@@ -22,4 +22,19 @@ router.get(
   }
 );
 
+//Facebook authentication routes
+
+router.get(
+  '/auth/facebook', 
+  passport.authenticate('facebook')
+);
+
+router.get(
+  '/auth/facebook/callback', 
+  passport.authenticate('facebook', {
+    successRedirect: '/profile',
+    failureRedirect: '/failedLogin'
+  })
+);
+
 module.exports = router;
