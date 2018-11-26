@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RateCategory from './RateCategory';
 import { RATE_CATEGORIES } from '../constants';
+import postBeerReview from '../utilityFns/postBeerReview';
 
 export default class BeerReview extends Component {
   state = {
@@ -27,7 +28,9 @@ export default class BeerReview extends Component {
     // get all values from this.state
     // make POST request to back-end
     // make sure to display success/failed message
-    console.log('lala');
+    const data = { ...this.state };
+    console.log('data is', data);
+    // postBeerReview(someRoute, data);
     return false; // stub
   };
 
