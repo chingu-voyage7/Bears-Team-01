@@ -7,6 +7,7 @@ const UserSchema = mongoose.Schema({
   email: {type: String, required: true},
   avatar: String,
   date: {type: Date, default: Date.now},
+  provider: String,
   ml: {
     look: Array,
     smell: Array,
@@ -16,8 +17,6 @@ const UserSchema = mongoose.Schema({
   facebook: {
     id: String,
     token: String,
-    email: String,
-    name: String
   }
 })
 

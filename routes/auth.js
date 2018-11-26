@@ -32,7 +32,7 @@ router.get(
 router.get(
   '/facebook/callback', 
   passport.authenticate('facebook', {
-    successRedirect: '/profile',
+    successRedirect: '/',
     failureRedirect: '/failedLogin'
   })
 );
