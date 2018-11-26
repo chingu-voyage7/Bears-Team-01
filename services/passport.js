@@ -57,9 +57,9 @@ passport.use(
         if(user)
           return done(null, user);
         else {
-          console.log("new user sign up")
+          console.log("### new user sign up ###")
           const newUser = new User();
-          newUser.provider = "facebook";
+          newUser.provider = "Facebook";
           newUser.facebook.id = profile.id;
           newUser.facebook.token = accessToken;
           newUser.name = profile.name.givenName;
@@ -75,8 +75,6 @@ passport.use(
     })
   }
 ));
-
-
 
 
 passport.serializeUser((user, done) => {

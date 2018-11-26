@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const UserSchema = mongoose.Schema({
   profileID: String,
   name: {type: String, required: true},
-  email: {type: String, required: true},
+  email: String,
   avatar: String,
   date: {type: Date, default: Date.now},
   provider: String,
