@@ -2,8 +2,15 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const mongoose = require('mongoose');
-const { googleClientID, googleClientSecret } = require('../config/keys');
-const configAuth = require('../do_not_commit/dev');
+const { 
+  googleClientID, 
+  googleClientSecret,
+  facebookClientID,
+  facebookClientSecret,
+  facebookCallbackURL
+} = require('../config/keys');
+
+//const configAuth = require('../do_not_commit/dev');
 
 const User = require('../models/user.model');
 
@@ -44,9 +51,9 @@ passport.use(
 
 passport.use(
   new FacebookStrategy({
-    clientID: configAuth.facebookAuth.clientID,
-    clientSecret: configAuth.facebookAuth.clientSecret,
-    callbackURL: configAuth.facebookAuth.callbackURL,
+    clientID: facebookClientID,
+    clientSecret: facebookClientSecret,
+    callbackURL: facebookCallbackURL,
     profileFields: ['emails' , 'name']
   },
   function(accessToken, refreshToken, profile, done) {
@@ -57,7 +64,7 @@ passport.use(
         if(user)
           return done(null, user);
         else {
-          console.log("### new user sign up ###")
+          console.log("### new user sign up ###" )
           const newUser = new User();
           newUser.provider = "Facebook";
           newUser.facebook.id = profile.id;
