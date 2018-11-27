@@ -17,10 +17,8 @@ const LoginModal = (props) => (
        <button className="btn btn-link nav-link text-muted close-button" onClick={props.handleRequestClose}>x</button>
         <div className="content">
           <h2 className="display-5 text-center">Login</h2>
-          <button onClick={makeGoogleAuthRequest} className="btn btn-danger btn-block">Login with Gmail</button>
-          <a href="/auth/google">Login With Google</a>
-          <button className="btn btn-primary btn-block">Login with Facebook</button>
-          <a href="/auth/facebook">Login With Facebook</a>
+          <a className="btn btn-danger btn-block" href="/auth/google">Login With Google</a>
+          <a className="btn btn-primary btn-block" href="/auth/facebook">Login With Facebook</a>
         </div>
       </ReactModal>
     </div>
