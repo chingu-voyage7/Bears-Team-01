@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-import makeGoogleAuthRequest from '../../utilityFns/makeGoogleAuthRequest';
 
 const LoginModal = (props) => (
   <div>
