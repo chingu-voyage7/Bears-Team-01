@@ -49,7 +49,7 @@ require('./services/passport');
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/beers', beersRouter);
-app.use('/auth/google', authRouter);
+app.use('/auth', authRouter);
 
 
 // The "catchall" handler: for any request that doesn't

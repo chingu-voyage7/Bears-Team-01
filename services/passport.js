@@ -1,7 +1,16 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const mongoose = require('mongoose');
-const { googleClientID, googleClientSecret } = require('../config/keys');
+const { 
+  googleClientID, 
+  googleClientSecret,
+  facebookClientID,
+  facebookClientSecret,
+  facebookCallbackURL
+} = require('../config/keys');
+
+//const configAuth = require('../do_not_commit/dev');
 
 const User = require('../models/user.model');
 
@@ -39,6 +48,42 @@ passport.use(
   )
 );
 
+
+passport.use(
+  new FacebookStrategy({
+    clientID: facebookClientID,
+    clientSecret: facebookClientSecret,
+    callbackURL: facebookCallbackURL,
+    profileFields: ['emails' , 'name']
+  },
+  function(accessToken, refreshToken, profile, done) {
+    process.nextTick(function(){
+      User.findOne({ 'facebook.id' : profile.id}, function(err, user){
+        if(err)
+          return done(err);
+        if(user)
+          return done(null, user);
+        else {
+          console.log("### new user sign up ###" )
+          const newUser = new User();
+          newUser.provider = "Facebook";
+          newUser.facebook.id = profile.id;
+          newUser.facebook.token = accessToken;
+          newUser.name = profile.name.givenName;
+          newUser.email = profile.emails[0].value;
+          newUser.save(function(err){
+            if(err)
+              throw err;
+            else 
+              return done(null, newUser);
+          })
+        }
+      })
+    })
+  }
+));
+
+
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
@@ -52,3 +97,4 @@ passport.deserializeUser(async (id, done) => {
     return done(e, null);
   }
 });
+
