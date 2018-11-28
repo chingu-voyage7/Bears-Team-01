@@ -5,8 +5,11 @@ import Footer from './components/layout/Footer';
 import Welcome from './components/WelcomePage';
 import Browse from './components/BrowsePage';
 import NotFoundPage from './components/NotFoundPage';
+// import ReviewBeer from './components/ReviewBeer';
 
 import './App.css';
+
+// const TEST_BEER_NAME = 'Sam Adams';
 
 class App extends Component {
   render() {
@@ -14,6 +17,7 @@ class App extends Component {
       <Router>
         <div className="App">
           <Navbar />
+          {/* <ReviewBeer beerName={TEST_BEER_NAME}/> */}
             <div className="container">
               <Switch>
                <Route path="/" component={Welcome} exact={true} />
