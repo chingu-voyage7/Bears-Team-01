@@ -118,8 +118,16 @@ hr {
 /*== Rate Beer styles ==*/
 
 .rate-beer-container {
-  height: 10em;
+  height: 30em;
+  width: 15em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+/* .rate-beer-container button {
+
+} */
 
 .rating-categories {
   display: flex;
