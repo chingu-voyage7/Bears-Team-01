@@ -7,7 +7,7 @@ import Browse from './components/BrowsePage';
 import NotFoundPage from './components/NotFoundPage';
 // import ReviewBeer from './components/ReviewBeer';
 
-import './App.scss';
+import './styles/styles.scss';
 
 // const TEST_BEER_NAME = 'Sam Adams';
 
