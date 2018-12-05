@@ -31,6 +31,9 @@ class ProfilePage extends Component {
         <h1>Profile Page</h1>
         <h3>{this.state.userData.name}</h3>
         <p>Joined on: {this.state.userData.date}</p>
+        <button>About</button>
+        <button>Timeline</button>
+        <button>Edit</button>
         <AboutSection />
         <TimelineSection />
         <EditSection />
