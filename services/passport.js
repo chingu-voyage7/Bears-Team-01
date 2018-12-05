@@ -54,7 +54,7 @@ passport.use(
     clientID: facebookClientID,
     clientSecret: facebookClientSecret,
     callbackURL: facebookCallbackURL,
-    profileFields: ['emails' , 'name']
+    profileFields: ['emails' , 'name', 'picture.type(large)']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function(){
@@ -71,6 +71,7 @@ passport.use(
           newUser.facebook.token = accessToken;
           newUser.name = profile.name.givenName;
           newUser.email = profile.emails[0].value;
+          newUser.picture = profile.photos[0].value;
           newUser.save(function(err){
             if(err)
               throw err;
