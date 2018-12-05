@@ -45,9 +45,9 @@ class ProfilePage extends Component {
   render() {
     return (
     <div>
-      <div class="container">
+      <div className="container">
           <div className="row">
-            <div class="col-md-4">
+            <div className="col-md-4">
               <div className="profile-img">
                 {!!this.state.userData.picture && <img src={this.state.userData.picture} alt="user-profile"></img>}
                 <div class="file btn btn-lg btn-primary">
@@ -56,27 +56,27 @@ class ProfilePage extends Component {
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="profile-head">
+            <div className="col-md-6">
+              <div className="profile-head">
                   <h2>
                     {this.state.userData.name}
                   </h2>
                   <h6>
                     United States
                   </h6>
-                  <p class="profile-rating">RATINGS : <span>82</span></p>
-                  <ul class="nav nav-tabs">
-                    <li class="nav-item">
+                  <p className="profile-rating">RATINGS : <span>82</span></p>
+                  <ul className="nav nav-tabs">
+                    <li className="nav-item">
                       <a className={this.state.timelineIsActive ? 'nav-link active': 'nav-link'} onClick={this.handleTimelineTab}>Timeline</a>
                     </li>
-                    <li class="nav-item">
+                    <li className="nav-item">
                       <a className={this.state.aboutIsActive ? 'nav-link active': 'nav-link'} onClick={this.handleAboutTab}>About</a>
                     </li>
                   </ul>
               </div>
             </div>
             <div className="col-md-2">
-              <input type="submit" class="profile-edit-btn" value="Edit Profile"/>
+              <input type="submit" className="profile-edit-btn" value="Edit Profile"/>
             </div>
           </div>
           <div className="row">
