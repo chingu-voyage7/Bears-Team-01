@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import AboutSection from './profile/About';
 import TimelineSection from './profile/Timeline';
-import EditSection from './profile/Edit';
 
 class ProfilePage extends Component {
   //todo: separate state so it can be used by the navbar and other components.
@@ -13,9 +11,23 @@ class ProfilePage extends Component {
     this.state = {
       userData : {
         name: ''
-      }
+      },
+      timelineIsActive: true,
+      aboutIsActive: false,
     }
   }
+  handleTimelineTab = () => {
+    this.setState(() => ({ 
+      timelineIsActive: true,
+      aboutIsActive: false,
+    }));
+  }    
+  handleAboutTab = () => {
+    this.setState(() => ({ 
+      timelineIsActive: false,
+      aboutIsActive: true,
+    }));
+  }    
   getUser = () => {
     fetch('/user', {credentials: 'include'})    
     .then(response => response.json())
@@ -28,15 +40,11 @@ class ProfilePage extends Component {
   render() {
     return (
       <header>
-        <h1>Profile Page</h1>
         <h3>{this.state.userData.name}</h3>
-        <p>Joined on: {this.state.userData.date}</p>
-        <button>About</button>
-        <button>Timeline</button>
-        <button>Edit</button>
-        <AboutSection />
-        <TimelineSection />
-        <EditSection />
+        <button onClick={this.handleTimelineTab}>Timeline</button>
+        <button onClick={this.handleAboutTab}>About</button>
+        {!!this.state.timelineIsActive && <TimelineSection />}
+        {!!this.state.aboutIsActive && <AboutSection userData={this.state.userData} />}
       </header>
     )
   }

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 
-class AboutSection extends Component {
-  render(){
-    return (
-      <div>
-      This is from my about section component
-      </div>
-    )
-  }
-}
+const AboutSection = (props) => (
+  <div>
+    <div>
+      <p>Name: {props.userData.name}</p>
+      <p>Date joined: {props.userData.date}</p>
+    </div>
+  </div>
+);
 
 export default AboutSection;
