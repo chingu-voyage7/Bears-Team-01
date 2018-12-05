@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
@@ -8,6 +9,7 @@ const passport = require('passport');
 
 // Import routes
 const indexRouter = require('./routes/index');
+const userRouter = require('./routes/user');
 const usersRouter = require('./routes/users');
 const beersRouter = require('./routes/beers');
 const authRouter = require('./routes/auth');
@@ -38,6 +40,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+app.use(session({ secret: 'anything' }));
 app.use(passport.initialize());
 app.use(passport.session());
 // Serve static files from the React app
@@ -47,6 +50,7 @@ require('./services/passport');
 
 // Routes
 app.use('/', indexRouter);
+app.use('/user', userRouter);
 app.use('/users', usersRouter);
 app.use('/beers', beersRouter);
 app.use('/auth', authRouter);

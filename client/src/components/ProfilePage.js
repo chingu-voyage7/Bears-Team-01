@@ -10,7 +10,7 @@ class ProfilePage extends Component {
     }
   }
   getUser = () => {
-    fetch('/user')
+    fetch('/user', {credentials: 'include'})    
     .then(response => response.json())
     .then(userData => this.setState({userData: userData}))
     .catch(err => console.log(err))
