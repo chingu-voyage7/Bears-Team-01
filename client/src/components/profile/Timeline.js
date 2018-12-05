@@ -1,25 +1,33 @@
 import React from 'react';
 
-const TimelineSection = () => (
-  <div>
-    <div>
-      <h3>Recent Ratings</h3>
-    </div>
-
-    <div>
-    <h4>Budweiser</h4>
-    <p>⭐⭐</p>
-    </div>    
-    <div>
-    <h4>Pilsner</h4>
-    <p>⭐⭐⭐</p>
-    </div>    
-    <div>
-    <h4>Sierra Nevada</h4>
-    <p>⭐⭐⭐⭐</p>
-    </div>
-
+const TimelineSection = (props) => (
+  //TODO: create a foreach loop with real user ratings
+  <div class="" id="profile" aria-labelledby="profile-tab">
+    <div class="row">
+      <div class="col-md-6">
+          <label><span className="user-name">{props.userData.name}</span> rated Budweiser</label>
+      </div>
+      <div class="col-md-6">
+        <span>⭐⭐⭐</span>
+      </div>
   </div>
+  <div class="row">
+      <div class="col-md-6">
+          <label><span className="user-name">{props.userData.name}</span> rated Pilsner Urqell</label>
+      </div>
+      <div class="col-md-6">
+        <span>⭐⭐⭐⭐</span>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-md-6">
+          <label><span className="user-name">{props.userData.name}</span> rated Sierra Nevada</label>
+      </div>
+      <div class="col-md-6">
+          <span>⭐⭐⭐⭐⭐</span>
+      </div>
+  </div>
+</div>
 );
 
 export default TimelineSection;

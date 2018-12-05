@@ -7,8 +7,10 @@ class ProfilePage extends Component {
   //if this.state.userData.name > 0, show "profile" link, and
   //"logged in as (name)" in the navbar
   //TODO: if there is no profile image, display randomized default image from database.
-  //TODO: Add support for google profile images.
   //TODO: Add moment.js for date parsing.
+  //TODO: "Change image" button functionality
+  //TODO: Make "ratings" section dynamic
+  //TODO: Make country section dynamic 
   constructor() {
     super();
     this.state = {
@@ -42,14 +44,53 @@ class ProfilePage extends Component {
   }
   render() {
     return (
-      <header>
-        {!!this.state.userData.picture && <img src={this.state.userData.picture}></img>}
-        <h3>{this.state.userData.name}</h3>
-        <button onClick={this.handleTimelineTab}>Timeline</button>
-        <button onClick={this.handleAboutTab}>About</button>
-        {!!this.state.timelineIsActive && <TimelineSection />}
-        {!!this.state.aboutIsActive && <AboutSection userData={this.state.userData} />}
-      </header>
+    <div>
+      <div class="container">
+          <div className="row">
+            <div class="col-md-4">
+              <div className="profile-img">
+                {!!this.state.userData.picture && <img src={this.state.userData.picture} alt="user-profile"></img>}
+                <div class="file btn btn-lg btn-primary">
+                  Change Photo
+                  <input type="file" name="file"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="profile-head">
+                  <h2>
+                    {this.state.userData.name}
+                  </h2>
+                  <h6>
+                    United States
+                  </h6>
+                  <p class="profile-rating">RATINGS : <span>82</span></p>
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a className={this.state.timelineIsActive ? 'nav-link active': 'nav-link'} onClick={this.handleTimelineTab}>Timeline</a>
+                    </li>
+                    <li class="nav-item">
+                      <a className={this.state.aboutIsActive ? 'nav-link active': 'nav-link'} onClick={this.handleAboutTab}>About</a>
+                    </li>
+                  </ul>
+              </div>
+            </div>
+            <div className="col-md-2">
+              <input type="submit" class="profile-edit-btn" value="Edit Profile"/>
+            </div>
+          </div>
+          <div className="row">
+              <div className="col-md-4">
+              </div>
+              <div className="col-md-8">
+                <div className="tab-content profile-tab">
+                  {!!this.state.timelineIsActive && <TimelineSection userData={this.state.userData} />}
+                  {!!this.state.aboutIsActive && <AboutSection userData={this.state.userData} />}
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
     )
   }
 }
