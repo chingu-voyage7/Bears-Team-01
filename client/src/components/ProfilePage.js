@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 
 class ProfilePage extends Component {
+  //todo: separate state so it can be used by the navbar and other components.
   constructor() {
     super();
     this.state = {
-      userData = {
-        name: ''
-      }
+      userData : {}
     }
   }
   getUser = () => {
     fetch('/user', {credentials: 'include'})    
     .then(response => response.json())
-    .then(userData => this.setState({userData: userData}))
+    .then(json => this.setState({userData: json}))
     .catch(err => console.log(err))
   }
   componentDidMount = () => {
@@ -21,8 +20,11 @@ class ProfilePage extends Component {
   render() {
     return (
       <div>
-        <h1>{this.state.userData.name}</h1>
+        <h3>{this.state.userData.name}</h3>
+        <p>Joined on: {this.state.userData.date}</p>
       </div>
     )
   }
 }
+
+export default ProfilePage;
