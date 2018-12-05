@@ -36,7 +36,8 @@ passport.use(
         const profileInfo = {
           profileID: profile.id,
           name: profile.displayName,
-          email: profile.emails[0].value
+          email: profile.emails[0].value,
+          picture: profile.photos[0].value
         };
         const user = await new User(profileInfo).save();
 

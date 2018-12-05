@@ -3,9 +3,12 @@ import AboutSection from './profile/About';
 import TimelineSection from './profile/Timeline';
 
 class ProfilePage extends Component {
-  //todo: separate userData so it can be used by the navbar and other components.
-  //if this.state.userData.name > 0, show "profile" link
-  // and "logged in as (name)" in the navbar
+  //TODO: separate userData so it can be used by the navbar and other components.
+  //if this.state.userData.name > 0, show "profile" link, and
+  //"logged in as (name)" in the navbar
+  //TODO: if there is no profile image, display randomized default image from database.
+  //TODO: Add support for google profile images.
+  //TODO: Add moment.js for date parsing.
   constructor() {
     super();
     this.state = {
