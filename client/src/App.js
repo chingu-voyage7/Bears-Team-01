@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom' 
+import { BrowserRouter, Route, Switch } from 'react-router-dom' 
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Welcome from './components/WelcomePage';
 import Browse from './components/BrowsePage';
 import NotFoundPage from './components/NotFoundPage';
 import ProfilePage from './components/ProfilePage';
+
 // import ReviewBeer from './components/ReviewBeer';
 
 import './styles/styles.scss';
@@ -15,7 +16,7 @@ import './styles/styles.scss';
 class App extends Component {
   render() {
     return (
-      <Router>
+      <BrowserRouter>
         <div className="App">
           <Navbar />
           {/* <ReviewBeer beerName={TEST_BEER_NAME}/> */}
@@ -29,7 +30,7 @@ class App extends Component {
              </div>
           <Footer />
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }
