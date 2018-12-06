@@ -45,12 +45,12 @@ class ProfilePage extends Component {
   render() {
     return (
     <div>
-      <div className="container">
+      <div className="container profile-container">
           <div className="row">
             <div className="col-md-4">
               <div className="profile-img">
                 {!!this.state.userData.picture && <img src={this.state.userData.picture} alt="user-profile"></img>}
-                <div class="file btn btn-lg btn-primary">
+                <div className="file btn btn-lg btn-primary">
                   Change Photo
                   <input type="file" name="file"/>
                 </div>
@@ -80,7 +80,7 @@ class ProfilePage extends Component {
           <div className="row">
               <div className="col-md-4">
               </div>
-              <div className="col-md-8">
+              <div className="col-md-6">
                 <div className="tab-content profile-tab">
                   {!!this.state.timelineIsActive && <TimelineSection userData={this.state.userData} />}
                   {!!this.state.aboutIsActive && <AboutSection userData={this.state.userData} />}

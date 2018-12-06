@@ -27,19 +27,11 @@ class AboutSection extends Component {
             </div>
         </div>
         <div className="row">
-            <div class="col-md-6">
+            <div className="col-md-6">
                 <label>Join date</label>
             </div>
             <div className="col-md-6">
                 <p>{this.props.userData.date.substring(0,10)}</p>
-            </div>
-        </div>
-        <div className="row">
-            <div class="col-md-6">
-                <label>Location</label>
-            </div>
-            <div className="col-md-6">
-                <p>United States</p>
             </div>
         </div>
         <div className="row">
@@ -49,6 +41,16 @@ class AboutSection extends Component {
           <div className="col-md-6">
               {this.state.editIsActive === false && <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>}
               {!!this.state.editIsActive ? <EditAboutMe handleEditToggle={this.handleEditToggle} /> : null}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+              <label>Favorite Beers</label>
+          </div>
+          <div className="col-md-6">
+                <p>Celebrator Dopplebock</p>
+                <p>West Sixth Cerveza</p>
+                <p>Funk Yeah</p>
           </div>
         </div>
       </div>
