@@ -6,7 +6,10 @@ import LoginModal from './LoginModal';
 class Navbar extends Component {
   state = {
     registerIsActive: false,
-    loginIsActive: false
+    loginIsActive: false,
+    userData : {
+      name : ''
+    }
   }
   handleRegisterToggle = () => {
     this.setState(() => ({ registerIsActive: !this.state.registerIsActive }));
@@ -16,6 +19,15 @@ class Navbar extends Component {
   }
   handleRequestClose = () => {
     this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
+  }
+  getUser = () => {
+    fetch('/user', {credentials: 'include'})    
+    .then(response => response.json())
+    .then(json => this.setState({userData: json}))
+    .catch(err => console.log(err))
+  }
+  componentDidMount = () => {
+    this.getUser();
   }
   render() {
     return (
@@ -37,10 +49,15 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link">Sign Up</button>
+                  {this.state.userData.name 
+                    ? <Link to="/profile" className="nav-link">Logged in as {this.state.userData.name}</Link>
+                    : <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link">Sign Up</button>
+                  }
+                  {}
                 </li>
                 <li className="nav-item">
-                <button onClick={this.handleLoginToggle} className="btn btn-link nav-link">Login</button>
+                  {!this.state.userData.name 
+                    && <button onClick={this.handleLoginToggle} className="btn btn-link nav-link">Login</button>}
                 </li>
               </ul>
             </div>
