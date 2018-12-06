@@ -31,7 +31,8 @@ class AboutSection extends Component {
                 <label>Join date</label>
             </div>
             <div className="col-md-6">
-                <p>{this.props.userData.date.substring(0,10)}</p>
+                {this.props.userData.date 
+                  && <p>{this.props.userData.date.substring(0,10)}</p>}
             </div>
         </div>
         <div className="row">
@@ -39,8 +40,11 @@ class AboutSection extends Component {
               <label>About</label>
           </div>
           <div className="col-md-6">
-              {this.state.editIsActive === false && <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>}
-              {!!this.state.editIsActive ? <EditAboutMe handleEditToggle={this.handleEditToggle} /> : null}
+            {this.state.editIsActive ? (
+              <EditAboutMe handleEditToggle={this.handleEditToggle} /> 
+            ) : (
+                <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>
+            )}
           </div>
         </div>
         <div className="row">
