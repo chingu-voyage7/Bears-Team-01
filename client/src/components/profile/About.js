@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutSection = (props) => (
   <div>
-  <div className="tab-pane fade show active" aria-labelledby="home-tab">
+  <div className="tab-pane fade show active" aria-labelledby="about-tab">
     <div className="row">
         <div className="col-md-6">
             <label>Name</label>
@@ -32,7 +32,7 @@ const AboutSection = (props) => (
         <label>About</label>
     </div>
     <div className="col-md-6">
-        <p>✏️ Add about me</p>
+        <button className="btn btn-primary-outline">✏️Edit</button>
     </div>
 </div>
   </div>
