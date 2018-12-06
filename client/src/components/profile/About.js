@@ -47,7 +47,7 @@ class AboutSection extends Component {
               <label>About</label>
           </div>
           <div className="col-md-6">
-              {this.state.editIsActive === false && <button className="btn btn-primary-outline" onClick={this.handleEditToggle}>✏️Edit</button>}
+              {this.state.editIsActive === false && <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>}
               {!!this.state.editIsActive ? <EditAboutMe handleEditToggle={this.handleEditToggle} /> : null}
           </div>
         </div>
