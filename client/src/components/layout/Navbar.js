@@ -49,15 +49,17 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  {this.state.userData.name 
-                    ? <Link to="/profile" className="nav-link">Logged in as {this.state.userData.name}</Link>
-                    : <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link">Sign Up</button>
-                  }
-                  {}
+                  {this.state.userData.name ? (
+                    <Link className="nav-link" to="/profile" className="nav-link">Profile</Link>
+                    ) : ( <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link">Sign Up</button>
+                    )}
                 </li>
                 <li className="nav-item">
-                  {!this.state.userData.name 
-                    && <button onClick={this.handleLoginToggle} className="btn btn-link nav-link">Login</button>}
+                  {this.state.userData.name ? (
+                    <button onClick={this.handleLoginToggle} className="btn btn-link nav-link">Logout</button>
+                  ) : (
+                    <button onClick={this.handleLoginToggle} className="btn btn-link nav-link">Login</button>
+                  )}
                 </li>
               </ul>
             </div>
