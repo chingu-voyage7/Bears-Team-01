@@ -55,7 +55,7 @@ passport.use(
     clientID: facebookClientID,
     clientSecret: facebookClientSecret,
     callbackURL: facebookCallbackURL,
-    profileFields: ['emails' , 'name', 'picture.type(large)']
+    profileFields: ['emails' , 'name', 'picture.type(large)', 'location']
   },
   function(accessToken, refreshToken, profile, done) {
     process.nextTick(function(){

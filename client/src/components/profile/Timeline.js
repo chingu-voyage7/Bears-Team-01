@@ -5,10 +5,18 @@ const TimelineSection = (props) => (
   <div className="" aria-labelledby="profile-tab">
     <div className="row">
       <div className="col-md-6">
+          <label><span className="user-name">{props.userData.name}</span> favorited Ayinger Celebrator</label>
+      </div>
+      <div className="col-md-6">
+        <span role="img">🏆</span>
+      </div>
+    </div>
+    <div className="row">
+      <div className="col-md-6">
           <label><span className="user-name">{props.userData.name}</span> rated Budweiser</label>
       </div>
       <div className="col-md-6">
-        <span>⭐⭐⭐</span>
+        <span role="img">⭐⭐⭐</span>
       </div>
   </div>
   <div className="row">
@@ -16,7 +24,7 @@ const TimelineSection = (props) => (
           <label><span className="user-name">{props.userData.name}</span> rated Pilsner Urqell</label>
       </div>
       <div class="col-md-6">
-        <span>⭐⭐⭐⭐</span>
+        <span role="img">⭐⭐⭐⭐</span>
       </div>
   </div>
   <div className="row">
@@ -24,7 +32,7 @@ const TimelineSection = (props) => (
           <label><span className="user-name">{props.userData.name}</span> rated Sierra Nevada</label>
       </div>
       <div class="col-md-6">
-          <span>⭐⭐⭐⭐⭐</span>
+          <span role="img">⭐⭐⭐⭐⭐</span>
       </div>
   </div>
 </div>
