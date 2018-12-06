@@ -31,7 +31,7 @@ class AboutSection extends Component {
                 <label>Join date</label>
             </div>
             <div className="col-md-6">
-                <p>{this.props.userData.date}</p>
+                <p>{this.props.userData.date.substring(0,10)}</p>
             </div>
         </div>
         <div className="row">
