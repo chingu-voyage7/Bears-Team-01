@@ -7,6 +7,7 @@ const UserSchema = mongoose.Schema({
   email: String,
   avatar: String,
   picture: String,
+  about: String,
   date: {type: Date, default: Date.now},
   provider: String,
   ml: {
