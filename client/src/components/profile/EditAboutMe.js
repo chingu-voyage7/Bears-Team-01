@@ -2,8 +2,8 @@ import React from 'react';
 
 const EditAboutMe = (props) => (
   <div>
-    <textarea></textarea>
-    <button className="btn-info" onClick={props.handleEditToggle}>Save</button>
+    <textarea className="form-control d-block mb-3"></textarea>
+    <button className="btn btn-outline-primary" onClick={props.handleEditToggle}>Save</button>
   </div>
 );
 
