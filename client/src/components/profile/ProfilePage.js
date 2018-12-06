@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import AboutSection from './profile/About';
-import TimelineSection from './profile/Timeline';
+import AboutSection from './About';
+import TimelineSection from './Timeline';
 
 class ProfilePage extends Component {
   //TODO: separate userData so it can be used by the navbar and other components.
@@ -45,12 +45,12 @@ class ProfilePage extends Component {
   render() {
     return (
     <div>
-      <div className="container">
+      <div className="container profile-container">
           <div className="row">
             <div className="col-md-4">
               <div className="profile-img">
                 {!!this.state.userData.picture && <img src={this.state.userData.picture} alt="user-profile"></img>}
-                <div class="file btn btn-lg btn-primary">
+                <div className="file btn btn-lg btn-primary">
                   Change Photo
                   <input type="file" name="file"/>
                 </div>
@@ -62,7 +62,7 @@ class ProfilePage extends Component {
                     {this.state.userData.name}
                   </h2>
                   <h6>
-                    United States
+                    Beer Enthusiast
                   </h6>
                   <p className="profile-rating">RATINGS : <span>82</span></p>
                   <ul className="nav nav-tabs">
@@ -75,14 +75,12 @@ class ProfilePage extends Component {
                   </ul>
               </div>
             </div>
-            <div className="col-md-2">
-              <input type="submit" className="profile-edit-btn" value="Edit Profile"/>
-            </div>
+
           </div>
           <div className="row">
               <div className="col-md-4">
               </div>
-              <div className="col-md-8">
+              <div className="col-md-6">
                 <div className="tab-content profile-tab">
                   {!!this.state.timelineIsActive && <TimelineSection userData={this.state.userData} />}
                   {!!this.state.aboutIsActive && <AboutSection userData={this.state.userData} />}

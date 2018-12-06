@@ -5,7 +5,7 @@ import Footer from './components/layout/Footer';
 import Welcome from './components/WelcomePage';
 import Browse from './components/BrowsePage';
 import NotFoundPage from './components/NotFoundPage';
-import ProfilePage from './components/ProfilePage';
+import ProfilePage from './components/profile/ProfilePage';
 
 // import ReviewBeer from './components/ReviewBeer';
 
