@@ -49,7 +49,6 @@ router.post('/', (req, res, next) => {
 
 // update user info
 router.put('/:userId', (req, res, next) => {
-  if (req.params.userId === req.user._id){
     User.findByIdAndUpdate(req.params.userId, req.body, {new:true}) // TOO TRUSTING OF DATA GIVEN BY CLIENT!!
     .then(data => {
       res.status(200).json(data);
@@ -57,9 +56,6 @@ router.put('/:userId', (req, res, next) => {
     .catch(err => {
       res.status(500).json({message: err.message || "some error occurred!"})
     });  
-  } else {
-    res.status(401).json({message: "not authorized" })
-  }
 });
 
 // delete a user

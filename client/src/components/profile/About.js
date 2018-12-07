@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EditAboutMe from './EditAboutMe';
 
 class AboutSection extends Component {
-  //TODO: Submit the data from the "about" section into the database
+  //TODO: Display the "about" text from a function that deals with all the conditional logic
   constructor() {
     super();
     this.state = {
@@ -15,7 +15,6 @@ class AboutSection extends Component {
     }));
   }    
   handleSaveBio = (bio) => {
-    console.log("object: ", bio);
     const id = this.props.userData._id;
     fetch("/users/" + id, {
       method: "PUT",
