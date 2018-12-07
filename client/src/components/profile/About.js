@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import EditAboutMe from './EditAboutMe';
 
 class AboutSection extends Component {
-  //TODO: Display the "about" text from a function that deals with all the conditional logic
   constructor() {
     super();
     this.state = {
@@ -25,6 +24,23 @@ class AboutSection extends Component {
         editIsActive: !this.state.editIsActive
       }));
     });
+  }
+  renderAbout = () => {
+    const about = this.props.userData.about
+    if (this.state.editIsActive){
+      return (
+        <EditAboutMe 
+          handleSaveBio={this.handleSaveBio} 
+          handleEditToggle={this.handleEditToggle} 
+          bio={this.props.userData.about}
+        />
+      )
+    }
+    return (
+      <div>
+        <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>
+      </div>
+    )
   }
   render() {
     return (
@@ -52,11 +68,8 @@ class AboutSection extends Component {
               <label>About</label>
           </div>
           <div className="col-md-6">
-            {this.state.editIsActive ? (
-              <EditAboutMe handleSaveBio={this.handleSaveBio} handleEditToggle={this.handleEditToggle} /> 
-            ) : (
-                <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>
-            )}
+            {!!this.props.userData.about && <p>{this.props.userData.about}</p>}
+            {this.renderAbout()}
           </div>
         </div>
         <div className="row">
