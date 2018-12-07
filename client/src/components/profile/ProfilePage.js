@@ -3,15 +3,12 @@ import AboutSection from './About';
 import TimelineSection from './Timeline';
 
 class ProfilePage extends Component {
-  //TODO: CLose off profile route to people who are not logged in
-  //TODO: separate userData so it can be used by the navbar and other components.
-  //if this.state.userData.name > 0, show "profile" link, and
-  //"logged in as (name)" in the navbar
+  //TODO: Pass down userData as props from the app router to the other components.(vs 
+  //the current system of fetch requests on every page.)
   //TODO: if there is no profile image, display randomized default image from database.
   //TODO: Add moment.js for date parsing.
   //TODO: "Change image" button functionality
   //TODO: Make "ratings" section dynamic
-  //TODO: Make country section dynamic 
   constructor() {
     super();
     this.state = {
