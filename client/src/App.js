@@ -36,7 +36,7 @@ class App extends Component {
         <div className="App">
           <Navbar />
           {/* <ReviewBeer beerName={TEST_BEER_NAME}/> */}
-            <div className="container">
+            <div className="container page-content">
               <Switch>
                <Route path="/" component={Welcome} exact={true} />
                <Route path="/browse" component={Browse} exact={true} />

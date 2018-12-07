@@ -16,8 +16,8 @@ const RegisterModal = (props) => (
        <button className="btn btn-link nav-link text-muted close-button" onClick={props.handleRequestClose}>x</button>
         <div className="content">
           <h2 className="display-5 text-center">Sign Up</h2>
-          <a className="btn btn-danger btn-block" href="/auth/google">Sign up With Google</a>
-          <a className="btn btn-primary btn-block" href="/auth/facebook">Sign up With Facebook</a>
+          <a className="btn google-btn btn-block" href="/auth/google">Sign up With Google</a>
+          <a className="btn facebook-btn btn-block" href="/auth/facebook">Sign up With Facebook</a>
         </div>
       </ReactModal>
     </div>

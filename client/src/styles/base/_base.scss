@@ -6,6 +6,9 @@ html {
 *:before,
 *:after {
   box-sizing: inherit;
+  -webkit-border-radius: 0 !important;
+      -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
 }
 
 body {
@@ -18,4 +21,9 @@ body {
 
 .container {
   min-height: 100%;
+}
+
+.page-content {
+  margin-top: 1rem;
+  margin-bottom: 10rem;
 }

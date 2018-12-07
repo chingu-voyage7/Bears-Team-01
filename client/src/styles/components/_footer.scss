@@ -5,9 +5,14 @@ footer {
   left: 0;
   padding: 1rem;
   text-align: center;
-  color: lightgray;
+  color: $off-white	;
 }
 
 .footer-bottom {
-  padding: 2rem .5rem 1rem .5rem;
+  padding: 1rem .5rem 1rem .5rem;
+}
+
+.footer-top h5 {
+  text-transform: uppercase;
+  font-size: $sm-size;
 }
