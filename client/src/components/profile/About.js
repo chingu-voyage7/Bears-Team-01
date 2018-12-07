@@ -14,6 +14,19 @@ class AboutSection extends Component {
       editIsActive: !this.state.editIsActive
     }));
   }    
+  handleSaveBio = (bio) => {
+    console.log("object: ", bio);
+    let id = this.props.userData._id;
+    fetch("/users/" + id, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({about:bio})
+    }).then(() => {
+      this.setState(() => ({ 
+        editIsActive: !this.state.editIsActive
+      }));
+    });
+  }
   render() {
     return (
     <div>
@@ -41,7 +54,7 @@ class AboutSection extends Component {
           </div>
           <div className="col-md-6">
             {this.state.editIsActive ? (
-              <EditAboutMe handleEditToggle={this.handleEditToggle} /> 
+              <EditAboutMe handleSaveBio={this.handleSaveBio} handleEditToggle={this.handleEditToggle} /> 
             ) : (
                 <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>
             )}
