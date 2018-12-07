@@ -56,7 +56,7 @@ class Navbar extends Component {
                 </li>
                 <li className="nav-item">
                   {this.state.userData.name ? (
-                    <Link to="/" className="nav-link">Logout</Link>
+                    <a href="/auth/logout" className="nav-link">Logout</a>
                   ) : (
                     <button onClick={this.handleLoginToggle} className="btn btn-link nav-link">Login</button>
                   )}

@@ -45,18 +45,18 @@ router.post('/', (req, res, next) => {
       message: err.message || "some error occurred!"
     });
   });
-})
+});
 
 // update user info
 router.put('/:userId', (req, res, next) => {
-  User.findByIdAndUpdate(req.params.userId, req.body, {new:true}) // TOO TRUSTING OF DATA GIVEN BY CLIENT!!
-  .then(data => {
-    res.status(200).json(data);
-  })
-  .catch(err => {
-    res.status(500).json({message: err.message || "some error occurred!"})
-  });
-})
+    User.findByIdAndUpdate(req.params.userId, req.body, {new:true}) // TOO TRUSTING OF DATA GIVEN BY CLIENT!!
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      res.status(500).json({message: err.message || "some error occurred!"})
+    });  
+});
 
 // delete a user
 router.delete('/:userId', (req, res, next) => {
@@ -67,6 +67,6 @@ router.delete('/:userId', (req, res, next) => {
   .catch(err => {
     res.status(500).json({message: err || "Could not delete user with id: " + id })
   });
-})
+});
 
 module.exports = router;

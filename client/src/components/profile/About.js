@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import EditAboutMe from './EditAboutMe';
 
 class AboutSection extends Component {
-  //TODO: Submit the data from the "about" section into the database
+  //TODO: Make about text automatically update (The text display updates only on a hard refresh,
+  //but saving to the database is working.)
   constructor() {
     super();
     this.state = {
@@ -14,6 +15,35 @@ class AboutSection extends Component {
       editIsActive: !this.state.editIsActive
     }));
   }    
+  handleSaveBio = (bio) => {
+    const id = this.props.userData._id;
+    fetch("/users/" + id, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({about:bio})
+    }).then(() => {
+      this.setState(() => ({ 
+        editIsActive: !this.state.editIsActive
+      }));
+    });
+  }
+  renderAbout = () => {
+    if (this.state.editIsActive){
+      return (
+        <EditAboutMe 
+          handleSaveBio={this.handleSaveBio} 
+          handleEditToggle={this.handleEditToggle} 
+          bio={this.props.userData.about}
+        />
+      )
+    }
+    return (
+      <div>
+        {!!this.props.userData.about && <p>{this.props.userData.about}</p>}
+        <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>
+      </div>
+    )
+  }
   render() {
     return (
     <div>
@@ -40,11 +70,7 @@ class AboutSection extends Component {
               <label>About</label>
           </div>
           <div className="col-md-6">
-            {this.state.editIsActive ? (
-              <EditAboutMe handleEditToggle={this.handleEditToggle} /> 
-            ) : (
-                <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>
-            )}
+            {this.renderAbout()}
           </div>
         </div>
         <div className="row">

@@ -3,6 +3,7 @@ import AboutSection from './About';
 import TimelineSection from './Timeline';
 
 class ProfilePage extends Component {
+  //TODO: CLose off profile route to people who are not logged in
   //TODO: separate userData so it can be used by the navbar and other components.
   //if this.state.userData.name > 0, show "profile" link, and
   //"logged in as (name)" in the navbar
