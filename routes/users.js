@@ -58,7 +58,7 @@ router.put('/:userId', (req, res, next) => {
       res.status(500).json({message: err.message || "some error occurred!"})
     });  
   } else {
-    res.status(401).json({message: err || "not authorized" })
+    res.status(401).json({message: "not authorized" })
   }
 });
 

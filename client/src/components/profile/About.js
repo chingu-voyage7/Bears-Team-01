@@ -16,7 +16,7 @@ class AboutSection extends Component {
   }    
   handleSaveBio = (bio) => {
     console.log("object: ", bio);
-    let id = this.props.userData._id;
+    const id = this.props.userData._id;
     fetch("/users/" + id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
