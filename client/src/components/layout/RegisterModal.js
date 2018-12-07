@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
-
+import { Link } from 'react-router-dom';
+//TODO: Make Privacy Policy link to actual page (& handlerequestclose)
 const RegisterModal = (props) => (
   <div>
     <div className="container">
@@ -15,9 +16,14 @@ const RegisterModal = (props) => (
       >
        <button className="btn btn-link nav-link text-muted close-button" onClick={props.handleRequestClose}>x</button>
         <div className="content">
-          <h2 className="display-5 text-center">Sign Up</h2>
-          <a className="btn google-btn btn-block" href="/auth/google">Sign up With Google</a>
-          <a className="btn facebook-btn btn-block" href="/auth/facebook">Sign up With Facebook</a>
+          <h2 className="display-5 text-center font-weight-light mb-4">Sign Up</h2>
+          <a className="btn google-btn btn-block" href="/auth/google">
+            <i className="fab fa-google modal-icon"></i>  Sign up With Google
+          </a>
+          <a className="btn facebook-btn btn-block" href="/auth/facebook">
+            <i className="fab fa-facebook modal-icon"></i>  Sign up With Facebook
+          </a>
+          <p className="policy-modal-link text-secondary">Read our <Link to="/profile">Privacy Policy.</Link></p>
         </div>
       </ReactModal>
     </div>
