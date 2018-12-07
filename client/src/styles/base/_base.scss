@@ -2,7 +2,6 @@ html {
   height: 100%;
   box-sizing: border-box;
 }
-
 *,
 *:before,
 *:after {
@@ -14,6 +13,7 @@ body {
   margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
+  background-color: #f9f9f9;
 }
 
 .container {

@@ -32,9 +32,9 @@ class Navbar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+        <nav className="navbar navbar-expand-sm bg-white mb-4">
           <div className="container">
-            <Link className="navbar-brand" to="/">BeerCraft</Link>
+            <Link className="navbar-brand text-dark" to="/">BeerCraft</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -42,7 +42,7 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="mobile-nav">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/browse">Browse
+                  <Link className="nav-link text-dark" to="/browse">Browse
                   </Link>
                 </li>
               </ul>
@@ -50,15 +50,15 @@ class Navbar extends Component {
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                   {this.state.userData.name ? (
-                    <Link className="nav-link" to="/profile" className="nav-link">Profile</Link>
-                    ) : ( <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link">Sign Up</button>
+                    <Link className="nav-link text-dark" to="/profile" className="nav-link text-dark">Profile</Link>
+                    ) : ( <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link text-dark">Sign Up</button>
                     )}
                 </li>
                 <li className="nav-item">
                   {this.state.userData.name ? (
-                    <a href="/auth/logout" className="nav-link">Logout</a>
+                    <a href="/auth/logout" className="nav-link text-dark">Logout</a>
                   ) : (
-                    <button onClick={this.handleLoginToggle} className="btn btn-link nav-link">Login</button>
+                    <button onClick={this.handleLoginToggle} className="btn btn-link nav-link text-dark">Login</button>
                   )}
                 </li>
               </ul>
