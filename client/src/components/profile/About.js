@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import EditAboutMe from './EditAboutMe';
 
 class AboutSection extends Component {
+  //TODO: Make about text automatically update (The text display updates only on a hard refresh,
+  //but saving to the database is working.)
   constructor() {
     super();
     this.state = {
@@ -26,7 +28,6 @@ class AboutSection extends Component {
     });
   }
   renderAbout = () => {
-    const about = this.props.userData.about
     if (this.state.editIsActive){
       return (
         <EditAboutMe 
@@ -38,6 +39,7 @@ class AboutSection extends Component {
     }
     return (
       <div>
+        {!!this.props.userData.about && <p>{this.props.userData.about}</p>}
         <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>
       </div>
     )
@@ -68,7 +70,6 @@ class AboutSection extends Component {
               <label>About</label>
           </div>
           <div className="col-md-6">
-            {!!this.props.userData.about && <p>{this.props.userData.about}</p>}
             {this.renderAbout()}
           </div>
         </div>
