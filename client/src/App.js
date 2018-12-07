@@ -30,7 +30,7 @@ class App extends Component {
     this.getUser();
   }
   render() {
-    const userID = this.state.userData._id
+    const userID = this.state.userData._id;
     return (
       <BrowserRouter>
         <div className="App">
