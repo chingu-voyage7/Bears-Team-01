@@ -14,7 +14,23 @@ import './styles/styles.scss';
 // const TEST_BEER_NAME = 'Sam Adams';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userData : {},
+    }
+  }
+  getUser = () => {
+    fetch('/user', {credentials: 'include'})    
+    .then(response => response.json())
+    .then(json => this.setState({userData: json}))
+    .catch(err => console.log(err))
+  }
+  componentDidMount = () => {
+    this.getUser();
+  }
   render() {
+    const userID = this.state.userData._id
     return (
       <BrowserRouter>
         <div className="App">
@@ -24,7 +40,8 @@ class App extends Component {
               <Switch>
                <Route path="/" component={Welcome} exact={true} />
                <Route path="/browse" component={Browse} exact={true} />
-               <Route path="/profile" component={ProfilePage} exact={true} />
+               {!!userID
+                &&  <Route path="/profile" component={ProfilePage} exact={true} /> }
                <Route path="/" component={NotFoundPage}/>
               </Switch>
              </div>
