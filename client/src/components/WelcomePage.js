@@ -7,7 +7,7 @@ class Welcome extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12 text-center">
-              <h1 className="display-4">BeerCraft</h1>
+              <h1 className="index-header display-4">BeerCraft</h1>
               <p className="lead">AI-Powered Beer Recommendations </p>
             </div>
           </div>

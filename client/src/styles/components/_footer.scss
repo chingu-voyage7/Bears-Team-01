@@ -1,4 +1,5 @@
 footer {
+  font-family: 'Pathway Gothic One', sans-serif;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -6,13 +7,45 @@ footer {
   padding: 1rem;
   text-align: center;
   color: $off-white	;
+  line-height: 2rem;
+}
+
+.footer-container {
+  padding: 1rem 8rem 0 8rem;
 }
 
 .footer-bottom {
-  padding: 1rem .5rem 1rem .5rem;
+  margin-top: $md-size;
+}
+
+.footer-top h4 {
+  text-transform: uppercase;
+  font-size: 2rem;
+  padding-bottom: 5px;
 }
 
 .footer-top h5 {
   text-transform: uppercase;
-  font-size: $sm-size;
+  font-size: 1.3rem;
+  padding-top: 7px;
+  padding-bottom: 5px;
+  transform: scale(1.1, 1);
 }
+
+.footer-logo {
+  width: $lg-size;
+  height: $lg-size;
+  padding: 0 5px 5px 5px;
+}
+
+.footer-link {
+  color: rgb(163, 162, 162);
+}
+
+.footer-link:hover {
+  color: rgb(209, 209, 209);
+}
+
+// .footer-list > li {
+//   text-align: left;
+// }
