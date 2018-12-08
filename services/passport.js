@@ -53,9 +53,9 @@ passport.use(
       callbackURL: facebookCallbackURL,
       profileFields: ["emails", "name", "picture.type(large)"]
     },
-    function(accessToken, refreshToken, profile, done) {
-      process.nextTick(function() {
-        User.findOne({ profileID: profile.id }, function(err, user) {
+    (accessToken, refreshToken, profile, done) => {
+      process.nextTick(() => {
+        User.findOne({ profileID: profile.id }, (err, user) => {
           if (err) return done(err);
           if (user) return done(null, user);
           else {
@@ -68,7 +68,7 @@ passport.use(
             };
             const newUser = new User(profileInfo);
 
-            newUser.save(function(err) {
+            newUser.save(err => {
               if (err) throw err;
               else return done(null, newUser);
             });
