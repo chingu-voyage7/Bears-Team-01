@@ -1,0 +1,12 @@
+.text-container {
+  margin: 0 auto;
+  background-color: white;
+  width: 100%;
+  max-width: 960px;
+  height: 100%;
+  padding: $lg-size;
+  @media screen and (max-width: 800px) {
+    width: 100%;
+    padding: $sm-size;
+  }    
+}

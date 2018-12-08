@@ -5,6 +5,8 @@ import Footer from './components/layout/Footer';
 import Welcome from './components/WelcomePage';
 import Browse from './components/BrowsePage';
 import NotFoundPage from './components/NotFoundPage';
+import BeerPage from './components/BeerPage';
+import PrivacyPage from './components/PrivacyPage';
 import ProfilePage from './components/profile/ProfilePage';
 
 // import ReviewBeer from './components/ReviewBeer';
@@ -36,10 +38,12 @@ class App extends Component {
         <div className="App">
           <Navbar />
           {/* <ReviewBeer beerName={TEST_BEER_NAME}/> */}
-            <div className="container">
+            <div className="container page-content">
               <Switch>
                <Route path="/" component={Welcome} exact={true} />
                <Route path="/browse" component={Browse} exact={true} />
+               <Route path="/beer/:id" component={BeerPage} exact={true} />
+               <Route path="/privacy" component={PrivacyPage} exact={true} />
                {!!userID
                 &&  <Route path="/profile" component={ProfilePage} exact={true} /> }
                <Route path="/" component={NotFoundPage}/>

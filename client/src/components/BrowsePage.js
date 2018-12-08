@@ -20,8 +20,10 @@ class BrowsePage extends Component {
   render() {
     return (
       <div>
-        <h1>Browse</h1>
-        <BeerList beers={this.state.beers} />
+        <div className="beer-container">
+          <h1>Browse</h1>
+          <BeerList beers={this.state.beers} />
+        </div>
       </div>
     )
   }

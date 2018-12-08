@@ -2,11 +2,13 @@ html {
   height: 100%;
   box-sizing: border-box;
 }
-
 *,
 *:before,
 *:after {
   box-sizing: inherit;
+  -webkit-border-radius: 0 !important;
+      -moz-border-radius: 0 !important;
+          border-radius: 0 !important;
 }
 
 body {
@@ -14,8 +16,22 @@ body {
   margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
+  background-color: #f9f9f9;
+}
+
+h1 {
+  font-weight: 200;
 }
 
 .container {
   min-height: 100%;
+}
+
+.page-content {
+  margin-top: 1rem;
+  min-height: 100vh;
+  padding-bottom: 18rem;
+  @media screen and (max-width: 576px) {
+    padding-bottom: 40rem;
+  }
 }

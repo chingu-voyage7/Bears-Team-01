@@ -15,9 +15,13 @@ const LoginModal = (props) => (
       >
        <button className="btn btn-link nav-link text-muted close-button" onClick={props.handleRequestClose}>x</button>
         <div className="content">
-          <h2 className="display-5 text-center">Login</h2>
-          <a className="btn btn-danger btn-block" href="/auth/google">Login With Google</a>
-          <a className="btn btn-primary btn-block" href="/auth/facebook">Login With Facebook</a>
+          <h2 className="display-5 text-center font-weight-light mb-4">Login</h2>
+          <a className="btn google-btn btn-block" href="/auth/google">
+            <i className="fab fa-google modal-icon"></i>  Login With Google
+          </a>
+          <a className="btn facebook-btn btn-block" href="/auth/facebook">
+            <i className="fab fa-facebook modal-icon"></i>  Login With Facebook
+          </a>
         </div>
       </ReactModal>
     </div>
