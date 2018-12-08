@@ -10,6 +10,12 @@ const ProfileSchema = new Schema({
   bio: {
     type: String
   },
+  location: {
+    type: String
+  },
+  age: {
+    type: String
+  },
   totalReviews: {
     type: Number,
     default: 0
