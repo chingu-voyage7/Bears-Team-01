@@ -6,9 +6,9 @@ const Footer = () => (
   <footer className="bg-dark text-center mt-4">
   <div className="footer-container">
     <div className="footer-top">
-      <div class="row">
+      <div className="row">
         <div className="col-lg-4 col-sm-12 p-0 footer-brand">
-          <h4 title>
+          <h4 className="title">
           <img className="footer-logo" src={logo}></img>
           <span>Beercraft</span>
           </h4>
@@ -16,7 +16,7 @@ const Footer = () => (
         <div className="col-lg-8 col-sm-12 p-0 footer-brand">
           <div className="row">
             <div className="col-sm-4 col-md-4 col-lg-4">
-              <h5 title>Explore</h5>
+              <h5 className="title">Explore</h5>
                 <ul className="list-unstyled footer-list">
                   <li><Link className="footer-link" to="/">Trending</Link></li>
                   <li><Link className="footer-link" to="/">Latest</Link></li>
@@ -24,7 +24,7 @@ const Footer = () => (
                 </ul>
             </div>
             <div className="col-sm-4 col-md-4 col-lg-4">
-              <h5 title>Share</h5>
+              <h5 className="title">Share</h5>
               <ul className="list-unstyled footer-list">
                 <li>
                   <Link className="footer-link" to="/">
@@ -33,21 +33,21 @@ const Footer = () => (
                 </li>
                 <li>
                   <Link className="footer-link" to="/">
-                    <i class="fab fa-facebook footer-icon"></i> Facebook
+                    <i className="fab fa-facebook footer-icon"></i> Facebook
                   </Link>
                 </li>
                 <li>
                   <Link className="footer-link" to="/">
-                    <i class="fab fa-reddit footer-icon"></i> Reddit
+                    <i className="fab fa-reddit footer-icon"></i> Reddit
                   </Link>
                 </li>
               </ul>
             </div>
             <div className="col-sm-4 col-md-4 col-lg-4">
-              <h5 title>Contact</h5>
+              <h5 className="title">Contact</h5>
               <ul className="list-unstyled footer-list">
                 <li><Link className="footer-link" to="/">Email</Link></li>
-                <li><Link className="footer-link" to="/">Privacy Policy</Link></li>
+                <li><Link className="footer-link" to="/privacy">Privacy Policy</Link></li>
               </ul>
             </div>  
           </div>      
