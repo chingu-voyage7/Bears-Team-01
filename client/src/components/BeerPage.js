@@ -5,7 +5,7 @@ const BeerPage = (props) => {
   return (
     <div>
       <div className="container">
-        <p>This is the beer page.</p>
+        <p>Beer with an id of {props.match.params.id}</p>
       </div>  
     </div>
   );
