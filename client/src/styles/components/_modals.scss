@@ -60,12 +60,28 @@
   color: white;
 }
 
+.google-btn:focus,
+.google-btn:hover {
+  color: white;
+  background-color: #cf4438;
+  outline: none;
+}
+
 .facebook-btn {
   background-color: #485a96;
   color: white;
 }
 
+.facebook-btn:focus,
+.facebook-btn:hover {
+  background-color: #3c4d85;
+  color: white;
+  outline: none;
+}
+
+
 .policy-modal-link {
   font-size: .8rem;
   margin-top: $sm-size;
 }
+
