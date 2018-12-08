@@ -5,48 +5,52 @@ import logo from '../../images/icons/logo-sm.png';
 const Footer = () => (
   <footer className="bg-dark text-center mt-4">
   <div className="footer-container">
-    <div className="footer-top d-none d-sm-block">
+    <div className="footer-top">
       <div class="row">
-        <div className="col-lg-4 col-sm-6 footer-brand">
+        <div className="col-lg-4 col-sm-12 p-0 footer-brand">
           <h4 title>
           <img className="footer-logo" src={logo}></img>
           <span>Beercraft</span>
           </h4>
         </div>
-        <div className="col-lg-2 col-sm-6">
-          <h5 title>Explore</h5>
-            <ul className="list-unstyled footer-list">
-              <li><Link className="footer-link" to="/">Trending</Link></li>
-              <li><Link className="footer-link" to="/">Latest</Link></li>
-              <li><Link className="footer-link" to="/">Browse</Link></li>
-            </ul>
-        </div>
-        <div className="col-lg-2 col-sm-6">
-          <h5 title>Share</h5>
-          <ul className="list-unstyled footer-list">
-            <li>
-              <Link className="footer-link" to="/">
-                <i className="fab fa-twitter"></i> Twitter
-              </Link>
-            </li>
-            <li>
-              <Link className="footer-link" to="/">
-                <i class="fab fa-facebook"></i> Facebook
-              </Link>
-            </li>
-            <li>
-              <Link className="footer-link" to="/">
-                <i class="fab fa-reddit"></i> Reddit
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div className="col-lg-2 col-sm-6">
-          <h5 title>Contact</h5>
-          <ul className="list-unstyled footer-list">
-            <li><Link className="footer-link" to="/">Email</Link></li>
-            <li><Link className="footer-link" to="/">Privacy Policy</Link></li>
-          </ul>
+        <div className="col-lg-8 col-sm-12 p-0 footer-brand">
+          <div className="row">
+            <div className="col-sm-4 col-md-4 col-lg-4">
+              <h5 title>Explore</h5>
+                <ul className="list-unstyled footer-list">
+                  <li><Link className="footer-link" to="/">Trending</Link></li>
+                  <li><Link className="footer-link" to="/">Latest</Link></li>
+                  <li><Link className="footer-link" to="/">Browse</Link></li>
+                </ul>
+            </div>
+            <div className="col-sm-4 col-md-4 col-lg-4">
+              <h5 title>Share</h5>
+              <ul className="list-unstyled footer-list">
+                <li>
+                  <Link className="footer-link" to="/">
+                    <i className="fab fa-twitter footer-icon"></i> Twitter
+                  </Link>
+                </li>
+                <li>
+                  <Link className="footer-link" to="/">
+                    <i class="fab fa-facebook footer-icon"></i> Facebook
+                  </Link>
+                </li>
+                <li>
+                  <Link className="footer-link" to="/">
+                    <i class="fab fa-reddit footer-icon"></i> Reddit
+                  </Link>
+                </li>
+              </ul>
+            </div>
+            <div className="col-sm-4 col-md-4 col-lg-4">
+              <h5 title>Contact</h5>
+              <ul className="list-unstyled footer-list">
+                <li><Link className="footer-link" to="/">Email</Link></li>
+                <li><Link className="footer-link" to="/">Privacy Policy</Link></li>
+              </ul>
+            </div>  
+          </div>      
         </div>
       </div>
       </div>

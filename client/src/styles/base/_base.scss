@@ -27,4 +27,7 @@ body {
   margin-top: 1rem;
   min-height: 100vh;
   padding-bottom: 18rem;
+  @media screen and (max-width: 576px) {
+    padding-bottom: 40rem;
+  }
 }

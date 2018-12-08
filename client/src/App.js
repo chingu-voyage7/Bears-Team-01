@@ -5,6 +5,7 @@ import Footer from './components/layout/Footer';
 import Welcome from './components/WelcomePage';
 import Browse from './components/BrowsePage';
 import NotFoundPage from './components/NotFoundPage';
+import BeerPage from './components/BeerPage';
 import ProfilePage from './components/profile/ProfilePage';
 
 // import ReviewBeer from './components/ReviewBeer';
@@ -40,6 +41,7 @@ class App extends Component {
               <Switch>
                <Route path="/" component={Welcome} exact={true} />
                <Route path="/browse" component={Browse} exact={true} />
+               <Route path="/beer/:id" component={BeerPage} exact={true} />
                {!!userID
                 &&  <Route path="/profile" component={ProfilePage} exact={true} /> }
                <Route path="/" component={NotFoundPage}/>
