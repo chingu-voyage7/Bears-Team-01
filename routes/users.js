@@ -26,6 +26,47 @@ router.get("/:userId", isLogedIn, (req, res, next) => {
     });
 });
 
+// update user info
+router.put("/:userId", isLogedIn, (req, res, next) => {
+  console.log(req.user);
+  if (req.params.userId === req.user.profileID) {
+    User.findOneAndUpdate({ profileID: req.params.userId }, req.body, {
+      new: true
+    }) // TOO TRUSTING OF DATA GIVEN BY CLIENT!!
+      .then(data => {
+        res.status(200).json(data);
+      })
+      .catch(err => {
+        res.status(500).json({
+          message: err.message || "some error occurred while updating the user"
+        });
+      });
+  } else {
+    res
+      .status(400)
+      .json("Your ID does not match the user you're trying to update");
+  }
+});
+
+// delete a user
+router.delete("/:userId", isLogedIn, (req, res, next) => {
+  if (req.params.userId === req.user.profileID) {
+    User.deleteOne({ profileID: req.params.userId })
+      .then(data => {
+        res.status(200).json(data);
+      })
+      .catch(err => {
+        res.status(500).json({
+          message: err || `Could not delete user with id: ${req.params.userId}`
+        });
+      });
+  } else {
+    res
+      .status(400)
+      .json("Your ID does not match the user you're trying to delete");
+  }
+});
+
 // create a user
 // router.post('/', (req, res, next) => {
 //   const user = new User({
@@ -45,29 +86,5 @@ router.get("/:userId", isLogedIn, (req, res, next) => {
 //     });
 //   });
 // });
-
-// update user info
-router.put("/:userId", isLogedIn, (req, res, next) => {
-  User.findByIdAndUpdate(req.params.userId, req.body, { new: true }) // TOO TRUSTING OF DATA GIVEN BY CLIENT!!
-    .then(data => {
-      res.status(200).json(data);
-    })
-    .catch(err => {
-      res.status(500).json({ message: err.message || "some error occurred!" });
-    });
-});
-
-// delete a user
-router.delete("/:userId", isLogedIn, (req, res, next) => {
-  User.deleteOne({ _id: req.params.userId })
-    .then(data => {
-      res.status(200).json(data);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ message: err || "Could not delete user with id: " + id });
-    });
-});
 
 module.exports = router;
