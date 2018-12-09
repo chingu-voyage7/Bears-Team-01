@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const BeerList = ({beers}) => {
 
@@ -6,7 +7,7 @@ const BeerList = ({beers}) => {
       <section className="beers row">
         {beers.map(beer => 
           <article className="beer col-sm-12 col-md-6 col-lg-3" key={beer._id}>
-            <p className="beer-name">{beer.beerName}</p>
+            <Link to={"/beer/" + beer._id} className="beer-name">{beer.beerName}</Link>
             <hr/>
             <div className="beer-info">
               <p className="beer-style"><span className="text-orange">Style:</span> {beer.style}</p>

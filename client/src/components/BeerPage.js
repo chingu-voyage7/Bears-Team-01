@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-const BeerPage = (props) => {
-  return (
+class BeerPage extends Component{
+  render(){
+    return (
     <div>
       <div className="container">
-        <p>This is the beer page.</p>
+        <p>Beer with an id of {this.props.match.params.id}</p>
       </div>  
     </div>
-  );
+    )
+  }
 }
 
 export default BeerPage;
