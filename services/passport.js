@@ -91,3 +91,6 @@ passport.deserializeUser(async (id, done) => {
     return done(e, null);
   }
 });
+
+module.exports = passport;
+// this gives the rest of the back end access to the req.user
