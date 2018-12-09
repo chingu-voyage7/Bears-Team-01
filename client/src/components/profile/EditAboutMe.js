@@ -2,7 +2,7 @@ import React from 'react';
 
 const EditAboutMe = (props) => (
   <div>
-    <textarea id="bio" placeholder={props.bio} className="form-control d-block mb-3"></textarea>
+    <textarea id="bio" className="form-control d-block mb-3">{props.bio}</textarea>
     <button 
       type="submit"
       className="btn btn-outline-primary" 
