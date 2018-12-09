@@ -21,7 +21,7 @@ class Navbar extends Component {
     this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
   }
   getUser = () => {
-    fetch('/user', {credentials: 'include'})    
+    fetch('/users/current')    
     .then(response => response.json())
     .then(json => this.setState({userData: json}))
     .catch(err => console.log(err))

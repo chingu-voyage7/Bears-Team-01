@@ -23,7 +23,7 @@ class App extends Component {
     }
   }
   getUser = () => {
-    fetch('/user', {credentials: 'include'})    
+    fetch('/users/current')    
     .then(response => response.json())
     .then(json => this.setState({userData: json}))
     .catch(err => console.log(err))
@@ -32,7 +32,7 @@ class App extends Component {
     this.getUser();
   }
   render() {
-    const userID = this.state.userData._id;
+    const userID = this.state.userData.id;
     return (
       <BrowserRouter>
         <div className="App">
