@@ -9,7 +9,6 @@ const passport = require('passport');
 
 // Import routes
 const indexRouter = require('./routes/index');
-const userRouter = require('./routes/user');
 const usersRouter = require('./routes/users');
 const beersRouter = require('./routes/beers');
 const authRouter = require('./routes/auth');
@@ -50,7 +49,6 @@ require('./services/passport');
 
 // Routes
 app.use('/', indexRouter);
-app.use('/user', userRouter);
 app.use('/users', usersRouter);
 app.use('/beers', beersRouter);
 app.use('/auth', authRouter);
