@@ -40,7 +40,8 @@ class AboutSection extends Component {
     return (
       <div>
         {!!this.props.userData.about && <p>{this.props.userData.about}</p>}
-        <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>✏️Edit</button>
+        <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>
+          <i class="far fa-edit"></i> Edit</button>
       </div>
     )
   }
