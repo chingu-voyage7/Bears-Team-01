@@ -21,7 +21,7 @@ const TimelineSection = (props) => (
       <div className="col-md-4">
         <span 
           role="img"
-          aria-labelledby="jsx-a11y/accessible-emoji"
+          aria-label="star"
           >⭐⭐⭐</span>
       </div>
   </div>
@@ -33,7 +33,7 @@ const TimelineSection = (props) => (
       <div className="col-md-4">
         <span 
           role="img"
-          aria-labelledby="jsx-a11y/accessible-emoji"
+          aria-label="star"
         >⭐⭐⭐⭐</span>
       </div>
   </div>
@@ -45,7 +45,7 @@ const TimelineSection = (props) => (
       <div className="col-md-4">
         <span 
           role="img"
-          aria-labelledby="jsx-a11y/accessible-emoji"
+          aria-label="star"
           >⭐⭐⭐⭐</span>
       </div>
   </div>

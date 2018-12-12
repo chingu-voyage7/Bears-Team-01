@@ -4,6 +4,25 @@
   } 
 }
 
+.top {
+  .name {
+    padding-left: $md-size;
+    @media screen and (max-width: 767px) {
+      padding-left: inherit;
+    } 
+  }
+}
+
+.bottom {
+  margin-top: $md-size;
+  @media screen and (max-width: 991px) {
+    margin-top: $sm-size;
+  } 
+  .rating {
+    font-size: 1.2rem;
+  }
+}
+
 .beer-container {
   background-color: white;
   padding: $lg-size;
