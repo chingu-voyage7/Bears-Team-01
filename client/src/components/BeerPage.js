@@ -40,7 +40,8 @@ class BeerPage extends Component{
                   <h4 className="mb-4">Reviews</h4>
                   <div className="row">
                     <div className="col-sm-2 review-info">
-                      <img className="review-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
+                      <img className="reviewer-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
+                      <p className="reviwer-name mt-2">Steve K.</p>
                       <span 
                         className="user-rating"
                         id="user-rating"

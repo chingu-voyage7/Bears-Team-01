@@ -21,7 +21,7 @@ class BrowsePage extends Component {
     return (
       <div>
         <div className="beer-container">
-          <h1>Browse</h1>
+          <h1>Most Recent</h1>
           <BeerList beers={this.state.beers} />
         </div>
       </div>
