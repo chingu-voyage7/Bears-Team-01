@@ -1,15 +1,15 @@
-.padding-mobile {
-  @media screen and (max-width: 991px) {
-    padding: $xs-size;
-  } 
+.beer-container {
+  background-color: white;
+  padding: $lg-size;
+  filter: drop-shadow(0 1px 1px #e4e4e4);
 }
 
-.top {
-  .name {
-    padding-left: $md-size;
-    @media screen and (max-width: 767px) {
-      padding-left: inherit;
-    } 
+.beer-img-container {
+  padding-right: 0;
+  padding-bottom: 0;
+  .beer-img {
+    width: 100%;
+    max-width: 120px;
   }
 }
 
@@ -23,19 +23,49 @@
   }
 }
 
-.beer-container {
-  background-color: white;
-  padding: $lg-size;
-  filter: drop-shadow(0 1px 1px #e4e4e4);
+.top {
+  .name {
+    padding-left: $md-size;
+    @media screen and (max-width: 767px) {
+      padding-top: $sm-size;
+      padding-left: inherit;
+    } 
+  }
 }
 
-.main-image {
-  max-width: 100px;
-  max-height: 100px;
+.rating-section {
+  .rating-subtitle {
+    @media screen and (min-width: 575px) and (max-width: 1199px) {
+      padding-left: 25px;
+    } 
+  }
+}
+
+.reviews {
+  .review-text {
+    border-left: 2px solid $off-white;
+    width: 100%;
+    height: 100%;
+    padding-left: $sm-size;
+  }
+  .review-thumbnail {
+    width: 100%;
+    max-width: 40px;
+    margin: 0 auto;
+  }
+  .review-info {
+    text-align: center;
+  }
+}
+
+.padding-mobile {
+  @media screen and (max-width: 991px) {
+    padding: $xs-size;
+  } 
 }
 
 .user-thumbnail {
-  max-width: 40px;
-  max-height: 40px;
-  margin-right: 5px;
+  margin-bottom: 4px;
+  width: 100%;
+  max-width: 50px;
 }
