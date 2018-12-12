@@ -1,25 +1,30 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 
 class BeerPage extends Component{
 //Id: this.props.match.params.id
   render(){
     return (
     <div>
-      <div className="container">
         <div className="row">
-          <div className="beer-container info col-md-8">
-            <img className="main-image" src="https://i.imgur.com/oLXSUJP.png"></img>
+          <div className="col-lg-9 padding-mobile">
+            <div className="beer-container info">
             <div className="name">
               <h2>Hazy Little Thing</h2>
               <p className="brewery">Sierra Nevada Brewing Co.</p>
             </div>
+              <img className="main-image" alt="beer-icon" src="https://i.imgur.com/oLXSUJP.png"></img>
+              <p>Rating: 4.98/5</p>
+            </div>
           </div>  
-          <div className="beer-container similar col-md-3 offset-1">
-            <h4>Similar Beers</h4>
-        </div> 
+          <div className="col-lg-3 padding-mobile">
+            <div className="beer-container recent">
+              <h4>Recent Likes</h4>
+              <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
+              <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
+              <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
+            </div>
+          </div> 
         </div>
-      </div>
     </div>
     )
   }

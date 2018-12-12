@@ -1,3 +1,9 @@
+.padding-mobile {
+  @media screen and (max-width: 991px) {
+    padding: $xs-size;
+  } 
+}
+
 .beer-container {
   background-color: white;
   padding: $lg-size;
@@ -7,4 +13,10 @@
 .main-image {
   max-width: 100px;
   max-height: 100px;
+}
+
+.user-thumbnail {
+  max-width: 40px;
+  max-height: 40px;
+  margin-right: 5px;
 }

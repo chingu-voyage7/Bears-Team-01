@@ -9,7 +9,7 @@ const Footer = () => (
       <div className="row">
         <div className="col-lg-4 col-sm-12 p-0 footer-brand">
           <h4 className="title">
-          <img className="footer-logo" src={logo}></img>
+          <img className="footer-logo" alt="logo" src={logo}></img>
           <span>Beercraft</span>
           </h4>
         </div>
