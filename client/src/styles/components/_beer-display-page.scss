@@ -58,12 +58,6 @@
   }
 }
 
-.padding-mobile {
-  @media screen and (max-width: 991px) {
-    padding: $xs-size;
-  } 
-}
-
 .user-thumbnail {
   margin-bottom: 4px;
   width: 100%;
