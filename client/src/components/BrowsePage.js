@@ -20,10 +20,8 @@ class BrowsePage extends Component {
   render() {
     return (
       <div>
-        <div className="">
           <h1>Most Recent</h1>
           <BeerList beers={this.state.beers} />
-        </div>
       </div>
     )
   }

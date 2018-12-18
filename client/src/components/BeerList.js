@@ -8,7 +8,14 @@ const BeerList = ({beers}) => {
         {beers.map(beer => 
           <article className="beer col-sm-12 col-md-12 padding-mobile mb-4" key={beer._id}>
             <div className="beer-container">
-              <Link to={"/beer/" + beer._id} className="beer-name text-dark font-weight-bold">{beer.beerName}</Link>
+              <div className="row">
+                <div className="col-lg-1 col-md-2 beer-icon-container">
+                  <img className="beer-icon" alt="beer-icon" src="https://i.imgur.com/oLXSUJP.png"></img>
+                </div>
+                <div className="col-lg-11 col-md-10 align-text-bottom">
+                  <Link to={"/beer/" + beer._id} className="text-dark font-weight-bold"><h4>{beer.beerName}</h4></Link>
+                </div>
+              </div>
               <hr/>
               <div>
                 <p className="beer-style"><span className="text-orange">Style:</span> {beer.style}</p>
