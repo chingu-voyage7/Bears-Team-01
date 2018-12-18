@@ -19,12 +19,18 @@ body {
   background-color: $background;
 }
 
+.container {
+  min-height: 100%;
+}
+
 h1 {
   font-weight: 200;
 }
 
-.container {
-  min-height: 100%;
+.padding-mobile {
+  @media screen and (max-width: 991px) {
+    padding: $xs-size;
+  } 
 }
 
 .page-content {

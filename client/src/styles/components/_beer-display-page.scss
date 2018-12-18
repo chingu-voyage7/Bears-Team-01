@@ -48,7 +48,7 @@
     height: 100%;
     padding-left: $sm-size;
   }
-  .review-thumbnail {
+  .reviewer-thumbnail {
     width: 100%;
     max-width: 40px;
     margin: 0 auto;
@@ -56,12 +56,6 @@
   .review-info {
     text-align: center;
   }
-}
-
-.padding-mobile {
-  @media screen and (max-width: 991px) {
-    padding: $xs-size;
-  } 
 }
 
 .user-thumbnail {

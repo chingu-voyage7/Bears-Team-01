@@ -20,8 +20,8 @@ class BrowsePage extends Component {
   render() {
     return (
       <div>
-        <div className="beer-container">
-          <h1>Browse</h1>
+        <div className="">
+          <h1>Most Recent</h1>
           <BeerList beers={this.state.beers} />
         </div>
       </div>
