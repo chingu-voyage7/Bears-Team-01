@@ -66,7 +66,7 @@ class ProfilePage extends Component {
                   <li className="nav-item">
                     <a
                       className={`nav-link ${
-                        this.state.timelineIsActive ? 'active' : ''
+                        this.state.aboutIsActive ? 'active' : ''
                       }`}
                       onClick={this.handleAboutTab}
                     >
