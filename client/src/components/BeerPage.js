@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
 
 class BeerPage extends Component{
-//Id: this.props.match.params.id
+  constructor(){
+    super();
+    this.state = {
+      beer: []
+    }
+  }
+  getBeer(beerId){
+    fetch(`/beers/${beerId}`)
+    .then(response => response.json())
+    .then(json => this.setState({beer: json}))
+    .catch(err => console.log(err))
+  }
+  componentDidMount(){
+    const beerId = this.props.match.params.id;
+    this.getBeer(beerId);
+  }
   render(){
+    const { beer } = this.state;
     return (
-    <div>
+      <div>
         <div className="row">
           <div className="col-lg-9 padding-mobile">
             <div className="row">     
@@ -15,8 +31,8 @@ class BeerPage extends Component{
                         <img className="beer-img" alt="beer-icon" src="https://i.imgur.com/oLXSUJP.png"></img>
                       </div>
                       <div className="name col-md-10">
-                        <h2>Hazy Little Thing</h2>
-                        <p className="brewery">Sierra Nevada Brewing Co.</p>
+                        <h2>{ beer.beerName }</h2>
+                        {!!beer.brewer && <p className="brewery">{ beer.brewer.name }</p>}
                         <div className="row rating-section">
                           <div className="col-sm-2">
                             <span 
@@ -31,7 +47,7 @@ class BeerPage extends Component{
                       </div>
                     </div>
                     <div className="bottom col-lg-12">
-                      <p className="rating">Rating, ranking and flavor information goes here.</p>
+                      <p className="rating">{ beer.notes }</p>
                     </div>
                 </div>
               </div>
