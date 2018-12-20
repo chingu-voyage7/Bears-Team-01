@@ -12,9 +12,6 @@ class ProfilePage extends Component {
   constructor() {
     super();
     this.state = {
-      userData : {
-        name: ''
-      },
       timelineIsActive: true,
       aboutIsActive: false,
     }

@@ -17,7 +17,7 @@ class Navbar extends Component {
   handleRequestClose = () => {
     this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
   }
-  
+
   render() {
     return (
       <div>
@@ -39,13 +39,13 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  {this.state.userData.name ? (
+                  {this.props.userData.name ? (
                     <Link className="nav-link text-dark" to="/profile" className="nav-link text-dark">Profile</Link>
                     ) : ( <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link text-dark">Sign Up</button>
                     )}
                 </li>
                 <li className="nav-item">
-                  {this.state.userData.name ? (
+                  {this.props.userData.name ? (
                     <a href="/auth/logout" className="nav-link text-dark">Logout</a>
                   ) : (
                     <button onClick={this.handleLoginToggle} className="btn btn-link nav-link text-dark">Login</button>
