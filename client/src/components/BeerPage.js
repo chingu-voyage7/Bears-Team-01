@@ -47,7 +47,7 @@ class BeerPage extends Component{
                       </div>
                     </div>
                     <div className="bottom col-lg-12">
-                      <p className="rating">{ beer.notes }</p>
+                      {!!beer.notes && <p className="rating">{ beer.notes }</p>}
                     </div>
                 </div>
               </div>
