@@ -6,10 +6,7 @@ import LoginModal from './LoginModal';
 class Navbar extends Component {
   state = {
     registerIsActive: false,
-    loginIsActive: false,
-    userData : {
-      name : ''
-    }
+    loginIsActive: false
   }
   handleRegisterToggle = () => {
     this.setState(() => ({ registerIsActive: !this.state.registerIsActive }));
