@@ -28,9 +28,6 @@ class ProfilePage extends Component {
       aboutIsActive: true,
     }));
   }
-  componentDidMount = () => {
-    this.getUser();
-  }
   render() {
     return (
     <div>
