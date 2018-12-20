@@ -28,6 +28,9 @@ class ProfilePage extends Component {
       aboutIsActive: true
     }));
   };
+  componentDidMount = () => {
+    window.scrollTo(0, 0);
+  }
   render() {
     const { userData } = this.props;
     return (
