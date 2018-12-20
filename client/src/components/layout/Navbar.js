@@ -17,12 +17,6 @@ class Navbar extends Component {
   handleRequestClose = () => {
     this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
   }
-  getUser = () => {
-    fetch('/users/current')    
-    .then(response => response.json())
-    .then(json => this.setState({userData: json}))
-    .catch(err => console.log(err))
-  }
   componentDidMount = () => {
     this.getUser();
   }
