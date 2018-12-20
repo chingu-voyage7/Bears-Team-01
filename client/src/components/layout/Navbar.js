@@ -17,9 +17,7 @@ class Navbar extends Component {
   handleRequestClose = () => {
     this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
   }
-  componentDidMount = () => {
-    this.getUser();
-  }
+  
   render() {
     return (
       <div>
