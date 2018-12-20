@@ -22,7 +22,7 @@ class Navbar extends Component {
     return (
       <div>
         <div className="top-bar"></div>
-        <nav className="navbar navbar-expand-sm mb-4 color-white">
+        <nav className="navbar navbar-light navbar-expand-sm mb-4 color-white">
           <div className="container">
             <Link className="navbar-brand text-dark" to="/">BeerCraft</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
