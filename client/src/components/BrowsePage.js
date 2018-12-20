@@ -16,6 +16,7 @@ class BrowsePage extends Component {
   }
   componentDidMount = () => {
     this.getBeers();
+    window.scrollTo(0, 0);
   }
   render() {
     return (
