@@ -32,11 +32,12 @@ class App extends Component {
     this.getUser();
   };
   render() {
-    const userID = this.state.userData.id;
+    // const userID = this.state.userData.id;
+    const { userData } = this.state;
     return (
       <BrowserRouter>
         <div className="App">
-          <Navbar userData={this.state.userData} />
+          <Navbar userData={userData} />
           {/* <ReviewBeer beerName={TEST_BEER_NAME}/> */}
           <div className="container page-content">
             <Switch>
@@ -44,8 +45,12 @@ class App extends Component {
               <Route path="/browse" component={Browse} exact={true} />
               <Route path="/beer/:id" component={BeerPage} exact={true} />
               <Route path="/privacy" component={PrivacyPage} exact={true} />
-              {!!userID && (
-                <Route path="/profile" component={ProfilePage} exact={true} />
+              {!!userData.id && (
+                <Route
+                  path="/profile"
+                  render={() => <ProfilePage {...{ userData }} />}
+                  exact={true}
+                />
               )}
               <Route path="/" component={NotFoundPage} />
             </Switch>
