@@ -6,10 +6,7 @@ import LoginModal from './LoginModal';
 class Navbar extends Component {
   state = {
     registerIsActive: false,
-    loginIsActive: false,
-    userData : {
-      name : ''
-    }
+    loginIsActive: false
   }
   handleRegisterToggle = () => {
     this.setState(() => ({ registerIsActive: !this.state.registerIsActive }));
@@ -20,15 +17,7 @@ class Navbar extends Component {
   handleRequestClose = () => {
     this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
   }
-  getUser = () => {
-    fetch('/users/current')    
-    .then(response => response.json())
-    .then(json => this.setState({userData: json}))
-    .catch(err => console.log(err))
-  }
-  componentDidMount = () => {
-    this.getUser();
-  }
+
   render() {
     return (
       <div>
@@ -50,13 +39,13 @@ class Navbar extends Component {
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  {this.state.userData.name ? (
+                  {this.props.userData.name ? (
                     <Link className="nav-link text-dark" to="/profile" className="nav-link text-dark">Profile</Link>
                     ) : ( <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link text-dark">Sign Up</button>
                     )}
                 </li>
                 <li className="nav-item">
-                  {this.state.userData.name ? (
+                  {this.props.userData.name ? (
                     <a href="/auth/logout" className="nav-link text-dark">Logout</a>
                   ) : (
                     <button onClick={this.handleLoginToggle} className="btn btn-link nav-link text-dark">Login</button>
