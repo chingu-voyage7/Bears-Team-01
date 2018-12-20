@@ -27,12 +27,6 @@ class ProfilePage extends Component {
       timelineIsActive: false,
       aboutIsActive: true,
     }));
-  }    
-  getUser = () => {
-    fetch('/users/current')    
-    .then(response => response.json())
-    .then(json => this.setState({userData: json}))
-    .catch(err => console.log(err))
   }
   componentDidMount = () => {
     this.getUser();
