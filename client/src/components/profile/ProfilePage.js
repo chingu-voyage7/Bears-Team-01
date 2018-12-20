@@ -3,7 +3,7 @@ import AboutSection from './About';
 import TimelineSection from './Timeline';
 
 class ProfilePage extends Component {
-  //TODO: Pass down userData as props from the app router to the other components.(vs 
+  //TODO: Pass down userData as props from the app router to the other components.(vs
   //the current system of fetch requests on every page.)
   //TODO: if there is no profile image, display randomized default image from database.
   //TODO: Add moment.js for date parsing.
@@ -13,69 +13,86 @@ class ProfilePage extends Component {
     super();
     this.state = {
       timelineIsActive: true,
-      aboutIsActive: false,
-    }
+      aboutIsActive: false
+    };
   }
   handleTimelineTab = () => {
-    this.setState(() => ({ 
+    this.setState(() => ({
       timelineIsActive: true,
-      aboutIsActive: false,
+      aboutIsActive: false
     }));
-  }    
+  };
   handleAboutTab = () => {
-    this.setState(() => ({ 
+    this.setState(() => ({
       timelineIsActive: false,
-      aboutIsActive: true,
+      aboutIsActive: true
     }));
-  }
+  };
   render() {
+    const { userData } = this.props;
     return (
-    <div>
-      <div className="container profile-container">
+      <div>
+        <div className="container profile-container">
           <div className="row">
             <div className="col-md-4">
               <div className="profile-img">
-                {!!this.state.userData.picture && <img src={this.state.userData.picture} alt="user-profile"></img>}
+                {!!userData.picture && (
+                  <img src={userData.picture} alt="user-profile" />
+                )}
                 <div className="file btn btn-lg btn-primary">
                   Change Photo
-                  <input type="file" name="file"/>
+                  <input type="file" name="file" />
                 </div>
               </div>
             </div>
             <div className="col-md-6">
               <div className="profile-head">
-                  <h2>
-                    {this.state.userData.name}
-                  </h2>
-                  <h6>
-                    Beer Enthusiast
-                  </h6>
-                  <p className="profile-rating">RATINGS : <span>82</span></p>
-                  <ul className="nav nav-tabs">
-                    <li className="nav-item">
-                      <a className={this.state.timelineIsActive ? 'nav-link active': 'nav-link'} onClick={this.handleTimelineTab}>Timeline</a>
-                    </li>
-                    <li className="nav-item">
-                      <a className={this.state.aboutIsActive ? 'nav-link active': 'nav-link'} onClick={this.handleAboutTab}>About</a>
-                    </li>
-                  </ul>
+                <h2>{userData.name}</h2>
+                <h6>Beer Enthusiast</h6>
+                <p className="profile-rating">
+                  RATINGS : <span>82</span>
+                </p>
+                <ul className="nav nav-tabs">
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${
+                        this.state.timelineIsActive ? 'active' : ''
+                      }`}
+                      onClick={this.handleTimelineTab}
+                    >
+                      Timeline
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className={`nav-link ${
+                        this.state.timelineIsActive ? 'active' : ''
+                      }`}
+                      onClick={this.handleAboutTab}
+                    >
+                      About
+                    </a>
+                  </li>
+                </ul>
               </div>
             </div>
-
           </div>
           <div className="row">
-              <div className="col-md-4">
+            <div className="col-md-4" />
+            <div className="col-md-6">
+              <div className="tab-content profile-tab">
+                {!!this.state.timelineIsActive && (
+                  <TimelineSection {...{ userData }} />
+                )}
+                {!!this.state.aboutIsActive && (
+                  <AboutSection {...{ userData }} />
+                )}
               </div>
-              <div className="col-md-6">
-                <div className="tab-content profile-tab">
-                  {!!this.state.timelineIsActive && <TimelineSection userData={this.state.userData} />}
-                  {!!this.state.aboutIsActive && <AboutSection userData={this.state.userData} />}
-                </div>
-              </div>
+            </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
