@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import ReviewBeer from './ReviewBeer'
 
 class BeerPage extends Component{
   constructor(){
     super();
     this.state = {
-      beer: []
+      beer: [],
+      reviewIsActive: false
     }
   }
   getBeer(beerId){
@@ -12,6 +14,9 @@ class BeerPage extends Component{
     .then(response => response.json())
     .then(json => this.setState({beer: json}))
     .catch(err => console.log(err))
+  }
+  handleReviewToggle = () => {
+    this.setState(() => ({ reviewIsActive: !this.state.reviewIsActive }));
   }
   componentDidMount(){
     const beerId = this.props.match.params.id;
@@ -54,7 +59,11 @@ class BeerPage extends Component{
               <div className="col-lg-12 mt-4 padding-mobile">
                 <div className="beer-container reviews">
                   <h4 className="mb-4">Reviews</h4>
-                  <div className="row">
+
+                  <button onClick={this.handleReviewToggle} className="btn btn-primary">Add a review</button>
+                  {!!this.state.reviewIsActive && <ReviewBeer />}
+
+                  <div className="row mt-5">
                     <div className="col-sm-2 review-info">
                       <img className="reviewer-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
                       <p className="reviwer-name mt-2">Steve K.</p>

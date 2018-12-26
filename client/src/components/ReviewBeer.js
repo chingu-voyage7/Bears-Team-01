@@ -36,9 +36,11 @@ export default class ReviewBeer extends Component {
 
   render() {
     return (
-      <div className="rate-beer-container">
+    <div className="col-lg-12 mb-4 p-0">
         <h1>{this.props.beerName}</h1>
-        <div className="rating-categories">
+        <div className="rating-categories mt-4">
+
+        <div className="form-row w-100 p-0 m-0">
           {RATE_CATEGORIES.map((categoryName, idx) => (
             <RateCategory
               key={`category${idx}`}
@@ -48,18 +50,19 @@ export default class ReviewBeer extends Component {
             />
           ))}
         </div>
-        <textarea
-          placeholder="Write your review here."
-          value={this.state.textValue}
-          onChange={this.handleTextAreaChange}
-        />
-        <button
-          onClick={this.handleButtonClick}
-          className="btn btn-primary btn-block"
-        >
-          Submit
-        </button>
-      </div>
+        </div>
+        <form>
+          <div className="form-group mt-4 p-1">
+            <label htmlFor="review">
+              Review
+            </label>
+            <textarea id="review" className="form-control" type="text" name="name"></textarea>
+          </div>
+          <div className="form-group">
+            <input className="btn btn-primary mb-1 ml-1" type="submit" value="Submit" />
+          </div>
+        </form>
+        </div>
     );
   }
 }
