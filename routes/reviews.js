@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Beer = require("../models/beer.model.js");
 const Review = require("../models/review.model.js");
-const isLogedIn = require("../middlewares/requireLogin");
+const isLoggedIn = require("../middlewares/requireLogin");
 
 //Reviews New
 
@@ -18,15 +18,18 @@ router.get("/new", isLoggedIn, function(req, res){
 });
 
 //Reviews Create
-
 router.post("/", isLoggedIn, function(req, res){
   //lookup beer using ID
-  Beer.findById(req.params.id, function(err, beer){
+  console.log("****debug**** : ", req.body);
+
+  Beer.findById(req.body.beerId, function(err, beer){
       if(err){
          req.flash("error", "Error: Something went wrong!");
          res.redirect("/browse");
       } else {
-          Review.create(req.body.review, function(err, review){
+          Review.create({
+            text: req.body.textValue
+          }, function(err, review){
               if(err){
                   console.log(err);
               } else {
@@ -46,3 +49,5 @@ router.post("/", isLoggedIn, function(req, res){
       }
   });
 });
+
+module.exports = router;

@@ -1,6 +1,6 @@
-const postBeerReview = (route, data) =>
-  fetch(route, {
-    method: 'POST', // correct HTTP verb?
+const postBeerReview = (data) =>
+  fetch('/beers/' + data.beerId + '/reviews', {
+    method: 'POST',
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include' // include session cookie

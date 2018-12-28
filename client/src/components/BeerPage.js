@@ -61,7 +61,7 @@ class BeerPage extends Component{
                   <h4 className="mb-4">Reviews</h4>
 
                   <button onClick={this.handleReviewToggle} className="btn btn-primary">Add a review</button>
-                  {!!this.state.reviewIsActive && <ReviewBeer />}
+                  {!!this.state.reviewIsActive && <ReviewBeer beerId={this.props.match.params.id} />}
 
                   <div className="row mt-5">
                     <div className="col-sm-2 review-info">

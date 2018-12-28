@@ -15,23 +15,27 @@ export default class ReviewBeer extends Component {
     textValue: ''
   };
 
-  handleSelectChange = e =>
-    this.setState({
-      categoryValues: {
-        [e.target.name]: e.target.value
-      }
-    });
+  handleSelectChange = e => {
+    let categoryValues = this.state.categoryValues;
+    categoryValues[e.target.name] = e.target.value;
 
-  handleTextAreaChange = e => this.setState({ textValue: e.target.value });
+    this.setState({
+      categoryValues: categoryValues
+    });
+  }
+  handleTextAreaChange = (e) => {
+    this.setState({ textValue: e.target.value })
+  };
 
   handleButtonClick = e => {
+    e.preventDefault();
     // get all values from this.state
     // make POST request to back-end
     // make sure to display success/failed message
     const data = { ...this.state };
-    console.log('data is', data);
-    // postBeerReview(someRoute, data);
-    return false; // stub
+    data.beerId = this.props.beerId;
+    console.log('data is ', data);
+    postBeerReview(data);
   };
 
   render() {
@@ -51,12 +55,13 @@ export default class ReviewBeer extends Component {
           ))}
         </div>
         </div>
-        <form>
+        <form onSubmit={this.handleButtonClick}>
+          <input type="hidden" name="beerID" value={this.props.id}></input>
           <div className="form-group mt-4 p-1">
             <label htmlFor="review">
               Review
             </label>
-            <textarea id="review" className="form-control" type="text" name="name"></textarea>
+            <textarea onChange={this.handleTextAreaChange} id="review" className="form-control" type="text" name="review"></textarea>
           </div>
           <div className="form-group">
             <input className="btn btn-primary mb-1 ml-1" type="submit" value="Submit" />
