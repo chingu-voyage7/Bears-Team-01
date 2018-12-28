@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
+import ReviewBeer from './ReviewBeer';
+import ReviewList from './ReviewList';
 
 class BeerPage extends Component{
   constructor(){
     super();
     this.state = {
-      beer: []
+      beer: [],
+      reviewIsActive: false,
+      reviews: []
     }
   }
   getBeer(beerId){
@@ -13,12 +17,23 @@ class BeerPage extends Component{
     .then(json => this.setState({beer: json}))
     .catch(err => console.log(err))
   }
+  getReviews(beerId){
+    fetch(`/beers/reviews/all/${beerId}`)
+    .then(response => response.json())
+    .then(json => this.setState({reviews: json}))
+    .catch(err => console.log(err))
+  }
+  handleReviewToggle = () => {
+    this.setState(() => ({ reviewIsActive: !this.state.reviewIsActive }));
+  }
   componentDidMount(){
     const beerId = this.props.match.params.id;
     this.getBeer(beerId);
+    this.getReviews(beerId);
   }
   render(){
     const { beer } = this.state;
+    console.log(this.state.reviews)
     return (
       <div>
         <div className="row">
@@ -54,22 +69,15 @@ class BeerPage extends Component{
               <div className="col-lg-12 mt-4 padding-mobile">
                 <div className="beer-container reviews">
                   <h4 className="mb-4">Reviews</h4>
-                  <div className="row">
-                    <div className="col-sm-2 review-info">
-                      <img className="reviewer-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
-                      <p className="reviwer-name mt-2">Steve K.</p>
-                      <span 
-                        className="user-rating"
-                        id="user-rating"
-                        role="img"
-                        aria-label="star"
-                      >⭐⭐⭐⭐</span>
-                      <p>4.35/5</p>
-                    </div>
-                    <div className="col-sm-8">
-                      <p className="review-text">Pours a cloudy amber color. One inch head of an off-white color. Good retention and slight lacing. Smells of a hint of wood, hint of sage, slight citrus hops, sweet malt, slight alcohol, yeast, esters, dough, and a hint of cinnamon. Fits the style of a Belgian Tripel. Mouth feel is sharp and clean, with an average carbonation level. Tastes of slight citrus hops, sweet malt, alcohol, yeast, esters, dough, and a hint of cinnamon. Overall, great aroma, great complexity, good blend and body. The cinnamon/sage combination might be eucalyptus, but I have no reference.
-                      </p>
-                    </div>
+
+                  <button onClick={this.handleReviewToggle} className="btn btn-primary">Add a review</button>
+                  {!!this.state.reviewIsActive && (
+                    <ReviewBeer 
+                      handleReviewToggle={this.handleReviewToggle}
+                      beerId={this.props.match.params.id} />
+                  )}
+                  <div>
+                      <ReviewList reviews={this.state.reviews} />
                   </div>
                 </div>
               </div>

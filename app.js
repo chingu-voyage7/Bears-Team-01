@@ -12,6 +12,7 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const beersRouter = require('./routes/beers');
 const authRouter = require('./routes/auth');
+const reviewRouter = require('./routes/reviews');
 
 const app = express();
 
@@ -52,6 +53,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/beers', beersRouter);
 app.use('/auth', authRouter);
+app.use('/beers/reviews', reviewRouter);
 
 
 // The "catchall" handler: for any request that doesn't
