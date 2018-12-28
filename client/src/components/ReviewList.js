@@ -17,8 +17,10 @@ const ReviewList = ({reviews}) => {
           >⭐⭐⭐⭐</span>
           <p>4.35/5</p>
         </div>
-        <div className="col-sm-8">
-          <p className="review-text">{review.text}</p>
+        <div className="col-sm-8 review-text">
+          <p>{review.text}</p>
+          <button className="btn btn-outline-secondary">edit</button>
+          <button className="btn btn-outline-danger">delete</button>
         </div>
       </div>
    )}
