@@ -8,6 +8,13 @@ const BeerSchema = mongoose.Schema({
     location: String,
     url: String
   },
+  rating: {
+    look: Number,
+    smell: Number,
+    taste: Number,
+    feel: Number,
+    overall: Number
+  },
   style: String,
   abv: String,
   availability: String,
