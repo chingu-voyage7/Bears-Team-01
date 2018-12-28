@@ -67,6 +67,7 @@ export default class ReviewBeer extends Component {
           </div>
           <div className="form-group">
             <input className="btn btn-primary mb-1 ml-1" type="submit" value="Submit" />
+            <input onClick={this.props.handleReviewToggle} className="btn btn-outline-primary mb-1 ml-1" type="submit" value="Close" />
           </div>
         </form>
         </div>
