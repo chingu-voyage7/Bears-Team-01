@@ -9,11 +9,8 @@ import BeerPage from './components/BeerPage';
 import PrivacyPage from './components/PrivacyPage';
 import ProfilePage from './components/profile/ProfilePage';
 
-// import ReviewBeer from './components/ReviewBeer';
-
 import './styles/styles.scss';
 
-// const TEST_BEER_NAME = 'Sam Adams';
 
 class App extends Component {
   constructor() {
@@ -38,12 +35,11 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           <Navbar userData={userData} />
-          {/* <ReviewBeer beerName={TEST_BEER_NAME}/> */}
           <div className="container page-content">
             <Switch>
               <Route path="/" component={Welcome} exact={true} />
               <Route path="/browse" component={Browse} exact={true} />
-              <Route path="/beer/:id" component={BeerPage} exact={true} />
+              <Route path="/beer/:id" userId={userData.id} component={BeerPage} exact={true} />
               <Route path="/privacy" component={PrivacyPage} exact={true} />
               {!!userData.id && (
                 <Route

@@ -63,11 +63,23 @@ export default class ReviewBeer extends Component {
             <label htmlFor="review">
               Review
             </label>
-            <textarea onChange={this.handleTextAreaChange} id="review" className="form-control" type="text" name="review"></textarea>
+            <textarea 
+              onChange={this.handleTextAreaChange} 
+              id="review" 
+              className="form-control" 
+              type="text" 
+              name="review"
+              placeholder="Review goes here">
+            </textarea>
           </div>
           <div className="form-group">
             <input className="btn btn-primary mb-1 ml-1" type="submit" value="Submit" />
-            <input onClick={this.props.handleReviewToggle} className="btn btn-outline-primary mb-1 ml-1" type="submit" value="Close" />
+            <input 
+              onClick={this.props.handleReviewToggle} 
+              className="btn btn-outline-primary mb-1 ml-1" 
+              type="submit" 
+              value="Close" 
+            />
           </div>
         </form>
         </div>
