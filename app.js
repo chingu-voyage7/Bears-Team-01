@@ -53,7 +53,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/beers', beersRouter);
 app.use('/auth', authRouter);
-app.use('/beers/:id/reviews', reviewRouter);
+app.use('/beers/reviews', reviewRouter);
 
 
 // The "catchall" handler: for any request that doesn't

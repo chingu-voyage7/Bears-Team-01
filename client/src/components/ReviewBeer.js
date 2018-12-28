@@ -32,6 +32,8 @@ export default class ReviewBeer extends Component {
     // get all values from this.state
     // make POST request to back-end
     // make sure to display success/failed message
+    // clear textarea on submit
+    //  show success message or updated review
     const data = { ...this.state };
     data.beerId = this.props.beerId;
     console.log('data is ', data);

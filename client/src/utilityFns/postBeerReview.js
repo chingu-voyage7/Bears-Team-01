@@ -1,5 +1,5 @@
 const postBeerReview = (data) =>
-  fetch('/beers/' + data.beerId + '/reviews', {
+  fetch('/beers/reviews/' + data.beerId, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: { 'Content-Type': 'application/json' },
