@@ -31,6 +31,18 @@ class BeerPage extends Component{
     this.getBeer(beerId);
     this.getReviews(beerId);
   }
+  handleDeleteButtonClick = (e) => {
+    const reviewId = e.target.getAttribute('data-review-id');
+    //e.preventDefault();
+    console.log('delete clicked')
+    if (window.confirm('Are you sure you want to delete this comment?')) {
+      fetch(`/beers/reviews/${reviewId}`, {
+        method: "DELETE", 
+        body: JSON.stringify({ reviewId })
+      })
+      .catch(err => console.log(err))
+    }
+  }
   render(){
     const { beer } = this.state;
     return (
@@ -73,10 +85,15 @@ class BeerPage extends Component{
                   {!!this.state.reviewIsActive && (
                     <ReviewBeer 
                       handleReviewToggle={this.handleReviewToggle}
-                      beerId={this.props.match.params.id} />
+                      beerId={this.props.match.params.id} 
+                      reviews={this.state.reviews}
+                      />
                   )}
                   <div>
-                      <ReviewList reviews={this.state.reviews} />
+                      <ReviewList 
+                        reviews={this.state.reviews}
+                        handleDeleteButtonClick={this.handleDeleteButtonClick}
+                      />
                   </div>
                 </div>
               </div>

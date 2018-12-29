@@ -15,7 +15,7 @@ export default class ReviewBeer extends Component {
     textValue: ''
   };
 
-  handleSelectChange = e => {
+  handleSelectChange = (e) => {
     let categoryValues = this.state.categoryValues;
     categoryValues[e.target.name] = e.target.value;
 
@@ -23,8 +23,17 @@ export default class ReviewBeer extends Component {
       categoryValues: categoryValues
     });
   }
+
   handleTextAreaChange = (e) => {
     this.setState({ textValue: e.target.value })
+  };
+
+  handleDeleteButtonClick = (e) => {
+    //e.preventDefault();
+    console.log('delete clicked')
+    if (window.confirm('Are you sure you want to delete this comment?')) {
+      this.fetch('delete', `/beers/reviews/5c264925015b2ca005236eba`);
+    }
   };
 
   handleButtonClick = e => {
@@ -36,7 +45,7 @@ export default class ReviewBeer extends Component {
     //  show success message or updated review
     const data = { ...this.state };
     data.beerId = this.props.beerId;
-    console.log('data is ', data);
+    //console.log('data is ', data);
     postBeerReview(data);
   };
 

@@ -58,7 +58,6 @@ router.post("/:beerId", isLoggedIn, function(req, res){
   Beer.findById(req.body.beerId, function(err, beer){
       if(err){
         res.status(404).json({ error: err });
-        res.redirect("/browse");
       } else {
           Review.create({
             text: req.body.textValue
@@ -89,10 +88,8 @@ router.delete("/:reviewId", checkReviewOwnership, function (req, res){
       if(err){
           console.log('ERROR: Unable to delete review. ', err);
           res.status(500).json({ error: err });
-          res.redirect("back");
       } else {
           res.status(200).json({ msg: "successfully deleted review." });
-          res.redirect("/");
       }
   })
 });
