@@ -5,7 +5,7 @@ const ReviewList = ({reviews}) => {
  return (
   <div>
     {reviews.map(review => 
-        <div className="row mt-5">
+        <div className="row mt-5" key={review._id}>
         <div className="col-sm-2 review-info">
           <img className="reviewer-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
           <p className="reviwer-name mt-2">{review.author.name}</p>

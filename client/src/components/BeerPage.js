@@ -33,7 +33,6 @@ class BeerPage extends Component{
   }
   render(){
     const { beer } = this.state;
-    console.log(this.state.reviews)
     return (
       <div>
         <div className="row">
