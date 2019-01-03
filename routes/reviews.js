@@ -83,15 +83,30 @@ router.post("/:beerId", isLoggedIn, function(req, res){
 
 //Delete review route
 
-router.delete("/:reviewId", checkReviewOwnership, function (req, res){
-  Review.findByIdAndRemove(req.params.reviewId, function(err){
-      if(err){
-          console.log('ERROR: Unable to delete review. ', err);
-          res.status(500).json({ error: err });
-      } else {
-          res.status(200).json({ msg: "successfully deleted review." });
-      }
-  })
+// router.delete("/:reviewId", checkReviewOwnership, function (req, res){
+//   Review.findByIdAndRemove(req.params.reviewId, function(err){
+//       if(err){
+//           console.log('ERROR: Unable to delete review. ', err);
+//           res.status(500).json({ error: err });
+//       } else {
+//           res.status(200).json({ msg: "successfully deleted review." });
+//       }
+//   })
+// });
+
+router.delete("/:reviewId", checkReviewOwnership, (req, res, next) => {
+  const id = req.params.reviewId;
+  Review.deleteOne({ _id: id })
+    .then(data => {
+      res.status(200).json(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ message: err || "Could not delete item with id: " + id });
+    });
 });
 
 module.exports = router;
+
+
