@@ -1,27 +1,59 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom' 
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import Welcome from './components/WelcomePage';
-import Login from './components/LoginPage';
+import Browse from './components/BrowsePage';
+import NotFoundPage from './components/NotFoundPage';
+import BeerPage from './components/BeerPage';
+import PrivacyPage from './components/PrivacyPage';
+import ProfilePage from './components/profile/ProfilePage';
 
-import './App.css';
+import './styles/styles.scss';
+
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      userData: {}
+    };
+  }
+  getUser = () => {
+    fetch('/users/current')
+      .then(response => response.json())
+      .then(json => this.setState({ userData: json }))
+      .catch(err => console.log(err));
+  };
+  componentDidMount = () => {
+    this.getUser();
+  };
   render() {
+    // const userID = this.state.userData.id;
+    const { userData } = this.state;
     return (
-      <Router>
+      <BrowserRouter>
         <div className="App">
-          <Navbar />
-            <div className="container">
-              <Switch>
-               <Route path="/" component={Welcome} exact={true} />
-               <Route path="/login" component={Login} exact={true} />
-              </Switch>
-             </div>
+          <Navbar userData={userData} />
+          <div className="container page-content">
+            <Switch>
+              <Route path="/" component={Welcome} exact={true} />
+              <Route path="/browse" component={Browse} exact={true} />
+              <Route path="/beer/:id" userId={userData.id} component={BeerPage} exact={true} />
+              <Route path="/privacy" component={PrivacyPage} exact={true} />
+              {!!userData.id && (
+                <Route
+                  path="/profile"
+                  render={() => <ProfilePage {...{ userData }} />}
+                  exact={true}
+                />
+              )}
+              <Route path="/" component={NotFoundPage} />
+            </Switch>
+          </div>
           <Footer />
         </div>
-      </Router>
+      </BrowserRouter>
     );
   }
 }

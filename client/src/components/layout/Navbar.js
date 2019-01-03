@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import RegisterModal from './RegisterModal';
+import LoginModal from './LoginModal';
 
 class Navbar extends Component {
   state = {
-    isActive: false
+    registerIsActive: false,
+    loginIsActive: false
   }
-  handleToggleModal = () => {
-    this.setState(() => ({ isActive: !this.state.isActive }));
+  handleRegisterToggle = () => {
+    this.setState(() => ({ registerIsActive: !this.state.registerIsActive }));
+  }  
+  handleLoginToggle = () => {
+    this.setState(() => ({ loginIsActive: !this.state.loginIsActive }));
   }
   handleRequestClose = () => {
-    this.setState(() => ({ isActive: false }));
+    this.setState(() => ({ registerIsActive: false, loginIsActive: false }));
   }
+
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
+        <div className="top-bar"></div>
+        <nav className="navbar navbar-light navbar-expand-sm mb-4 color-white">
           <div className="container">
-            <Link className="navbar-brand" to="/">BeerCraft</Link>
+            <Link className="navbar-brand text-dark" to="/">BeerCraft</Link>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
               <span className="navbar-toggler-icon"></span>
             </button>
@@ -25,24 +32,35 @@ class Navbar extends Component {
             <div className="collapse navbar-collapse" id="mobile-nav">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/drink"> Browse
+                  <Link className="nav-link text-dark" to="/browse">Browse
                   </Link>
                 </li>
               </ul>
       
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <button onClick={this.handleToggleModal} className="btn btn-link nav-link">Sign Up</button>
+                  {this.props.userData.name ? (
+                    <Link className="nav-link text-dark" to="/profile" className="nav-link text-dark">Profile</Link>
+                    ) : ( <button onClick={this.handleRegisterToggle} className="btn btn-link nav-link text-dark">Sign Up</button>
+                    )}
                 </li>
                 <li className="nav-item">
-                  <Link className="btn btn-link nav-link" to="/login">Login</Link>
+                  {this.props.userData.name ? (
+                    <a href="/auth/logout" className="nav-link text-dark">Logout</a>
+                  ) : (
+                    <button onClick={this.handleLoginToggle} className="btn btn-link nav-link text-dark">Login</button>
+                  )}
                 </li>
               </ul>
             </div>
           </div>
         </nav>
         <RegisterModal 
-          isOpen={this.state.isActive}
+          isOpen={this.state.registerIsActive}
+          handleRequestClose={this.handleRequestClose}
+        />
+        <LoginModal 
+          isOpen={this.state.loginIsActive}
           handleRequestClose={this.handleRequestClose}
         />
       </div>

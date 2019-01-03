@@ -1,0 +1,65 @@
+.beer-container {
+  background-color: white;
+  padding: $lg-size;
+  filter: drop-shadow(0 1px 1px #e4e4e4);
+}
+
+.beer-img-container {
+  padding-right: 0;
+  padding-bottom: 0;
+  .beer-img {
+    width: 100%;
+    max-width: 120px;
+  }
+}
+
+.bottom {
+  margin-top: $md-size;
+  @media screen and (max-width: 991px) {
+    margin-top: $sm-size;
+  } 
+  .rating {
+    font-size: 1.2rem;
+  }
+}
+
+.top {
+  .name {
+    padding-left: $md-size;
+    @media screen and (max-width: 767px) {
+      padding-top: $sm-size;
+      padding-left: inherit;
+    } 
+  }
+}
+
+.rating-section {
+  .rating-subtitle {
+    @media screen and (min-width: 575px) and (max-width: 1199px) {
+      padding-left: 25px;
+    } 
+  }
+}
+
+.reviews {
+  .review-text {
+    border-left: 2px solid $off-white;
+    width: 100%;
+    height: 100%;
+    padding-left: $sm-size;
+  }
+  .reviewer-thumbnail {
+    width: 100%;
+    max-width: 40px;
+    margin: 0 auto;
+  }
+  .review-info {
+    text-align: center;
+  }
+}
+
+.user-thumbnail {
+  margin-bottom: 4px;
+  width: 100%;
+  max-width: 50px;
+}

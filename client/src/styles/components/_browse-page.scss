@@ -1,0 +1,18 @@
+.beer-info p {
+  color: #3d3d3d;
+}
+
+.beer-icon-container {
+  padding-right: 0;
+  padding-bottom: 0;
+  .beer-icon {
+    width: 100%;
+    max-width: 100px;
+  }
+}
+
+.text-orange {
+  color: $dark-amber;
+}
+
+
