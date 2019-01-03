@@ -99,6 +99,7 @@ router.delete("/:reviewId", checkReviewOwnership, (req, res, next) => {
   Review.deleteOne({ _id: id })
     .then(data => {
       res.status(200).json(data);
+      console.log("data***", data);
     })
     .catch(err => {
       res

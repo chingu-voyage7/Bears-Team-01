@@ -33,8 +33,7 @@ class BeerPage extends Component{
   }
   handleDeleteButtonClick = (e) => {
     const reviewId = e.target.getAttribute('data-review-id');
-    //e.preventDefault();
-    console.log('delete clicked')
+
     if (window.confirm('Are you sure you want to delete this comment?')) {
       fetch(`/beers/reviews/${reviewId}`, {
         method: "DELETE", 
@@ -42,6 +41,10 @@ class BeerPage extends Component{
       })
       .catch(err => console.log(err))
     }
+
+    this.setState((prevState) => ({
+      reviews: prevState.reviews.filter((review) => reviewId !== review._id)
+    }));
   }
   render(){
     const { beer } = this.state;

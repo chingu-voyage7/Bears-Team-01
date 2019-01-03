@@ -28,24 +28,14 @@ export default class ReviewBeer extends Component {
     this.setState({ textValue: e.target.value })
   };
 
-  handleDeleteButtonClick = (e) => {
-    //e.preventDefault();
-    console.log('delete clicked')
-    if (window.confirm('Are you sure you want to delete this comment?')) {
-      this.fetch('delete', `/beers/reviews/5c264925015b2ca005236eba`);
-    }
-  };
-
   handleButtonClick = e => {
     e.preventDefault();
-    // get all values from this.state
-    // make POST request to back-end
+    //TODO:
     // make sure to display success/failed message
     // clear textarea on submit
     //  show success message or updated review
     const data = { ...this.state };
     data.beerId = this.props.beerId;
-    //console.log('data is ', data);
     postBeerReview(data);
   };
 
