@@ -57,6 +57,7 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
     if(err){
       res.status(404).json({ error: err });
     } else {
+      console.log('body: ', req.body)
       const review = new Review({
         author: {
           id: req.user._id, 
@@ -65,7 +66,15 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
           picture: req.user.picture
         },
         date: new Date(),
-        text: req.body.textValue
+        text: req.body.textValue,
+        lookRating: req.body.categoryValues.look + '',
+        category: {
+          look: req.body.categoryValues.look + '',
+          smell: req.body.categoryValues.smell + '',
+          taste: req.body.categoryValues.taste + '',
+          feel: req.body.categoryValues.feel + '',
+          overall: req.body.categoryValues.overall + ''
+        }
       });
       review
       .save()

@@ -21,6 +21,7 @@ export default class ReviewBeer extends Component {
     this.setState({
       categoryValues: categoryValues
     });
+    console.log(this.state.categoryValues);
   }
 
   handleTextAreaChange = (e) => {

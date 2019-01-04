@@ -42,12 +42,13 @@ class BeerPage extends Component{
       .then(res => res.json())
       .then(newReview => {
         if(newReview.author){
-          this.setState({ reviews: [ newReview, ...this.state.reviews] })
+          this.setState({ reviews: [ newReview, ...this.state.reviews] });
         }
         else {
           this.setState({ status: 'You must be logged in to do that!'})
         }
       })
+      .then(this.handleReviewToggle())
       .catch(e => console.error(e));
   }
   handleDeleteButtonClick = (e) => {
@@ -100,18 +101,16 @@ class BeerPage extends Component{
               <div className="col-lg-12 mt-4 padding-mobile">
                 <div className="beer-container reviews">
                   <h4 className="mb-4">Reviews</h4>
-
                   <button onClick={this.handleReviewToggle} className="btn btn-primary">Add a review</button>
                   {!!this.state.reviewIsActive && (
                     <ReviewBeer 
                       postBeerReview={this.postBeerReview}
                       handleReviewToggle={this.handleReviewToggle}
                       beerId={this.props.match.params.id} 
-                      reviews={this.state.reviews}
                       />
                   )}
                   <div>
-                    {this.state.status.length > 0 && <p>{this.state.status}</p>}
+                    {this.state.status.length > 0 && <p className="mt-4">{this.state.status}</p>}
                       <ReviewList 
                         reviews={this.state.reviews}
                         handleDeleteButtonClick={this.handleDeleteButtonClick}

@@ -12,6 +12,13 @@ const ReviewSchema = new Schema({
         username: String,
         name: String,
         picture: String,
+    },
+    category: {
+      look: String,
+      smell: String,
+      taste: String,
+      feel: String,
+      overall: String
     }
 });
 
