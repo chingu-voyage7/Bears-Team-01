@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 
 class ReviewList extends Component {
   //TODO:
-  //turn into class component
-  //pass down reviews as props
-  //pass down deleteComment function as props
-  //pass down user info as props (to display edit & delete only to the creator)
+  //Display edit & delete buttons only to the author
   render() {
     const reviews = this.props.reviews;
-    console.log(this.props);
     return (
       <div>
         {reviews.map(review => 

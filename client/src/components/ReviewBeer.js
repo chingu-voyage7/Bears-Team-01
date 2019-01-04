@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import RateCategory from './RateCategory';
 import { RATE_CATEGORIES } from '../constants';
-import postBeerReview from '../utilityFns/postBeerReview';
 
 export default class ReviewBeer extends Component {
   state = {
@@ -28,25 +27,13 @@ export default class ReviewBeer extends Component {
     this.setState({ textValue: e.target.value })
   };
 
-  handleDeleteButtonClick = (e) => {
-    //e.preventDefault();
-    console.log('delete clicked')
-    if (window.confirm('Are you sure you want to delete this comment?')) {
-      this.fetch('delete', `/beers/reviews/5c264925015b2ca005236eba`);
-    }
-  };
-
-  handleButtonClick = e => {
+  handleSubmitClick = e => {
     e.preventDefault();
-    // get all values from this.state
-    // make POST request to back-end
+    //TODO:
     // make sure to display success/failed message
-    // clear textarea on submit
-    //  show success message or updated review
     const data = { ...this.state };
     data.beerId = this.props.beerId;
-    //console.log('data is ', data);
-    postBeerReview(data);
+    this.props.postBeerReview(data)
   };
 
   render() {
@@ -66,7 +53,7 @@ export default class ReviewBeer extends Component {
           ))}
         </div>
         </div>
-        <form onSubmit={this.handleButtonClick}>
+        <form onSubmit={this.handleSubmitClick}>
           <input type="hidden" name="beerID" value={this.props.id}></input>
           <div className="form-group mt-4 p-1">
             <label htmlFor="review">
@@ -82,7 +69,11 @@ export default class ReviewBeer extends Component {
             </textarea>
           </div>
           <div className="form-group">
-            <input className="btn btn-primary mb-1 ml-1" type="submit" value="Submit" />
+            <input 
+              className="btn btn-primary mb-1 ml-1" 
+              type="submit" 
+              value="Submit"
+             />
             <input 
               onClick={this.props.handleReviewToggle} 
               className="btn btn-outline-primary mb-1 ml-1" 

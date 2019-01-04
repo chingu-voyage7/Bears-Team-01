@@ -8,7 +8,8 @@ class BeerPage extends Component{
     this.state = {
       beer: [],
       reviewIsActive: false,
-      reviews: []
+      reviews: [],
+      status: ''
     }
   }
   getBeer(beerId){
@@ -31,10 +32,26 @@ class BeerPage extends Component{
     this.getBeer(beerId);
     this.getReviews(beerId);
   }
+  postBeerReview = (data) => {
+    fetch('/beers/reviews/' + data.beerId, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include' // include session cookie
+    })
+      .then(res => res.json())
+      .then(newReview => {
+        if(newReview.author){
+          this.setState({ reviews: [ newReview, ...this.state.reviews] })
+        }
+        else {
+          this.setState({ status: 'You must be logged in to do that!'})
+        }
+      })
+      .catch(e => console.error(e));
+  }
   handleDeleteButtonClick = (e) => {
     const reviewId = e.target.getAttribute('data-review-id');
-    //e.preventDefault();
-    console.log('delete clicked')
     if (window.confirm('Are you sure you want to delete this comment?')) {
       fetch(`/beers/reviews/${reviewId}`, {
         method: "DELETE", 
@@ -42,6 +59,9 @@ class BeerPage extends Component{
       })
       .catch(err => console.log(err))
     }
+    this.setState((prevState) => ({
+      reviews: prevState.reviews.filter((review) => reviewId !== review._id)
+    }));
   }
   render(){
     const { beer } = this.state;
@@ -84,12 +104,14 @@ class BeerPage extends Component{
                   <button onClick={this.handleReviewToggle} className="btn btn-primary">Add a review</button>
                   {!!this.state.reviewIsActive && (
                     <ReviewBeer 
+                      postBeerReview={this.postBeerReview}
                       handleReviewToggle={this.handleReviewToggle}
                       beerId={this.props.match.params.id} 
                       reviews={this.state.reviews}
                       />
                   )}
                   <div>
+                    {this.state.status.length > 0 && <p>{this.state.status}</p>}
                       <ReviewList 
                         reviews={this.state.reviews}
                         handleDeleteButtonClick={this.handleDeleteButtonClick}
