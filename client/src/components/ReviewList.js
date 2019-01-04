@@ -18,7 +18,10 @@ class ReviewList extends Component {
                 role="img"
                 aria-label="star"
               >⭐⭐⭐⭐</span>
-              <p>4.35/5</p>
+              {!!review.category && <p>Look: {review.category.look}</p>}
+              {!!review.category && <p>Smell: {review.category.smell}</p>}
+              {!!review.category && <p>Taste: {review.category.taste}</p>}
+              {!!review.category && <p>Overall: {review.category.overall}</p>}
             </div>
             <div className="col-sm-8 review-text">
               <p>{review.text}</p>
