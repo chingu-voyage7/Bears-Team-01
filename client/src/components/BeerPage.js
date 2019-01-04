@@ -8,7 +8,8 @@ class BeerPage extends Component{
     this.state = {
       beer: [],
       reviewIsActive: false,
-      reviews: []
+      reviews: [],
+      status: ''
     }
   }
   getBeer(beerId){
@@ -40,7 +41,12 @@ class BeerPage extends Component{
     })
       .then(res => res.json())
       .then(newReview => {
-        this.setState({ reviews: [ newReview, ...this.state.reviews] })
+        if(newReview.author){
+          this.setState({ reviews: [ newReview, ...this.state.reviews] })
+        }
+        else {
+          this.setState({ status: 'You must be logged in to do that!'})
+        }
       })
       .catch(e => console.error(e));
   }
@@ -105,6 +111,7 @@ class BeerPage extends Component{
                       />
                   )}
                   <div>
+                    {this.state.status.length > 0 && <p>{this.state.status}</p>}
                       <ReviewList 
                         reviews={this.state.reviews}
                         handleDeleteButtonClick={this.handleDeleteButtonClick}
