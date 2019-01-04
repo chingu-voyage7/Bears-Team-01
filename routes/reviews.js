@@ -11,7 +11,6 @@ router.get("/all/:beerId", (req, res, next) => {
   Beer.findById(req.params.beerId)
     .then(beer => {
       if (beer) {
-        console.log( beer.reviews.map(reviewId => new mongoose.Types.ObjectId(reviewId)) );
         Review.find({
           '_id': { $in: beer.reviews.map(reviewId => new mongoose.Types.ObjectId(reviewId)) }
         })
@@ -84,7 +83,6 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
     }
   });
 });
-
 
 router.delete("/:reviewId", checkReviewOwnership, (req, res, next) => {
   const id = req.params.reviewId;

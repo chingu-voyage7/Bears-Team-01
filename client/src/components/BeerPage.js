@@ -39,7 +39,9 @@ class BeerPage extends Component{
       credentials: 'include' // include session cookie
     })
       .then(res => res.json())
-      .then(newReview => this.setState({ reviews: [...this.state.reviews, newReview] }))
+      .then(newReview => {
+        this.setState({ reviews: [ newReview, ...this.state.reviews] })
+      })
       .catch(e => console.error(e));
   }
   handleDeleteButtonClick = (e) => {
