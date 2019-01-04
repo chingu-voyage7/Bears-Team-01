@@ -42,7 +42,6 @@ class BeerPage extends Component{
       .then(res => res.json())
       .then(newReview => {
         if(newReview.author){
-          console.log("**newReview** : ", newReview)
           this.setState({ reviews: [ newReview, ...this.state.reviews] });
         }
         else {
@@ -111,7 +110,7 @@ class BeerPage extends Component{
                       />
                   )}
                   <div>
-                    {this.state.status.length > 0 && <p>{this.state.status}</p>}
+                    {this.state.status.length > 0 && <p className="mt-4">{this.state.status}</p>}
                       <ReviewList 
                         reviews={this.state.reviews}
                         handleDeleteButtonClick={this.handleDeleteButtonClick}
