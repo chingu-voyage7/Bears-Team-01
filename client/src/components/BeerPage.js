@@ -49,6 +49,7 @@ class BeerPage extends Component{
           this.setState({ status: 'You must be logged in to do that!'})
         }
       })
+      .then(this.handleReviewToggle())
       .catch(e => console.error(e));
   }
   handleDeleteButtonClick = (e) => {
