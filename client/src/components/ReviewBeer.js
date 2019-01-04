@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import RateCategory from './RateCategory';
 import { RATE_CATEGORIES } from '../constants';
-import postBeerReview from '../utilityFns/postBeerReview';
 
 export default class ReviewBeer extends Component {
   state = {
@@ -28,15 +27,13 @@ export default class ReviewBeer extends Component {
     this.setState({ textValue: e.target.value })
   };
 
-  handleButtonClick = e => {
+  handleSubmitClick = e => {
     e.preventDefault();
     //TODO:
     // make sure to display success/failed message
-    // clear textarea on submit
-    //  show success message or updated review
     const data = { ...this.state };
     data.beerId = this.props.beerId;
-    postBeerReview(data);
+    this.props.postBeerReview(data)
   };
 
   render() {
@@ -56,7 +53,7 @@ export default class ReviewBeer extends Component {
           ))}
         </div>
         </div>
-        <form onSubmit={this.handleButtonClick}>
+        <form onSubmit={this.handleSubmitClick}>
           <input type="hidden" name="beerID" value={this.props.id}></input>
           <div className="form-group mt-4 p-1">
             <label htmlFor="review">
@@ -72,7 +69,11 @@ export default class ReviewBeer extends Component {
             </textarea>
           </div>
           <div className="form-group">
-            <input className="btn btn-primary mb-1 ml-1" type="submit" value="Submit" />
+            <input 
+              className="btn btn-primary mb-1 ml-1" 
+              type="submit" 
+              value="Submit"
+             />
             <input 
               onClick={this.props.handleReviewToggle} 
               className="btn btn-outline-primary mb-1 ml-1" 

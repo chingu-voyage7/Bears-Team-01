@@ -31,9 +31,19 @@ class BeerPage extends Component{
     this.getBeer(beerId);
     this.getReviews(beerId);
   }
+  postBeerReview = (data) => {
+    fetch('/beers/reviews/' + data.beerId, {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include' // include session cookie
+    })
+      .then(res => res.json())
+      .then(newReview => this.setState({ reviews: [...this.state.reviews, newReview] }))
+      .catch(e => console.error(e));
+  }
   handleDeleteButtonClick = (e) => {
     const reviewId = e.target.getAttribute('data-review-id');
-
     if (window.confirm('Are you sure you want to delete this comment?')) {
       fetch(`/beers/reviews/${reviewId}`, {
         method: "DELETE", 
@@ -41,7 +51,6 @@ class BeerPage extends Component{
       })
       .catch(err => console.log(err))
     }
-
     this.setState((prevState) => ({
       reviews: prevState.reviews.filter((review) => reviewId !== review._id)
     }));
@@ -87,6 +96,7 @@ class BeerPage extends Component{
                   <button onClick={this.handleReviewToggle} className="btn btn-primary">Add a review</button>
                   {!!this.state.reviewIsActive && (
                     <ReviewBeer 
+                      postBeerReview={this.postBeerReview}
                       handleReviewToggle={this.handleReviewToggle}
                       beerId={this.props.match.params.id} 
                       reviews={this.state.reviews}

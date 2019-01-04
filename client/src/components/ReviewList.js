@@ -8,7 +8,6 @@ class ReviewList extends Component {
   //pass down user info as props (to display edit & delete only to the creator)
   render() {
     const reviews = this.props.reviews;
-    console.log(this.props);
     return (
       <div>
         {reviews.map(review => 

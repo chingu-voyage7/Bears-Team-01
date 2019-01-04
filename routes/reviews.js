@@ -52,54 +52,45 @@ router.get("/:reviewId", (req, res, next) => {
     });
 });
 
-//Reviews Create
-router.post("/:beerId", isLoggedIn, function(req, res){
-  //console.log("****debug**** : ", req.body);
-  Beer.findById(req.body.beerId, function(err, beer){
-      if(err){
-        res.status(404).json({ error: err });
-      } else {
-          Review.create({
-            text: req.body.textValue
-          }, function(err, review){
-              if(err){
-                  console.log(err);
-              } else {
-                  review.author.id = req.user._id;
-                  review.author.username = req.user.username;
-                  review.author.name = req.user.name;
-                  review.author.picture = req.user.picture;
-                  review.date = new Date();
-                  //save review
-                  review.save();
-                  beer.reviews.push(review);
-                  beer.save();
-                  res.redirect("/beer/" + beer._id);
-              }
-          });
-      }
+// Create a review instance
+router.post("/:beerId", isLoggedIn, (req, res, next) => {
+  Beer.findById(req.body.beerId, (err, beer) => {
+    if(err){
+      res.status(404).json({ error: err });
+    } else {
+      const review = new Review({
+        author: {
+          id: req.user._id, 
+          username: req.user.username,
+          name: req.user.name,
+          picture: req.user.picture
+        },
+        date: new Date(),
+        text: req.body.textValue
+      });
+      review
+      .save()
+      .then(data => {
+        beer.reviews.push(review);
+        beer.save();
+        res.status(201).json(data);
+      })
+      .catch(err => {
+        console.log(err);
+        res.status(500).send({
+          message: err.message || "some error occurred!"
+        });
+      });
+    }
   });
 });
 
-//Delete review route
-
-// router.delete("/:reviewId", checkReviewOwnership, function (req, res){
-//   Review.findByIdAndRemove(req.params.reviewId, function(err){
-//       if(err){
-//           console.log('ERROR: Unable to delete review. ', err);
-//           res.status(500).json({ error: err });
-//       } else {
-//           res.status(200).json({ msg: "successfully deleted review." });
-//       }
-//   })
-// });
 
 router.delete("/:reviewId", checkReviewOwnership, (req, res, next) => {
   const id = req.params.reviewId;
   Review.deleteOne({ _id: id })
     .then(data => {
       res.status(200).json(data);
-      console.log("data***", data);
     })
     .catch(err => {
       res
