@@ -12,6 +12,28 @@ class BeerPage extends Component{
       status: ''
     }
   }
+  createRating = () => {
+    let ratingDisplay = [];
+    let reviews = this.state.reviews;
+    if(!reviews.category){
+      let rating = 0;
+      //add all ratings together
+      for (let i = 0; i <= reviews.length-1; i++) {
+        if(reviews[i].category.overall !== ''){
+          rating += parseFloat(reviews[i].category.overall)
+        }
+      }
+      //propagate stars 
+      for (let i = 0; i <=4; i++) {
+        if ((i - (rating / reviews.length)) >= 0 || reviews.length === 0) {
+          ratingDisplay.push( <i className="fas fa-star gray" aria-hidden="true" key={i}></i>);
+        } else {
+          ratingDisplay.push( <i className="fas fa-star amber" aria-hidden="true" key={i}></i>);
+        }
+      }
+    } 
+    return <div>{ratingDisplay}</div>
+  }
   getBeer(beerId){
     fetch(`/beers/${beerId}`)
     .then(response => response.json())
@@ -66,6 +88,7 @@ class BeerPage extends Component{
   }
   render(){
     const { beer } = this.state;
+    console.log("reviews: ", this.state.reviews)
     return (
       <div>
         <div className="row">
@@ -81,14 +104,16 @@ class BeerPage extends Component{
                         <h2>{ beer.beerName }</h2>
                         {!!beer.brewer && <p className="brewery">{ beer.brewer.name }</p>}
                         <div className="row rating-section">
-                          <div className="col-sm-2">
-                            <span 
-                              role="img"
-                              aria-label="star"
-                            >⭐⭐⭐⭐</span>
+                          <div className="col-sm-4">
+                            {this.createRating()}
                           </div>
                           <div className="col-sm-4">
-                            <p className="rating-subtitle">88 ratings</p>
+                          {this.state.reviews.length > 0 ? (
+                              <p className="rating-subtitle">{this.state.reviews.length} reviews</p>
+                            ) : (
+                              <p className="rating-subtitle">No Reviews</p>  
+                            )
+                          }
                           </div>
                         </div>
                       </div>

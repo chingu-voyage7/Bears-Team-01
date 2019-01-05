@@ -33,14 +33,6 @@
   }
 }
 
-.rating-section {
-  .rating-subtitle {
-    @media screen and (min-width: 575px) and (max-width: 1199px) {
-      padding-left: 25px;
-    } 
-  }
-}
-
 .reviews {
   .review-text {
     border-left: 2px solid $off-white;
