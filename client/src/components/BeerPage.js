@@ -12,12 +12,14 @@ class BeerPage extends Component{
       status: ''
     }
   }
-  createRating = () => {
+  createBeerRating = () => {
     let ratingDisplay = [];
     let reviews = this.state.reviews;
+    let rating = 0;
+
     if(!reviews.category){
-      let rating = 0;
       //add all ratings together
+      //TODO: store the beer's overall rating in the database instead.
       for (let i = 0; i <= reviews.length-1; i++) {
         if(reviews[i].category.overall !== ''){
           rating += parseFloat(reviews[i].category.overall)
@@ -32,7 +34,14 @@ class BeerPage extends Component{
         }
       }
     } 
-    return <div>{ratingDisplay}</div>
+    return (
+      <div>
+        { ratingDisplay } 
+        { !isNaN(rating / reviews.length) && 
+          <span className="text-muted ml-2">{rating / reviews.length}</span>
+        }
+      </div>
+      )
   }
   getBeer(beerId){
     fetch(`/beers/${beerId}`)
@@ -88,7 +97,6 @@ class BeerPage extends Component{
   }
   render(){
     const { beer } = this.state;
-    console.log("reviews: ", this.state.reviews)
     return (
       <div>
         <div className="row">
@@ -104,10 +112,10 @@ class BeerPage extends Component{
                         <h2>{ beer.beerName }</h2>
                         {!!beer.brewer && <p className="brewery">{ beer.brewer.name }</p>}
                         <div className="row rating-section">
-                          <div className="col-sm-4">
-                            {this.createRating()}
+                          <div className="col-xs-5 col-lg-4">
+                            {this.createBeerRating()}
                           </div>
-                          <div className="col-sm-4">
+                          <div className="col-sm-3 ml-0">
                           {this.state.reviews.length > 0 ? (
                               <p className="rating-subtitle">{this.state.reviews.length} reviews</p>
                             ) : (
