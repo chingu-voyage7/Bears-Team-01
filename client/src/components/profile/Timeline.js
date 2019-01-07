@@ -4,7 +4,12 @@ import ActivityList from './ActivityList';
 const TimelineSection = (props) => (
   <div className="" aria-labelledby="profile-tab">
 
-    <ActivityList user={props.userData}/>
+    {!props.userData.reviews || props.userData.reviews.length === 0 ? (
+      <p>No user activity to display.</p>
+    ) : (
+      <ActivityList user={props.userData}/>
+    )
+    }
 
   </div>
 );

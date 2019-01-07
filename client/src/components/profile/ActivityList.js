@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 //import { ReactComponent as FavoriteIcon } from '../../images/icons/favorite.svg';
 
 class ActivityList extends Component {
-  //TODO: Status: "No user activity." if reviews.length === 0
+  //TODO: Move fetch request & state up to profile page so About component can use review data.
   constructor(){
     super();
     this.state = {
       reviews: [],
-      status: ''
     }
   }
   getUserReviews(userId){
@@ -30,7 +29,7 @@ class ActivityList extends Component {
           <div className="row timeline-row" key={review._id}>
             <div className="col-md-8">
               <label>
-                <span className="user-name">{user.name}</span> left new review on
+                <span className="user-name">{user.name}</span> left review on
                 
                   {!!review.beer ? (
                     <span className="timeline-beer-name"> {review.beer}:</span>
