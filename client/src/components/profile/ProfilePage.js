@@ -6,7 +6,6 @@ class ProfilePage extends Component {
   //TODO: if there is no profile image, display randomized default image from database.
   //TODO: Add moment.js for date parsing.
   //TODO: "Change image" button functionality
-  //TODO: Make "ratings" section dynamic
   constructor() {
     super();
     this.state = {
@@ -31,6 +30,7 @@ class ProfilePage extends Component {
   }
   render() {
     const { userData } = this.props;
+    console.log(userData)
     return (
       <div>
         <div className="container profile-container">
@@ -51,7 +51,7 @@ class ProfilePage extends Component {
                 <h2>{userData.name}</h2>
                 <h6>Beer Enthusiast</h6>
                 <p className="profile-rating">
-                  RATINGS : <span>82</span>
+                  RATINGS : {!!userData.reviews && <span>{userData.reviews.length}</span>}
                 </p>
                 <ul className="nav nav-tabs">
                   <li className="nav-item">
