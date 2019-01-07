@@ -96,6 +96,7 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
           picture: req.user.picture
           //redundant data; does not require saving again
         },
+        beer: beer.beerName,
         date: new Date(),
         text: req.body.textValue,
         lookRating: req.body.categoryValues.look + '',

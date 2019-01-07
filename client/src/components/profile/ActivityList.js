@@ -11,7 +11,6 @@ class ActivityList extends Component {
     }
   }
   getUserReviews(userId){
-    //TODO: create user/reviews/all route (similar to beers/reviews/all)
     fetch(`/beers/reviews/userid/${userId}`)
     .then(response => response.json())
     .then(json => this.setState({reviews: json}))
@@ -24,14 +23,22 @@ class ActivityList extends Component {
   render(){ 
     const reviews = this.state.reviews;
     const user = this.props.user
+    console.log('reviews state: ', this.state.reviews)
     return (
       <section className="user-activity row">
         {reviews.map(review => 
           <div className="row timeline-row" key={review._id}>
             <div className="col-md-8">
               <label>
-                <span className="user-name">{user.name}</span> left new review on (beer name):
-                 {!!review.text && '"' + review.text + '"'}
+                <span className="user-name">{user.name}</span> left new review on
+                
+                  {!!review.beer ? (
+                    <span className="timeline-beer-name"> {review.beer}:</span>
+                  ):(
+                    <span className="timeline-beer-name"> a new beer:</span>
+                  )
+                  }
+                 {!!review.text && ' "' + review.text + '"'}
               </label>
             </div>
             <div className="col-md-4">
