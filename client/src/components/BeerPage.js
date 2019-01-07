@@ -20,6 +20,7 @@ class BeerPage extends Component{
     if(!reviews.category){
       //add all ratings together
       //TODO: store the beer's overall rating in the database instead.
+      //TODO: Show half-star ratings
       for (let i = 0; i <= reviews.length-1; i++) {
         if(reviews[i].category.overall !== ''){
           rating += parseFloat(reviews[i].category.overall)
@@ -36,9 +37,15 @@ class BeerPage extends Component{
     } 
     return (
       <div>
-        { ratingDisplay } 
-        { !isNaN(rating / reviews.length) && 
-          <span className="text-muted ml-2">{(rating / reviews.length).toFixed(2)}</span>
+        <div className="col-lg-12">
+          { ratingDisplay } 
+          <span className="ml-3 text-muted">{reviews.length} Reviews</span>
+        </div>
+        { !isNaN(rating / reviews.length) && (
+          <div className="col-lg-12">
+          <span className="text-muted">{(rating / reviews.length).toFixed(2)} out of 5</span>
+          </div>
+        )
         }
       </div>
       )
@@ -112,17 +119,7 @@ class BeerPage extends Component{
                         <h2>{ beer.beerName }</h2>
                         {!!beer.brewer && <p className="brewery">{ beer.brewer.name }</p>}
                         <div className="row rating-section">
-                          <div className="col-xs-5 col-lg-4">
                             {this.createBeerRating()}
-                          </div>
-                          <div className="col-sm-3 ml-0">
-                          {this.state.reviews.length > 0 ? (
-                              <p className="rating-subtitle">{this.state.reviews.length} reviews</p>
-                            ) : (
-                              <p className="rating-subtitle">No Reviews</p>  
-                            )
-                          }
-                          </div>
                         </div>
                       </div>
                     </div>
