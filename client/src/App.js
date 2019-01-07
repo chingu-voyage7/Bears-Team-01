@@ -11,7 +11,6 @@ import ProfilePage from './components/profile/ProfilePage';
 
 import './styles/styles.scss';
 
-
 class App extends Component {
   constructor() {
     super();

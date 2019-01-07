@@ -38,7 +38,7 @@ class BeerPage extends Component{
       <div>
         { ratingDisplay } 
         { !isNaN(rating / reviews.length) && 
-          <span className="text-muted ml-2">{rating / reviews.length}</span>
+          <span className="text-muted ml-2">{(rating / reviews.length).toFixed(2)}</span>
         }
       </div>
       )

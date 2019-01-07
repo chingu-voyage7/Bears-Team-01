@@ -36,6 +36,36 @@ router.get("/all/:beerId", (req, res, next) => {
     });
 });
 
+// Get all the beer reviews of a user
+router.get("/userid/:userId", (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => {
+      if (user) {
+        Review.find({
+          '_id': { $in: user.reviews.map(reviewId => new mongoose.Types.ObjectId(reviewId)) }
+        })
+        .then(reviews => {
+          if (reviews) {
+            res.status(200).json(reviews);
+          } else {
+            res.status(404).json({ msg: "No reviews found for this user" });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(404).json({ error: err });
+        });
+      } else {
+        res.status(404).json({ msg: "No user found with this id" });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json({ error: err });
+    });
+});
+
+
 // Get a single review
 router.get("/:reviewId", (req, res, next) => {
   Review.findById(req.params.reviewId)
@@ -64,7 +94,7 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
           username: req.user.username,
           name: req.user.name,
           picture: req.user.picture
-          //redundant data; does not require saving
+          //redundant data; does not require saving again
         },
         date: new Date(),
         text: req.body.textValue,
