@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const ReviewSchema = new Schema({
     date: Date,
     text: String,
+    beer: String,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

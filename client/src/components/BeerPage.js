@@ -12,6 +12,44 @@ class BeerPage extends Component{
       status: ''
     }
   }
+  createBeerRating = () => {
+    let ratingDisplay = [];
+    let reviews = this.state.reviews;
+    let rating = 0;
+
+    if(!reviews.category){
+      //add all ratings together
+      //TODO: store the beer's overall rating in the database instead.
+      //TODO: Show half-star ratings
+      for (let i = 0; i <= reviews.length-1; i++) {
+        if(reviews[i].category.overall !== ''){
+          rating += parseFloat(reviews[i].category.overall)
+        }
+      }
+      //propagate stars 
+      for (let i = 0; i <=4; i++) {
+        if ((i - (rating / reviews.length)) >= 0 || reviews.length === 0) {
+          ratingDisplay.push( <i className="fas fa-star gray" aria-hidden="true" key={i}></i>);
+        } else {
+          ratingDisplay.push( <i className="fas fa-star amber" aria-hidden="true" key={i}></i>);
+        }
+      }
+    } 
+    return (
+      <div>
+        <div className="col-lg-12">
+          { ratingDisplay } 
+          <span className="ml-3 text-muted">{reviews.length} Reviews</span>
+        </div>
+        { !isNaN(rating / reviews.length) && (
+          <div className="col-lg-12">
+          <span className="text-muted">{(rating / reviews.length).toFixed(2)} out of 5</span>
+          </div>
+        )
+        }
+      </div>
+      )
+  }
   getBeer(beerId){
     fetch(`/beers/${beerId}`)
     .then(response => response.json())
@@ -81,15 +119,7 @@ class BeerPage extends Component{
                         <h2>{ beer.beerName }</h2>
                         {!!beer.brewer && <p className="brewery">{ beer.brewer.name }</p>}
                         <div className="row rating-section">
-                          <div className="col-sm-2">
-                            <span 
-                              role="img"
-                              aria-label="star"
-                            >⭐⭐⭐⭐</span>
-                          </div>
-                          <div className="col-sm-4">
-                            <p className="rating-subtitle">88 ratings</p>
-                          </div>
+                            {this.createBeerRating()}
                         </div>
                       </div>
                     </div>

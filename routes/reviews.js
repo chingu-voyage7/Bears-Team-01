@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const Beer = require("../models/beer.model.js");
+const User = require("../models/user.model.js");
 const Review = require("../models/review.model.js");
 const isLoggedIn = require("../middlewares/requireLogin");
 const checkReviewOwnership = require('../middlewares/checkReviewOwnership');
@@ -35,6 +36,36 @@ router.get("/all/:beerId", (req, res, next) => {
     });
 });
 
+// Get all the beer reviews of a user
+router.get("/userid/:userId", (req, res, next) => {
+  User.findById(req.params.userId)
+    .then(user => {
+      if (user) {
+        Review.find({
+          '_id': { $in: user.reviews.map(reviewId => new mongoose.Types.ObjectId(reviewId)) }
+        })
+        .then(reviews => {
+          if (reviews) {
+            res.status(200).json(reviews);
+          } else {
+            res.status(404).json({ msg: "No reviews found for this user" });
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          res.status(404).json({ error: err });
+        });
+      } else {
+        res.status(404).json({ msg: "No user found with this id" });
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(404).json({ error: err });
+    });
+});
+
+
 // Get a single review
 router.get("/:reviewId", (req, res, next) => {
   Review.findById(req.params.reviewId)
@@ -57,14 +88,15 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
     if(err){
       res.status(404).json({ error: err });
     } else {
-      console.log('body: ', req.body)
       const review = new Review({
         author: {
           id: req.user._id, 
           username: req.user.username,
           name: req.user.name,
           picture: req.user.picture
+          //redundant data; does not require saving again
         },
+        beer: beer.beerName,
         date: new Date(),
         text: req.body.textValue,
         lookRating: req.body.categoryValues.look + '',
@@ -82,6 +114,17 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
         beer.reviews.push(review);
         beer.save();
         res.status(201).json(data);
+      })
+      .then(data => {
+        User.findById(req.user._id, (err, user) => {
+          if(err){
+            res.status(404).json({ error: err });
+          } else {
+            user.reviews.push(review);
+            user.save();
+            res.status(201).json(data);
+          }
+        });
       })
       .catch(err => {
         console.log(err);

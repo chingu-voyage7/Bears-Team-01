@@ -33,14 +33,6 @@
   }
 }
 
-.rating-section {
-  .rating-subtitle {
-    @media screen and (min-width: 575px) and (max-width: 1199px) {
-      padding-left: 25px;
-    } 
-  }
-}
-
 .reviews {
   .review-text {
     border-left: 2px solid $off-white;
@@ -62,4 +54,11 @@
   margin-bottom: 4px;
   width: 100%;
   max-width: 50px;
+}
+
+.user-rating-categories {
+  font-size: 0.85rem;
+  p {
+    margin-bottom: 4px;
+  }
 }
