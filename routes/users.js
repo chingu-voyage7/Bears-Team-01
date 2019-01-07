@@ -18,7 +18,8 @@ router.get("/current", isLogedIn, (req, res, next) => {
       email: req.user.email,
       picture: req.user.picture,
       date: req.user.date,
-      ml: req.user.ml
+      ml: req.user.ml,
+      reviews: req.user.reviews
     });
   }
 });

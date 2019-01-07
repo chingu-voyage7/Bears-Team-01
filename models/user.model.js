@@ -11,7 +11,13 @@ const UserSchema = mongoose.Schema({
     smell: Array,
     taste: Array,
     feel: Array
-  }
+  },
+  reviews: [
+    {
+       type: mongoose.Schema.Types.ObjectId,
+       ref: "Review"
+    }
+  ]
 });
 
 module.exports = mongoose.model("User", UserSchema);
