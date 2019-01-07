@@ -50,6 +50,17 @@
   }
 }
 
+.favorite-button {
+  background-color: $amber;
+  i {
+    font-size: $md-size;
+    color: white;
+  }
+  &:hover{
+    background-color: $medium-amber;
+  }
+}
+
 .user-thumbnail {
   margin-bottom: 4px;
   width: 100%;
