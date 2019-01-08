@@ -77,7 +77,6 @@ class BeerPage extends Component{
   }
   postBeerReview = (data) => {
     //TODO: Save and render paragraphs & line breaks
-    console.log("post beer data", data);
     if(data.textValue.length > 10 && data.categoryValues.overall.length !== 0){
       fetch('/beers/reviews/' + data.beerId, {
         method: 'POST',

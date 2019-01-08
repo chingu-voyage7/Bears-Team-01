@@ -41,7 +41,6 @@ class ProfilePage extends Component {
   }
   render() {
     const { userData } = this.props;
-    console.log("userData profile page: ", userData)
     return (
       <div>
         <div className="container profile-container">
