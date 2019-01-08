@@ -31,8 +31,6 @@ export default class ReviewBeer extends Component {
 
   handleSubmitClick = e => {
     e.preventDefault();
-    //TODO:
-    // make sure to display success/failed message
     const data = { ...this.state };
     data.beerId = this.props.beerId;
     this.props.postBeerReview(data)

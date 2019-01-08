@@ -85,7 +85,10 @@ class BeerPage extends Component{
       .then(res => res.json())
       .then(newReview => {
         if(newReview.author){
-          this.setState({ reviews: [ newReview, ...this.state.reviews] });
+          this.setState({ 
+            reviews: [ newReview, ...this.state.reviews],
+            status: 'Thank you for your review.'
+          });
         }
         else {
           this.setState({ status: 'You must be logged in to do that!'})

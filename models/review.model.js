@@ -21,7 +21,6 @@ const ReviewSchema = new Schema({
       feel: String,
       overall: String
     },
-    favorite: Boolean
 });
 
 module.exports = mongoose.model("Review", ReviewSchema);
