@@ -14,12 +14,14 @@ class ProfilePage extends Component {
     };
   }
   displayUserRanking = (ratings) => {
-    if(ratings < 3){
+    if(ratings < 5){
       return <h6>Dabbler</h6>
     } else if (ratings < 50){
       return <h6>Beer Enthusiast</h6>
-    } else {
+    } else if (ratings < 150) {
       return <h6>Beer Connoisseur</h6>
+    } else {
+      return <h6>Beer Expert</h6>
     }
   };
   handleTimelineTab = () => {

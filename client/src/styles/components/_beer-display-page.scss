@@ -50,15 +50,8 @@
   }
 }
 
-.favorite-button {
-  background-color: $amber;
-  i {
-    font-size: $md-size;
-    color: white;
-  }
-  &:hover{
-    background-color: $medium-amber;
-  }
+.favorites-checkbox {
+  padding: $xs-size;
 }
 
 .user-thumbnail {
@@ -73,3 +66,36 @@
     margin-bottom: 4px;
   }
 }
+
+
+.animated-button {
+  color: $amber;
+  font-size: $md-size;
+	position: relative;
+	border: 2px solid $amber;
+  transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+  &:hover {
+    color: rgb(255, 255, 255) !important;
+    background-color: transparent;
+    text-shadow: nthree;
+    &:before {
+      left: 0%;
+      right: auto;
+      width: 100%;
+    }
+  }
+  &:before {
+    display: block;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 100%;
+    width: 0px;
+    z-index: -1;
+    content: '';
+    color: rgb(243, 243, 243) !important;
+    background: $amber;
+    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+  }
+}
+

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReviewBeer from './ReviewBeer';
 import ReviewList from './ReviewList';
+import { Link } from 'react-router-dom';
 
 class BeerPage extends Component{
   constructor(){
@@ -30,21 +31,23 @@ class BeerPage extends Component{
       //propagate stars 
       for (let i = 0; i <=4; i++) {
         if ((i - (rating / reviews.length)) >= 0 || reviews.length === 0) {
-          ratingDisplay.push( <i className="fas fa-star gray" aria-hidden="true" key={i}></i>);
+          ratingDisplay.push( <i className="fas fa-beer rating-icon gray mr-1" aria-hidden="true" key={i}></i>);
         } else {
-          ratingDisplay.push( <i className="fas fa-star amber" aria-hidden="true" key={i}></i>);
+          ratingDisplay.push( <i className="fas fa-beer rating-icon amber mr-1" aria-hidden="true" key={i}></i>);
         }
       }
     } 
     return (
       <div>
         <div className="col-lg-12">
-          { ratingDisplay } 
-          <span className="ml-3 text-muted">{reviews.length} Reviews</span>
+          { ratingDisplay }
+          <span className="ml-3 text-muted">
+            <a href="#reviews" className="ml-1">{reviews.length} Reviews</a>
+          </span>
         </div>
         { !isNaN(rating / reviews.length) && (
           <div className="col-lg-12">
-          <span className="text-muted">{(rating / reviews.length).toFixed(2)} out of 5</span>
+            <span className="text-muted">{(rating / reviews.length).toFixed(2)} out of 5</span>
           </div>
         )
         }
@@ -67,6 +70,7 @@ class BeerPage extends Component{
     this.setState(() => ({ reviewIsActive: !this.state.reviewIsActive }));
   }
   componentDidMount(){
+    window.scrollTo(0, 0);
     const beerId = this.props.match.params.id;
     this.getBeer(beerId);
     this.getReviews(beerId);
@@ -127,14 +131,14 @@ class BeerPage extends Component{
                     <div className="bottom col-lg-12">
                       {!!beer.notes && <p className="rating">{ beer.notes }</p>}
                     </div>
-                    <div className="col-sm-12">
-                      <button className="btn favorite-button" title="add to favorites">
-                        <i className="fas fa-thumbs-up"></i>
-                      </button>
+                    <div class="col-sm-12"> 
+                      <button className="btn animated-button" title="add to favorites">
+                        <i className="fas fa-thumbs-up" alt="thumbs-up-icon"></i>
+                      </button> 
                     </div>
                 </div>
               </div>
-              <div className="col-lg-12 mt-4 padding-mobile">
+              <div className="col-lg-12 mt-4 padding-mobile" id="reviews">
                 <div className="beer-container reviews">
                   <h4 className="mb-4">Reviews</h4>
                   <button onClick={this.handleReviewToggle} className="btn btn-primary">Add a review</button>
