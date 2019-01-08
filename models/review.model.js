@@ -4,7 +4,13 @@ const Schema = mongoose.Schema;
 const ReviewSchema = new Schema({
     date: Date,
     text: String,
-    beer: String,
+    beer: {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Beer"
+      },
+      name: String
+    },
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,

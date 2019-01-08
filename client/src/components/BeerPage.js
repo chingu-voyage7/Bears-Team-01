@@ -76,7 +76,9 @@ class BeerPage extends Component{
     this.getReviews(beerId);
   }
   postBeerReview = (data) => {
-    if(data.textValue.length > 10 && data.textValue.length < 20000){
+    //TODO: Save and render paragraphs & line breaks
+    console.log("post beer data", data);
+    if(data.textValue.length > 10 && data.categoryValues.overall.length !== 0){
       fetch('/beers/reviews/' + data.beerId, {
         method: 'POST',
         body: JSON.stringify(data),
@@ -98,10 +100,11 @@ class BeerPage extends Component{
         .then(this.handleReviewToggle())
         .catch(e => console.error(e));
     } else {
-      if(data.textValue.length > 19000){
-        this.setState({ status: 'Your post exceeds character count limit.'});
+      if (data.categoryValues.overall.length === 0){
+        this.setState({ status: 'You must choose an overall rating.'});
+      } else {
+        this.setState({ status: 'Your review must be at least 10 characters long.'});
       }
-      this.setState({ status: 'Your review must be at least 10 characters long.'});
     }
   }
   handleDeleteButtonClick = (e) => {
@@ -111,11 +114,10 @@ class BeerPage extends Component{
         method: "DELETE", 
         body: JSON.stringify({ reviewId })
       })
+      .then(response => response.status === 200 
+        && this.setState((prevState) => ({reviews: prevState.reviews.filter((review) => reviewId !== review._id)})))
       .catch(err => console.log(err))
     }
-    this.setState((prevState) => ({
-      reviews: prevState.reviews.filter((review) => reviewId !== review._id)
-    }));
   }
   render(){
     const { beer } = this.state;
@@ -126,26 +128,26 @@ class BeerPage extends Component{
             <div className="row">     
               <div className="col-lg-12">
                 <div className="beer-container info">
-                    <div className="top row col-lg-12">
-                      <div className="col-md-2 beer-img-container">
-                        <img className="beer-img" alt="beer-icon" src="https://i.imgur.com/oLXSUJP.png"></img>
+                  <div className="top row col-lg-12">
+                    <div className="col-md-2 beer-img-container">
+                      <img className="beer-img" alt="beer-icon" src="https://i.imgur.com/oLXSUJP.png"></img>
+                    </div>
+                    <div className="name col-sm-10">
+                      <h2>{ beer.beerName }</h2>
+                      {!!beer.brewer && <p className="brewery">{ beer.brewer.name }</p>}
+                      <div className="row rating-section">
+                          {this.createBeerRating()}
                       </div>
-                      <div className="name col-sm-10">
-                        <h2>{ beer.beerName }</h2>
-                        {!!beer.brewer && <p className="brewery">{ beer.brewer.name }</p>}
-                        <div className="row rating-section">
-                            {this.createBeerRating()}
-                        </div>
-                      </div>
                     </div>
-                    <div className="bottom col-lg-12">
-                      {!!beer.notes && <p className="rating">{ beer.notes }</p>}
-                    </div>
-                    <div className="col-sm-12"> 
-                      <button className="btn animated-button" title="add to favorites">
-                        <i className="fas fa-thumbs-up" alt="thumbs-up-icon"></i>
-                      </button> 
-                    </div>
+                  </div>
+                  <div className="bottom col-lg-12">
+                    {!!beer.notes && <p className="rating">{ beer.notes }</p>}
+                  </div>
+                  <div className="col-sm-12"> 
+                    <button className="btn animated-button" title="add to favorites">
+                      <i className="fas fa-thumbs-up" alt="thumbs-up-icon"></i>
+                    </button> 
+                  </div>
                 </div>
               </div>
               <div className="col-lg-12 mt-4 padding-mobile" id="reviews">
