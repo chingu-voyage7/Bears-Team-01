@@ -76,26 +76,33 @@ class BeerPage extends Component{
     this.getReviews(beerId);
   }
   postBeerReview = (data) => {
-    fetch('/beers/reviews/' + data.beerId, {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include' // include session cookie
-    })
-      .then(res => res.json())
-      .then(newReview => {
-        if(newReview.author){
-          this.setState({ 
-            reviews: [ newReview, ...this.state.reviews],
-            status: 'Thank you for your review.'
-          });
-        }
-        else {
-          this.setState({ status: 'You must be logged in to do that!'})
-        }
+    if(data.textValue.length > 10 && data.textValue.length < 20000){
+      fetch('/beers/reviews/' + data.beerId, {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include' // include session cookie
       })
-      .then(this.handleReviewToggle())
-      .catch(e => console.error(e));
+        .then(res => res.json())
+        .then(newReview => {
+          if(newReview.author){
+            this.setState({ 
+              reviews: [ newReview, ...this.state.reviews],
+              status: 'Thank you for your review.'
+            });
+          }
+          else {
+            this.setState({ status: 'You must be logged in to do that!'});
+          }
+        })
+        .then(this.handleReviewToggle())
+        .catch(e => console.error(e));
+    } else {
+      if(data.textValue.length > 19000){
+        this.setState({ status: 'Your post exceeds character count limit.'});
+      }
+      this.setState({ status: 'Your review must be at least 10 characters long.'});
+    }
   }
   handleDeleteButtonClick = (e) => {
     const reviewId = e.target.getAttribute('data-review-id');
@@ -134,7 +141,7 @@ class BeerPage extends Component{
                     <div className="bottom col-lg-12">
                       {!!beer.notes && <p className="rating">{ beer.notes }</p>}
                     </div>
-                    <div class="col-sm-12"> 
+                    <div className="col-sm-12"> 
                       <button className="btn animated-button" title="add to favorites">
                         <i className="fas fa-thumbs-up" alt="thumbs-up-icon"></i>
                       </button> 
