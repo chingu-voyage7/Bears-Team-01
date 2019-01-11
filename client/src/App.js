@@ -8,6 +8,7 @@ import NotFoundPage from './components/NotFoundPage';
 import BeerPage from './components/BeerPage';
 import PrivacyPage from './components/PrivacyPage';
 import ProfilePage from './components/profile/ProfilePage';
+import AddNewBeerPage from './components/AddNewBeerPage';
 
 import './styles/styles.scss';
 
@@ -40,6 +41,7 @@ class App extends Component {
               <Route path="/browse" component={Browse} exact={true} />
               <Route path="/beer/:id" userId={userData.id} component={BeerPage} exact={true} />
               <Route path="/privacy" component={PrivacyPage} exact={true} />
+              <Route path="/add-new-beer" component={AddNewBeerPage} exact={true} />
               {!!userData.id && (
                 <Route
                   path="/profile"
