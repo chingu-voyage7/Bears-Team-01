@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Beer = require("../models/beer.model.js");
 const isLoggedIn = require("../middlewares/requireLogin");
+const multer = require("multer");
+const upload = multer({ dest: 'uploads/'});
+
 
 // Get all beers
 router.get("/", function(req, res, next) {
@@ -35,12 +38,13 @@ router.get("/:beerId", (req, res, next) => {
 });
 
 // Create a beer instance
-router.post("/", isLoggedIn, (req, res, next) => {
-  if (!req.body.brewer.name) {
-    return res.status(400).json({
-      message: "Brewer name must be filled out"
-    });
-  }
+router.post("/", isLoggedIn, upload.single('beerImage'), (req, res, next) => {
+console.log("***BODY** ", req.body)
+  // if (!req.body.brewer.name) {
+  //   return res.status(400).json({
+  //     message: "Brewer name must be filled out"
+  //   });
+  // }
   const beer = new Beer({
     beerName: req.body.beerName,
     brewer: {

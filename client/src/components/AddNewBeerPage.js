@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class AddNewBeerPage extends Component {
   constructor() {
@@ -13,6 +14,7 @@ class AddNewBeerPage extends Component {
       IBU: '',
       ABV: '',
       style: '',
+      pictureIsSelected: false,
       selectedPicture: null,
       status: ''
     }
@@ -30,17 +32,29 @@ class AddNewBeerPage extends Component {
   };
   handleSelectImage = (e) => {
     this.setState({ 
+      pictureIsSelected: true,
       selectedPicture: e.target.files[0]
     });
+    console.log("State : ", this.state.selectedPicture)
+  };
+  handleUploadImage = (e) => {
+    let formData = new FormData();
+    formData.append('beerImage', this.state.selectedPicture, this.state.selectedPicture.name);
+    axios.post('/beers/', formData, {
+      onUploadProgress: progressEvent => {
+        console.log('Upload Progress: ', Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
+      }
+    })  
+    .catch(e => console.error(e));
   };
   onSubmit = (e) => {
     e.preventDefault();
     const data = { ...this.state };
     this.postNewBeer(data)
+    //this.handleUploadImage()
   };
   postNewBeer = (data) => {
-    console.log(data.selectedPicture);
-    if(data.beerName.length >= 3 && data.description.length > 20){
+    if(data.beerName.length >= 3 /*&& data.description.length > 20*/){
       fetch('/beers/', {
         method: 'POST',
         body: JSON.stringify(data),
@@ -71,7 +85,7 @@ class AddNewBeerPage extends Component {
     return (
       <div>
         <div className="container">
-          <form onSubmit={this.onSubmit}>
+          <form onSubmit={this.onSubmit} encType="multipart/form-data">
             <div className="form-group mt-3 p-1">
               <label htmlFor="beername">
                 Name
@@ -99,16 +113,22 @@ class AddNewBeerPage extends Component {
               </input>
             </div>
             <div className="form-group mt-3 p-1">
-              <label htmlFor="picture">
+              <label htmlFor="beerImage">
                 Choose Picture
               </label>
               <input 
                 onChange={this.handleSelectImage} 
-                id="picture" 
+                id="beerImage" 
                 type="file" 
-                name="file"
-                className="btn-block btn-sm mt-1 add-beer-picture"
+                name="beerImage"
+                className="btn-block btn-sm mt-1 add-beer-image"
                 placeholder="Choose Picture" />
+              {
+                !!this.state.pictureIsSelected && <button
+                className="btn btn-sm mt-1 btn-secondary"
+                onClick={this.handleUploadImage}
+                >Upload Selected Image</button>
+              }
             </div>
             <div className="form-group mt-3 p-1">
               <label htmlFor="description">
