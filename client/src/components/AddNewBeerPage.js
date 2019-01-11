@@ -60,7 +60,7 @@ class AddNewBeerPage extends Component {
         })
         .catch(e => console.error(e));
     } else {
-      if (data.name.length < 3){
+      if (data.beerName.length < 3){
         this.setState({ status: 'Beer name must be at least 3 characters long'});
       } else {
         this.setState({ status: 'Beer description must be at least 20 characters long.'});
