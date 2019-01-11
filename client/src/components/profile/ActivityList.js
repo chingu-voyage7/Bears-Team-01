@@ -46,7 +46,7 @@ class ActivityList extends Component {
           <div className="row timeline-row" key={review._id}>
             <div className="col-md-8">
               <label>
-                <span className="user-name">{user.name}</span> left review on
+                <span className="user-name">{user.name}</span> left a review on
                   {!!review.beer ? (
                     <Link to={`/beer/${review.beer.id}`} className="timeline-beer-name"> {review.beer.name}</Link>
                   ):(

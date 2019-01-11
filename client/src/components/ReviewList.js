@@ -46,7 +46,7 @@ class ReviewList extends Component {
               <p>{review.text}</p>
               <button className="btn btn-outline-secondary">edit</button>
               <button 
-                onClick={this.props.handleDeleteButtonClick} 
+                onClick={this.props.onDeleteButtonClick} 
                 data-review-id={review._id} 
                 className="btn btn-outline-danger">
                 delete

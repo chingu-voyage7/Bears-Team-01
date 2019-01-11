@@ -10,7 +10,8 @@ class BeerPage extends Component{
       beer: [],
       reviewIsActive: false,
       reviews: [],
-      status: ''
+      status: '',
+      likeButtonClass: ''
     }
   }
   createBeerRating = () => {
@@ -106,7 +107,14 @@ class BeerPage extends Component{
       }
     }
   }
-  handleDeleteButtonClick = (e) => {
+  onLikeButtonClick = () => {
+    if (this.state.likeButtonClass === ''){
+      this.setState({ likeButtonClass: 'clicked' });
+    } else {
+      this.setState({ likeButtonClass: '' });
+    }
+  }
+  onDeleteButtonClick = (e) => {
     const reviewId = e.target.getAttribute('data-review-id');
     if (window.confirm('Are you sure you want to delete this comment?')) {
       fetch(`/beers/reviews/${reviewId}`, {
@@ -142,11 +150,15 @@ class BeerPage extends Component{
                   <div className="bottom col-lg-12">
                     {!!beer.notes && <p className="rating">{ beer.notes }</p>}
                   </div>
-                  <div className="col-sm-12"> 
-                    <button className="btn animated-button" title="add to favorites">
-                      <i className="fas fa-thumbs-up" alt="thumbs-up-icon"></i>
-                    </button> 
-                  </div>
+{                  //<div className="col-sm-12"> 
+                   //<button 
+                   //   className={`btn animated-button ${this.state.likeButtonClass}`} 
+                   //   onClick={this.onLikeButtonClick} 
+                   //   title="add to favorites">
+                   //   <i className="fas fa-thumbs-up" alt="thumbs-up-icon"></i>
+                  //  </button> 
+                //  </div>
+              }
                 </div>
               </div>
               <div className="col-lg-12 mt-4 padding-mobile" id="reviews">
@@ -164,48 +176,13 @@ class BeerPage extends Component{
                     {this.state.status.length > 0 && <p className="mt-4">{this.state.status}</p>}
                       <ReviewList 
                         reviews={this.state.reviews}
-                        handleDeleteButtonClick={this.handleDeleteButtonClick}
+                        onDeleteButtonClick={this.onDeleteButtonClick}
                       />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div className="col-lg-3 padding-mobile">
-            <div className="beer-container recent">
-              <div className="col-lg-12">
-                <h4 className="mb-4">Recent Favorites</h4>
-              </div>
-              <div className="row">
-                <div className="col-lg-12 col-md-6 col-sm-6">
-                  <div className="row">
-                      <div className="col-lg-4">
-                        <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
-                      </div>
-                      <div className="col-lg-4">
-                        <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
-                      </div>
-                      <div className="col-lg-4">
-                        <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
-                      </div>
-                  </div>
-                </div>
-                <div className="col-lg-12 col-md-6 col-sm-6">
-                <div className="row">
-                  <div className="col-lg-4">
-                    <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
-                  </div>
-                  <div className="col-lg-4">
-                    <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
-                  </div>
-                  <div className="col-lg-4">
-                    <img className="user-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
-                  </div>
-                </div>
-                </div>
-                </div>
-            </div>
-          </div> 
         </div>
     </div>
     )

@@ -26,7 +26,7 @@ const ReviewSchema = new Schema({
       taste: String,
       feel: String,
       overall: String
-    },
+    }
 });
 
 module.exports = mongoose.model("Review", ReviewSchema);

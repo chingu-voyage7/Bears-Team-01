@@ -67,13 +67,15 @@
   }
 }
 
-
-.animated-button {
+.btn.animated-button {
   color: $amber;
   font-size: $md-size;
 	position: relative;
 	border: 2px solid $amber;
-  transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+  transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
+  &:focus{
+    outline:none;
+  }
   &:hover {
     color: rgb(255, 255, 255) !important;
     background-color: transparent;
@@ -95,7 +97,23 @@
     content: '';
     color: rgb(243, 243, 243) !important;
     background: $amber;
-    transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
+    transition: all 0.2s cubic-bezier(0.42, 0, 0.58, 1);
   }
 }
 
+.btn.animated-button.clicked{
+  font-size: $md-size;
+  color: white;
+  background-color: $amber;
+  &:focus{
+    outline:none;
+  }
+  i{
+    -webkit-transition: -webkit-transform .15s ease-in-out;
+    -ms-transition: -ms-transform .15s ease-in-out;
+    transition: transform .15s ease-in-out; 
+    transform:scale(1.1);
+    -ms-transform:scale(1.1);
+    -webkit-transform:scale(1.1);
+  }
+}

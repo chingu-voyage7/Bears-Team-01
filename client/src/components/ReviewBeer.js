@@ -66,7 +66,7 @@ export default class ReviewBeer extends Component {
               placeholder="Review goes here">
             </textarea>
             <div className="col-lg-12 favorites-checkbox ml-2 mt-4">
-              <input className="form-check-input" type="checkbox" value="" id="defaultCheck1" />
+              <input className="form-check-input" type="checkbox" value="true" id="defaultCheck1" />
               <p>add beer to favorites</p>
             </div>
           </div>
