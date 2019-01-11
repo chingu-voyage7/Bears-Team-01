@@ -96,7 +96,10 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
           picture: req.user.picture
           //redundant data; does not require saving again
         },
-        beer: beer.beerName,
+        beer: {
+          id: req.body.beerId,
+          name: beer.beerName
+        },
         date: new Date(),
         text: req.body.textValue,
         lookRating: req.body.categoryValues.look + '',
@@ -138,7 +141,7 @@ router.post("/:beerId", isLoggedIn, (req, res, next) => {
 
 router.delete("/:reviewId", checkReviewOwnership, (req, res, next) => {
   const id = req.params.reviewId;
-  Review.deleteOne({ _id: id })
+  Review.deleteMany({ _id: id })
     .then(data => {
       res.status(200).json(data);
     })
@@ -150,5 +153,3 @@ router.delete("/:reviewId", checkReviewOwnership, (req, res, next) => {
 });
 
 module.exports = router;
-
-

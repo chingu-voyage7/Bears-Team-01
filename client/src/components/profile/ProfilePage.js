@@ -13,6 +13,17 @@ class ProfilePage extends Component {
       aboutIsActive: false
     };
   }
+  displayUserRanking = (ratings) => {
+    if(ratings < 5){
+      return <h6>Dabbler</h6>
+    } else if (ratings < 50){
+      return <h6>Beer Enthusiast</h6>
+    } else if (ratings < 150) {
+      return <h6>Beer Connoisseur</h6>
+    } else {
+      return <h6>Beer Expert</h6>
+    }
+  };
   handleTimelineTab = () => {
     this.setState(() => ({
       timelineIsActive: true,
@@ -30,7 +41,6 @@ class ProfilePage extends Component {
   }
   render() {
     const { userData } = this.props;
-    console.log("userData profile page: ", userData)
     return (
       <div>
         <div className="container profile-container">
@@ -49,7 +59,7 @@ class ProfilePage extends Component {
             <div className="col-md-6">
               <div className="profile-head">
                 <h2>{userData.name}</h2>
-                <h6>Beer Enthusiast</h6>
+                {this.displayUserRanking(userData.reviews.length)}
                 <p className="profile-rating">
                   RATINGS : {!!userData.reviews && <span>{userData.reviews.length}</span>}
                 </p>

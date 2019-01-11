@@ -11,7 +11,8 @@ export default class ReviewBeer extends Component {
       feel: '',
       overall: ''
     },
-    textValue: ''
+    textValue: '',
+    favorite: false
   };
 
   handleSelectChange = (e) => {
@@ -21,7 +22,6 @@ export default class ReviewBeer extends Component {
     this.setState({
       categoryValues: categoryValues
     });
-    console.log(this.state.categoryValues);
   }
 
   handleTextAreaChange = (e) => {
@@ -30,8 +30,6 @@ export default class ReviewBeer extends Component {
 
   handleSubmitClick = e => {
     e.preventDefault();
-    //TODO:
-    // make sure to display success/failed message
     const data = { ...this.state };
     data.beerId = this.props.beerId;
     this.props.postBeerReview(data)
@@ -39,20 +37,19 @@ export default class ReviewBeer extends Component {
 
   render() {
     return (
-    <div className="col-lg-12 mb-4 p-0">
+      <div className="col-lg-12 mb-4 p-0">
         <h1>{this.props.beerName}</h1>
         <div className="rating-categories mt-4">
-
-        <div className="form-row w-100 p-0 m-0">
-          {RATE_CATEGORIES.map((categoryName, idx) => (
-            <RateCategory
-              key={`category${idx}`}
-              categoryName={categoryName}
-              handleSelectChange={this.handleSelectChange}
-              selectValue={this.state.categoryValues[categoryName]}
-            />
-          ))}
-        </div>
+          <div className="form-row w-100 p-0 m-0">
+            {RATE_CATEGORIES.map((categoryName, idx) => (
+              <RateCategory
+                key={`category${idx}`}
+                categoryName={categoryName}
+                handleSelectChange={this.handleSelectChange}
+                selectValue={this.state.categoryValues[categoryName]}
+              />
+            ))}
+          </div>
         </div>
         <form onSubmit={this.handleSubmitClick}>
           <input type="hidden" name="beerID" value={this.props.id}></input>
@@ -68,6 +65,10 @@ export default class ReviewBeer extends Component {
               name="review"
               placeholder="Review goes here">
             </textarea>
+            <div className="col-lg-12 favorites-checkbox ml-2 mt-4">
+              <input className="form-check-input" type="checkbox" value="true" id="defaultCheck1" />
+              <p>add beer to favorites</p>
+            </div>
           </div>
           <div className="form-group">
             <input 
@@ -83,7 +84,7 @@ export default class ReviewBeer extends Component {
             />
           </div>
         </form>
-        </div>
+      </div>
     );
   }
 }

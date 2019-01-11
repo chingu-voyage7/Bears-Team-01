@@ -22,7 +22,12 @@ class ReviewList extends Component {
         {reviews.map(review => 
             <div className="row mt-5" key={review._id}>
             <div className="col-sm-2 review-info">
-              <img className="reviewer-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
+              {!!review.author.picture ? (
+                <img className="reviewer-thumbnail" alt="user" src={review.author.picture}></img>
+              ) : (
+                <img className="reviewer-thumbnail" alt="user" src="https://i.imgur.com/BXELpe9.png"></img>
+              )
+              }
               <p className="reviwer-name mt-2">{review.author.name}</p>
               <span 
                 className="user-rating"
@@ -41,7 +46,7 @@ class ReviewList extends Component {
               <p>{review.text}</p>
               <button className="btn btn-outline-secondary">edit</button>
               <button 
-                onClick={this.props.handleDeleteButtonClick} 
+                onClick={this.props.onDeleteButtonClick} 
                 data-review-id={review._id} 
                 className="btn btn-outline-danger">
                 delete
