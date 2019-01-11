@@ -4,8 +4,8 @@ class AddNewBeerPage extends Component {
   constructor() {
     super();
     this.state = {
-      beername: '',
-      brewery: {
+      beerName: '',
+      brewer: {
         location: '',
         name: ''
       },
@@ -13,23 +13,59 @@ class AddNewBeerPage extends Component {
       IBU: '',
       ABV: '',
       style: '',
+      selectedPicture: null,
       status: ''
     }
   }
   handleNameChange = (e) => {
-    this.setState({ beername: e.target.value });
+    this.setState({ beerName: e.target.value });
   };
   handleBrewerChange = (e) => {
-    let brewer = {...this.state.brewery}
+    let brewer = {...this.state.brewer}
     brewer.name = e.target.value;
     this.setState({brewer});
-  }
+  };
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value });
   };
+  handleSelectImage = (e) => {
+    this.setState({ 
+      selectedPicture: e.target.files[0]
+    });
+  };
   onSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state);
+    const data = { ...this.state };
+    this.postNewBeer(data)
+  };
+  postNewBeer = (data) => {
+    console.log(data.selectedPicture);
+    if(data.beerName.length >= 3 && data.description.length > 20){
+      fetch('/beers/', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include' // include session cookie
+      })
+        .then(res => res.json())
+        .then(newBeer => {
+          if(newBeer.author){
+            this.setState({ 
+              status: 'Beer successfully created.'
+            });
+          }
+          else {
+            this.setState({ status: 'You must be logged in to do that!'});
+          }
+        })
+        .catch(e => console.error(e));
+    } else {
+      if (data.name.length < 3){
+        this.setState({ status: 'Beer name must be at least 3 characters long'});
+      } else {
+        this.setState({ status: 'Beer description must be at least 20 characters long.'});
+      }
+    }
   }
   render(){
     return (
@@ -64,16 +100,15 @@ class AddNewBeerPage extends Component {
             </div>
             <div className="form-group mt-3 p-1">
               <label htmlFor="picture">
-                Picture
+                Choose Picture
               </label>
               <input 
-                onChange={this.handleTextAreaChange} 
+                onChange={this.handleSelectImage} 
                 id="picture" 
                 type="file" 
                 name="file"
                 className="btn-block btn-sm mt-1 add-beer-picture"
-                placeholder="Add Picture">
-              </input>
+                placeholder="Choose Picture" />
             </div>
             <div className="form-group mt-3 p-1">
               <label htmlFor="description">

@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 
 const BeerSchema = mongoose.Schema({
@@ -8,6 +7,12 @@ const BeerSchema = mongoose.Schema({
     location: String,
     url: String
   },
+  author: {
+    id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    }
+  },
   rating: {
     look: Number,
     smell: Number,
@@ -15,6 +20,7 @@ const BeerSchema = mongoose.Schema({
     feel: Number,
     overall: Number
   },
+  picture: String,
   style: String,
   abv: String,
   availability: String,

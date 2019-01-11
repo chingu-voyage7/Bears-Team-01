@@ -36,9 +36,9 @@ router.get("/:beerId", (req, res, next) => {
 
 // Create a beer instance
 router.post("/", isLoggedIn, (req, res, next) => {
-  if (!req.body.brewer.name || !req.body.style) {
+  if (!req.body.brewer.name) {
     return res.status(400).json({
-      message: "Brewer name and style fields must be filled out"
+      message: "Brewer name must be filled out"
     });
   }
   const beer = new Beer({
@@ -48,10 +48,13 @@ router.post("/", isLoggedIn, (req, res, next) => {
       location: req.body.brewer.location,
       url: req.body.brewer.url
     },
+    author: {
+      id: req.user._id
+    },
     style: req.body.style,
     abv: req.body.abv,
     availability: req.body.availability,
-    notes: req.body.notes
+    notes: req.body.description
   });
   beer
     .save()
