@@ -44,13 +44,22 @@ class AddNewBeerPage extends Component {
 
       let formData = new FormData();
       formData.append('beerData', JSON.stringify(this.state));
-      formData.append('beerImage', this.state.selectedPicture, this.state.selectedPicture.name);
+
+      if(this.state.selectedPicture !== null){
+        formData.append('beerImage', this.state.selectedPicture, this.state.selectedPicture.name);
+      }
 
       axios.post('/beers/', formData, {
         onUploadProgress: progressEvent => {
           console.log('Upload Progress: ', Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
         }
-      })  
+      })
+      .then(response => {
+        console.log(response);
+        if (response.data && response.data.id){
+          window.location = `beer/${response.data.id}`;
+        }
+      })
       .catch(e => console.error(e));
     } else {
       if (data.beerName.length < 3){
@@ -91,7 +100,35 @@ class AddNewBeerPage extends Component {
                 placeholder="Brewer">
               </input>
             </div>
-            <div className="form-group mt-3 p-1">
+            <div className="row mt-3 p-1">
+              <div className="form-group col-sm-6">
+                <label htmlFor="abv">
+                  ABV - Alcohol by Volume
+                </label>
+                <input 
+                  onChange={this.handleABVChange} 
+                  id="abv" 
+                  className="form-control mt-1" 
+                  type="text" 
+                  name="abv"
+                  placeholder="ABV">
+                </input>
+              </div>
+              <div className="form-group col-sm-6">
+                <label htmlFor="abv">
+                  IBU - International Bitterness Unit
+                </label>
+                <input 
+                  onChange={this.handleIBUChange} 
+                  id="ibu" 
+                  className="form-control mt-1" 
+                  type="text" 
+                  name="ibu"
+                  placeholder="IBU">
+                </input>
+              </div>
+            </div>
+            <div className="form-group mt-1 p-1">
               <label htmlFor="beerImage">
                 Choose Picture
               </label>

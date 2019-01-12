@@ -62,12 +62,12 @@ router.post("/", isLoggedIn, upload.single('beerImage'), (req, res, next) => {
     abv: beerData.abv,
     availability: beerData.availability,
     notes: beerData.description,
-    image: req.file.filename
+    image: (req.file && req.file.filename ? req.file.filename : null)
   });
   beer
     .save()
     .then(data => {
-      res.status(201).json(data);
+      res.status(201).json({id: data._id});
     })
     .catch(err => {
       console.log(err);
