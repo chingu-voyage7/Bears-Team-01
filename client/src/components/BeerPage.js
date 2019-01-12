@@ -11,8 +11,21 @@ class BeerPage extends Component {
       reviewIsActive: false,
       reviews: [],
       status: "",
-      likeButtonClass: ""
+      likeButtonClass: "",
+      reviewSuccess: {
+        error: false,
+        success: false
+      }
     };
+  }
+
+  componentWillUnmount() {
+    this.setState({
+      reviewSuccess: {
+        error: false,
+        success: false
+      }
+    });
   }
   createBeerRating = () => {
     let ratingDisplay = [];

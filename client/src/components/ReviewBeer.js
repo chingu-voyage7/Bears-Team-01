@@ -12,21 +12,8 @@ export default class ReviewBeer extends Component {
       overall: ""
     },
     textValue: "",
-    favorite: false,
-    reviewSuccess: {
-      error: false,
-      success: false
-    }
+    favorite: false
   };
-
-  componentWillUnmount() {
-    this.setState({
-      reviewSuccess: {
-        error: false,
-        success: false
-      }
-    });
-  }
 
   postBeerReview = data =>
     fetch("/beers/reviews/" + data.beerId, {

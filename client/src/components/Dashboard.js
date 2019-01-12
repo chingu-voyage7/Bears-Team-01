@@ -13,13 +13,12 @@ class Dashboard extends Component {
     return this.getReviews();
   }
 
-  getReviews() {
-    console.log(this.props);
-    return fetch(`/beers/reviews/user/${this.props.userData.id}`)
+  getReviews = async () => {
+    const reviews = await fetch(`/beers/reviews/user/${this.props.userData.id}`)
       .then(res => res.json())
-      .then(reviews => this.setState({ reviews }))
       .catch(err => console.error);
-  }
+    return this.setState({ reviews });
+  };
 
   render() {
     const { reviews } = this.state;
