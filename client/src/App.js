@@ -10,6 +10,8 @@ import BeerPage from "./components/BeerPage";
 import PrivacyPage from "./components/PrivacyPage";
 import ProfilePage from "./components/profile/ProfilePage";
 
+import isEmpty from "./utilityFns/isEmpty";
+
 import "./styles/styles.scss";
 
 class App extends Component {
@@ -30,13 +32,24 @@ class App extends Component {
   };
   render() {
     const { userData } = this.state;
+    console.log(userData);
     return (
       <BrowserRouter>
         <div className="App">
           <Navbar userData={userData} />
           <div className="container page-content">
             <Switch>
-              <Route path="/" component={Welcome} exact={true} />
+              <Route
+                path="/"
+                render={() =>
+                  isEmpty(userData) ? (
+                    <Welcome />
+                  ) : (
+                    <Dashboard userData={userData} />
+                  )
+                }
+                exact={true}
+              />
               <Route path="/browse" component={Browse} exact={true} />
               <Route
                 path="/beer/:id"
