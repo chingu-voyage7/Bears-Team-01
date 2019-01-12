@@ -11,6 +11,7 @@ import ReviewBeer from "./components/ReviewBeer";
 import BeerRecommendation from "./components/BeerRecommendation";
 import PrivacyPage from "./components/PrivacyPage";
 import ProfilePage from "./components/profile/ProfilePage";
+import AddNewBeerPage from './components/AddNewBeerPage';
 
 import isEmpty from "./utilityFns/isEmpty";
 
@@ -72,6 +73,7 @@ class App extends Component {
                 exact={true}
               />
               <Route path="/privacy" component={PrivacyPage} exact={true} />
+              <Route path="/add-new-beer" component={AddNewBeerPage} exact={true} />
               {!!userData.id && (
                 <Route
                   path="/profile"

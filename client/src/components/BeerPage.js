@@ -170,11 +170,11 @@ class BeerPage extends Component {
                 <div className="beer-container info">
                   <div className="top row col-lg-12">
                     <div className="col-md-2 beer-img-container">
-                      <img
-                        className="beer-img"
-                        alt="beer-icon"
-                        src="https://i.imgur.com/oLXSUJP.png"
-                      />
+                    {!!beer.image ? (
+                      <img className="beer-img" alt="beer-icon" src={"/images/" + beer.image}></img>
+                    ) : (
+                      <img className="beer-img" alt="beer-icon" src="https://i.imgur.com/oLXSUJP.png"></img>
+                    )}
                     </div>
                     <div className="name col-sm-10">
                       <h2>{beer.beerName}</h2>

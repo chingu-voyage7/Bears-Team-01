@@ -2,6 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Beer = require("../models/beer.model.js");
 const isLoggedIn = require("../middlewares/requireLogin");
+const multer = require("multer");
+const path = require('path');
+const upload = multer({ dest: path.join(__dirname, '../client/public/images')});
 
 // Get all beers
 router.get("/", function(req, res, next) {
@@ -35,28 +38,35 @@ router.get("/:beerId", (req, res, next) => {
 });
 
 // Create a beer instance
-router.post("/", isLoggedIn, (req, res, next) => {
-  if (!req.body.brewer.name || !req.body.style) {
-    return res.status(400).json({
-      message: "Brewer name and style fields must be filled out"
-    });
-  }
+router.post("/", isLoggedIn, upload.single('beerImage'), (req, res, next) => {
+  const beerData = JSON.parse(req.body.beerData);
+
+  // if (!req.body.brewer.name) {
+  //   return res.status(400).json({
+  //     message: "Brewer name must be filled out"
+  //   });
+  // }
   const beer = new Beer({
-    beerName: req.body.beerName,
+    beerName: beerData.beerName,
     brewer: {
-      name: req.body.brewer.name,
-      location: req.body.brewer.location,
-      url: req.body.brewer.url
+      name: beerData.brewer.name,
+      location: beerData.brewer.location,
+      url: beerData.brewer.url
     },
-    style: req.body.style,
-    abv: req.body.abv,
-    availability: req.body.availability,
-    notes: req.body.notes
+    author: {
+      id: req.user._id
+    },
+    style: beerData.style,
+    abv: beerData.abv,
+    ibu: beerData.ibu,
+    availability: beerData.availability,
+    notes: beerData.description,
+    image: (req.file && req.file.filename ? req.file.filename : null)
   });
   beer
     .save()
     .then(data => {
-      res.status(201).json(data);
+      res.status(201).json({id: data._id});
     })
     .catch(err => {
       console.log(err);
