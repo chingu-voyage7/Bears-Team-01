@@ -18,11 +18,10 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userData: Object.create(null)
+      userData: Object.create(null) // create object with empty prototype
     };
   }
 
-  // this.setState({ userData: json }
   getUser = () => {
     fetch("/users/current")
       .then(response =>
@@ -36,7 +35,7 @@ class App extends Component {
   };
   render() {
     const { userData } = this.state;
-    console.log(userData);
+
     return (
       <BrowserRouter>
         <div className="App">
