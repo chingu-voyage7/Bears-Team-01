@@ -40,8 +40,6 @@ router.get("/:beerId", (req, res, next) => {
 // Create a beer instance
 router.post("/", isLoggedIn, upload.single('beerImage'), (req, res, next) => {
   const beerData = JSON.parse(req.body.beerData);
-    // console.log(beerData);
-    // console.log(req.file);
 
   // if (!req.body.brewer.name) {
   //   return res.status(400).json({
@@ -60,6 +58,7 @@ router.post("/", isLoggedIn, upload.single('beerImage'), (req, res, next) => {
     },
     style: beerData.style,
     abv: beerData.abv,
+    ibu: beerData.ibu,
     availability: beerData.availability,
     notes: beerData.description,
     image: (req.file && req.file.filename ? req.file.filename : null)

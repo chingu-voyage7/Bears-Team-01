@@ -11,8 +11,8 @@ class AddNewBeerPage extends Component {
         name: ''
       },
       description: '',
-      IBU: '',
-      ABV: '',
+      ibu: '',
+      abv: '',
       style: '',
       selectedPicture: null,
       status: ''
@@ -28,6 +28,18 @@ class AddNewBeerPage extends Component {
   };
   handleDescriptionChange = (e) => {
     this.setState({ description: e.target.value });
+  };
+  handleABVChange = (e) => {
+    const number = e.target.value
+    if(number.match(/^\d{0,2}(\.\d{0,2})?$/)){
+      this.setState({ abv: number });
+    } 
+  };
+  handleIBUChange = (e) => {
+    const number = e.target.value
+    if(number.match(/^\d{0,3}(\.\d{0,2})?$/)){
+      this.setState({ ibu: number });
+    }
   };
   handleSelectImage = (e) => {
     this.setState({ 
@@ -106,6 +118,7 @@ class AddNewBeerPage extends Component {
                   ABV - Alcohol by Volume
                 </label>
                 <input 
+                  value={this.state.abv}
                   onChange={this.handleABVChange} 
                   id="abv" 
                   className="form-control mt-1" 
@@ -119,6 +132,7 @@ class AddNewBeerPage extends Component {
                   IBU - International Bitterness Unit
                 </label>
                 <input 
+                  value={this.state.ibu}
                   onChange={this.handleIBUChange} 
                   id="ibu" 
                   className="form-control mt-1" 
