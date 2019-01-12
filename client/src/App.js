@@ -8,6 +8,7 @@ import Browse from "./components/BrowsePage";
 import NotFoundPage from "./components/NotFoundPage";
 import BeerPage from "./components/BeerPage";
 import ReviewBeer from "./components/ReviewBeer";
+import BeerRecommendation from "./components/BeerRecommendation";
 import PrivacyPage from "./components/PrivacyPage";
 import ProfilePage from "./components/profile/ProfilePage";
 
@@ -63,6 +64,11 @@ class App extends Component {
               <Route
                 path="/beer/:id"
                 render={props => <BeerPage {...props} userData={userData} />}
+                exact={true}
+              />
+              <Route
+                path="/get_beer_suggestion"
+                render={() => <BeerRecommendation userData={userData} />}
                 exact={true}
               />
               <Route path="/privacy" component={PrivacyPage} exact={true} />
