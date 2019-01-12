@@ -51,6 +51,9 @@ class AddNewBeerPage extends Component {
     const data = { ...this.state };
     this.postNewBeer(e, data);
   };
+  componentDidMount(){
+    window.scrollTo(0, 0);
+  };
   postNewBeer = (e, data) => {
     if(data.beerName.length >= 3 && data.description.length > 20){
 
