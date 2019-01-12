@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import RegisterModal from "./RegisterModal";
 import LoginModal from "./LoginModal";
@@ -44,11 +44,21 @@ class Navbar extends Component {
                   </Link>
                 </li>
                 {this.props.userData.id ? (
-                  <li className="nav-item">
-                    <Link className="nav-link text-dark" to="/review">
-                      Review
-                    </Link>
-                  </li>
+                  <Fragment>
+                    <li className="nav-item">
+                      <Link className="nav-link text-dark" to="/review">
+                        Review
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link
+                        className="nav-link text-dark"
+                        to="/get_beer_suggestion"
+                      >
+                        Get Beer Suggestion
+                      </Link>
+                    </li>
+                  </Fragment>
                 ) : null}
               </ul>
 

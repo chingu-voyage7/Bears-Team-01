@@ -17,7 +17,7 @@ class Dashboard extends Component {
     const res = await fetch(`/beers/reviews/user/${this.props.userData.id}`)
       .then(res => res.json())
       .catch(err => console.error);
-    console.log("Dashboard reviews", res);
+
     return this.setState({ reviews: res.reviews });
   };
 
@@ -31,7 +31,7 @@ class Dashboard extends Component {
           <ul className="list-group">
             {this.state.reviews.map((review, idx) => (
               <li key={`review${idx}`} className="list-group-item">
-                {review.text}
+                <p>{review.text}</p>
               </li>
             ))}
           </ul>
