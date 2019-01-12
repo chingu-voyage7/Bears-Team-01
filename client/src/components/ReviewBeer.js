@@ -1,38 +1,52 @@
-import React, { Component } from 'react';
-import RateCategory from './RateCategory';
-import { RATE_CATEGORIES } from '../constants';
+import React, { Component } from "react";
+import RateCategory from "./RateCategory";
+import { RATE_CATEGORIES } from "../constants";
 
 export default class ReviewBeer extends Component {
   state = {
     categoryValues: {
-      look: '',
-      smell: '',
-      taste: '',
-      feel: '',
-      overall: ''
+      look: "",
+      smell: "",
+      taste: "",
+      feel: "",
+      overall: ""
     },
-    textValue: '',
+    textValue: "",
     favorite: false
   };
 
-  handleSelectChange = (e) => {
+  postBeerReview = data =>
+    fetch("/beers/reviews/" + data.beerId, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include" // include session cookie
+    })
+      .then(res => res.json())
+      .catch(e => console.error(e));
+
+  handleSelectChange = e => {
     let categoryValues = this.state.categoryValues;
     categoryValues[e.target.name] = e.target.value;
 
     this.setState({
       categoryValues: categoryValues
     });
-  }
-
-  handleTextAreaChange = (e) => {
-    this.setState({ textValue: e.target.value })
   };
 
-  handleSubmitClick = e => {
+  handleTextAreaChange = e => {
+    this.setState({ textValue: e.target.value });
+  };
+
+  handleSubmitClick = async e => {
     e.preventDefault();
-    const data = { ...this.state };
-    data.beerId = this.props.beerId;
-    this.props.postBeerReview(data)
+    const { beerName, beerId, userData } = this.props;
+    const data = { ...this.state, beerName, beerId, userData };
+    const res = await this.postBeerReview(data);
+
+    window.location.reload(false);
+
+    return res.error ? this.props.setError(true) : this.props.setSuccess(true);
   };
 
   render() {
@@ -52,35 +66,38 @@ export default class ReviewBeer extends Component {
           </div>
         </div>
         <form onSubmit={this.handleSubmitClick}>
-          <input type="hidden" name="beerID" value={this.props.id}></input>
+          <input type="hidden" name="beerID" value={this.props.id} />
           <div className="form-group mt-4 p-1">
-            <label htmlFor="review">
-              Review
-            </label>
-            <textarea 
-              onChange={this.handleTextAreaChange} 
-              id="review" 
-              className="form-control" 
-              type="text" 
+            <label htmlFor="review">Review</label>
+            <textarea
+              onChange={this.handleTextAreaChange}
+              id="review"
+              className="form-control"
+              type="text"
               name="review"
-              placeholder="Review goes here">
-            </textarea>
+              placeholder="Review goes here"
+            />
             <div className="col-lg-12 favorites-checkbox ml-2 mt-4">
-              <input className="form-check-input" type="checkbox" value="true" id="defaultCheck1" />
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value="true"
+                id="defaultCheck1"
+              />
               <p>add beer to favorites</p>
             </div>
           </div>
           <div className="form-group">
-            <input 
-              className="btn btn-primary mb-1 ml-1" 
-              type="submit" 
+            <input
+              className="btn btn-primary mb-1 ml-1"
+              type="submit"
               value="Submit"
-             />
-            <input 
-              onClick={this.props.handleReviewToggle} 
-              className="btn btn-outline-primary mb-1 ml-1" 
-              type="submit" 
-              value="Close" 
+            />
+            <input
+              onClick={this.props.handleReviewToggle}
+              className="btn btn-outline-primary mb-1 ml-1"
+              type="submit"
+              value="Close"
             />
           </div>
         </form>
@@ -88,3 +105,26 @@ export default class ReviewBeer extends Component {
     );
   }
 }
+
+/*
+  when user submits a review:
+    - for each review, normalize all category values to a scale of 0 to 1 (divide by 5)
+      - also normalize starRating (divide by 5)
+    - so we will have an array of five values representing 'look', 'smell', 'taste', 'feel', 'overall'
+  - each element in data array is an object like so: { input: [normalizedCategoryValues], output: [starRating] };
+  - POST new review to back end
+  - save trainingData to localStorage
+
+/*
+
+/* steps to train model
+  - check if localStorage has user's reviews
+    - if not, fetch from db and save to localStorage
+  - create new neural network (const net = new brain.NeuralNetwork())
+  - train model (net.train(data)) (so data is all of the user's normalized reviews)
+  - for each beer we have in database, we run net.run([normalizedCategoryValues]) on its normalized values
+    - net.run will give us an array so take first score from it
+    - push each beer with its' prediction score onto an array
+    - sort the array of beers according to prediction score
+    - take top 10 (or 20?) and give to user
+*/

@@ -4,10 +4,10 @@ const User = require("../models/user.model");
 const isLogedIn = require("../middlewares/requireLogin");
 
 // get info about currently logged in user
-router.get("/current", isLogedIn, (req, res, next) => {
+router.get("/current", (req, res, next) => {
   if (!req.user) {
-    res.status(500).json({
-      message: err.message || "some error occurred while retrieving the user",
+    res.status(400).json({
+      message: "Currently no user logged in",
       route: "users/current",
       method: "GET"
     });
