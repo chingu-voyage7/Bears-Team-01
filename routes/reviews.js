@@ -65,36 +65,35 @@ router.get("/:reviewId", (req, res, next) => {
 });
 
 //Reviews Create
-router.post("/:beerId", isLoggedIn, function(req, res) {
-  console.log("BEER REVIEW ROUTE", req.body);
-  Beer.findById(req.body.beerId, function(err, beer) {
-    if (err) {
-      res.status(404).json({ error: err });
-    } else {
-      Review.create(
-        {
-          // TODO: include more relevant data
-          text: req.body.textValue
-        },
-        function(err, review) {
-          if (err) {
-            console.log(err);
-          } else {
-            review.author.id = req.user._id;
-            review.author.username = req.user.username;
-            review.author.name = req.user.name;
-            review.author.picture = req.user.picture;
-            review.date = new Date();
-            //save review
-            review.save();
-            beer.reviews.push(review);
-            beer.save();
-            res.redirect("/beer/" + beer._id);
-          }
-        }
-      );
-    }
-  });
+router.post("/:beerId", isLoggedIn, async function(req, res) {
+  try {
+    const { body } = req;
+    const { userData, categoryValues, beerId, beerName } = req.body;
+    const review = await new Review({
+      date: Date.now(),
+      text: body.textValue,
+      beer: {
+        id: beerId,
+        name: beerName
+      },
+      author: {
+        id: userData.id,
+        username: "",
+        name: userData.name,
+        picture: userData.picture
+      },
+      category: { ...categoryValues }
+    }).save();
+    const updatedBeer = await Beer.findByIdAndUpdate(
+      beerId,
+      { $push: { reviews: review } },
+      { new: true }
+    );
+
+    res.send({ updatedBeer });
+  } catch (e) {
+    res.status(500).send({ error: "An error occurred" });
+  }
 });
 
 //Delete review route

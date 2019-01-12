@@ -8,6 +8,7 @@ class BrowsePage extends Component {
       beers: []
     };
   }
+  // REFACTOR: look into extracting setting cache from getting beers into separate functions
   getBeers = () => {
     fetch("/beers")
       .then(response => response.json())
@@ -19,7 +20,6 @@ class BrowsePage extends Component {
   };
   componentDidMount = async () => {
     const currentBeerList = window.localStorage.getItem("beerList");
-    console.log("beerList", currentBeerList);
 
     if (!currentBeerList) {
       await this.getBeers();
