@@ -14,10 +14,11 @@ class Dashboard extends Component {
   }
 
   getReviews = async () => {
-    const reviews = await fetch(`/beers/reviews/user/${this.props.userData.id}`)
+    const res = await fetch(`/beers/reviews/user/${this.props.userData.id}`)
       .then(res => res.json())
       .catch(err => console.error);
-    return this.setState({ reviews });
+    console.log("Dashboard reviews", res);
+    return this.setState({ reviews: res.reviews });
   };
 
   render() {
