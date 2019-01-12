@@ -18,13 +18,17 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      userData: {}
+      userData: Object.create(null)
     };
   }
+
+  // this.setState({ userData: json }
   getUser = () => {
     fetch("/users/current")
-      .then(response => response.json())
-      .then(json => this.setState({ userData: json }))
+      .then(response =>
+        response.status === 200 ? response.json() : Object.create(null)
+      )
+      .then(userData => this.setState({ userData }))
       .catch(err => console.log(err));
   };
   componentDidMount = () => {
