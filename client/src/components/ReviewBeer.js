@@ -57,11 +57,11 @@ export default class ReviewBeer extends Component {
             <label htmlFor="review">
               Review
             </label>
-            <textarea 
-              onChange={this.handleTextAreaChange} 
-              id="review" 
-              className="form-control" 
-              type="text" 
+            <textarea
+              onChange={this.handleTextAreaChange}
+              id="review"
+              className="form-control"
+              type="text"
               name="review"
               placeholder="Review goes here">
             </textarea>
@@ -71,6 +71,12 @@ export default class ReviewBeer extends Component {
             </div>
           </div>
           <div className="form-group">
+            <input className="btn btn-primary mb-1 ml-1" type="submit" value="Submit" />
+            <input
+              onClick={this.props.handleReviewToggle}
+              className="btn btn-outline-primary mb-1 ml-1"
+              type="submit"
+              value="Close"
             <input 
               className="btn btn-primary mb-1 ml-1" 
               type="submit" 
@@ -88,3 +94,26 @@ export default class ReviewBeer extends Component {
     );
   }
 }
+
+/*
+  when user submits a review:
+    - for each review, normalize all category values to a scale of 0 to 1 (divide by 5)
+      - also normalize starRating (divide by 5)
+    - so we will have an array of five values representing 'look', 'smell', 'taste', 'feel', 'overall'
+  - each element in data array is an object like so: { input: [normalizedCategoryValues], output: [starRating] };
+  - POST new review to back end
+  - save trainingData to localStorage
+
+/*
+
+/* steps to train model
+  - check if localStorage has user's reviews
+    - if not, fetch from db and save to localStorage
+  - create new neural network (const net = new brain.NeuralNetwork())
+  - train model (net.train(data)) (so data is all of the user's normalized reviews)
+  - for each beer we have in database, we run net.run([normalizedCategoryValues]) on its normalized values
+    - net.run will give us an array so take first score from it
+    - push each beer with its' prediction score onto an array
+    - sort the array of beers according to prediction score
+    - take top 10 (or 20?) and give to user
+*/
