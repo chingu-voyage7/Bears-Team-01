@@ -1,38 +1,65 @@
-import React, { Component } from 'react';
-import RateCategory from './RateCategory';
-import { RATE_CATEGORIES } from '../constants';
+import React, { Component } from "react";
+import RateCategory from "./RateCategory";
+import { RATE_CATEGORIES } from "../constants";
 
 export default class ReviewBeer extends Component {
   state = {
     categoryValues: {
-      look: '',
-      smell: '',
-      taste: '',
-      feel: '',
-      overall: ''
+      look: "",
+      smell: "",
+      taste: "",
+      feel: "",
+      overall: ""
     },
-    textValue: '',
-    favorite: false
+    textValue: "",
+    favorite: false,
+    reviewSuccess: {
+      error: false,
+      success: false
+    }
   };
 
-  handleSelectChange = (e) => {
+  componentWillUnmount() {
+    this.setState({
+      reviewSuccess: {
+        error: false,
+        success: false
+      }
+    });
+  }
+
+  postBeerReview = data =>
+    fetch("/beers/reviews/" + data.beerId, {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" },
+      credentials: "include" // include session cookie
+    })
+      .then(res => res.json())
+      .catch(e => console.error(e));
+
+  handleSelectChange = e => {
     let categoryValues = this.state.categoryValues;
     categoryValues[e.target.name] = e.target.value;
 
     this.setState({
       categoryValues: categoryValues
     });
-  }
-
-  handleTextAreaChange = (e) => {
-    this.setState({ textValue: e.target.value })
   };
 
-  handleSubmitClick = e => {
+  handleTextAreaChange = e => {
+    this.setState({ textValue: e.target.value });
+  };
+
+  handleSubmitClick = async e => {
     e.preventDefault();
-    const data = { ...this.state };
-    data.beerId = this.props.beerId;
-    this.props.postBeerReview(data)
+    const { beerName, beerId, userData } = this.props;
+    const data = { ...this.state, beerName, beerId, userData };
+    const res = await this.postBeerReview(data);
+
+    return res.error
+      ? this.setState({ reviewSuccess: { error: true } })
+      : this.setState({ reviewSuccess: { success: true } });
   };
 
   render() {
@@ -52,41 +79,38 @@ export default class ReviewBeer extends Component {
           </div>
         </div>
         <form onSubmit={this.handleSubmitClick}>
-          <input type="hidden" name="beerID" value={this.props.id}></input>
+          <input type="hidden" name="beerID" value={this.props.id} />
           <div className="form-group mt-4 p-1">
-            <label htmlFor="review">
-              Review
-            </label>
+            <label htmlFor="review">Review</label>
             <textarea
               onChange={this.handleTextAreaChange}
               id="review"
               className="form-control"
               type="text"
               name="review"
-              placeholder="Review goes here">
-            </textarea>
+              placeholder="Review goes here"
+            />
             <div className="col-lg-12 favorites-checkbox ml-2 mt-4">
-              <input className="form-check-input" type="checkbox" value="true" id="defaultCheck1" />
+              <input
+                className="form-check-input"
+                type="checkbox"
+                value="true"
+                id="defaultCheck1"
+              />
               <p>add beer to favorites</p>
             </div>
           </div>
           <div className="form-group">
-            <input className="btn btn-primary mb-1 ml-1" type="submit" value="Submit" />
+            <input
+              className="btn btn-primary mb-1 ml-1"
+              type="submit"
+              value="Submit"
+            />
             <input
               onClick={this.props.handleReviewToggle}
               className="btn btn-outline-primary mb-1 ml-1"
               type="submit"
               value="Close"
-            <input 
-              className="btn btn-primary mb-1 ml-1" 
-              type="submit" 
-              value="Submit"
-             />
-            <input 
-              onClick={this.props.handleReviewToggle} 
-              className="btn btn-outline-primary mb-1 ml-1" 
-              type="submit" 
-              value="Close" 
             />
           </div>
         </form>

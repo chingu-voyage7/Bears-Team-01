@@ -26,7 +26,7 @@ class Dashboard extends Component {
 
     return (
       <div className="container text-center shadow-sm p-3 mb-5 bg-white rounded">
-        <h2>Dashboard</h2>
+        <h1>Dashboard</h1>
         {reviews.length > 0 ? (
           <ul className="list-group">
             {this.state.reviews.map((review, idx) => (
@@ -35,7 +35,9 @@ class Dashboard extends Component {
               </li>
             ))}
           </ul>
-        ) : null}
+        ) : (
+          <p style={{ marginTop: "30px" }}>You currently have no reviews.</p>
+        )}
       </div>
     );
   }

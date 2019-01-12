@@ -13,7 +13,6 @@ import ProfilePage from "./components/profile/ProfilePage";
 
 import isEmpty from "./utilityFns/isEmpty";
 
-
 import "./styles/styles.scss";
 
 class App extends Component {
@@ -63,8 +62,7 @@ class App extends Component {
               />
               <Route
                 path="/beer/:id"
-                userId={userData.id}
-                component={BeerPage}
+                render={props => <BeerPage {...props} userData={userData} />}
                 exact={true}
               />
               <Route path="/privacy" component={PrivacyPage} exact={true} />
