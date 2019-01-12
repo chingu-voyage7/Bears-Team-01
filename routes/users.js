@@ -18,7 +18,9 @@ router.get("/current", (req, res, next) => {
       email: req.user.email,
       picture: req.user.picture,
       date: req.user.date,
-      ml: req.user.ml
+      ml: req.user.ml,
+      reviews: req.user.reviews,
+      bio: req.user.bio
     });
   }
 });
@@ -37,7 +39,8 @@ router.put("/:userId", isLogedIn, (req, res, next) => {
             email: user.email,
             picture: user.picture,
             date: user.date,
-            ml: user.ml
+            ml: user.ml,
+            bio: user.bio
           });
         } else {
           res.status(404).json({

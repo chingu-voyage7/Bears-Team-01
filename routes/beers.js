@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Beer = require("../models/beer.model.js");
-const isLogedIn = require("../middlewares/requireLogin");
+const isLoggedIn = require("../middlewares/requireLogin");
 
 // Get all beers
 router.get("/", function(req, res, next) {
@@ -35,7 +35,7 @@ router.get("/:beerId", (req, res, next) => {
 });
 
 // Create a beer instance
-router.post("/", isLogedIn, (req, res, next) => {
+router.post("/", isLoggedIn, (req, res, next) => {
   if (!req.body.brewer.name || !req.body.style) {
     return res.status(400).json({
       message: "Brewer name and style fields must be filled out"
@@ -67,7 +67,7 @@ router.post("/", isLogedIn, (req, res, next) => {
 });
 
 // Update a beer
-router.put("/:beerId", isLogedIn, (req, res, next) => {
+router.put("/:beerId", isLoggedIn, (req, res, next) => {
   Beer.findByIdAndUpdate(req.params.beerId, req.body, { new: true }) // TOO TRUSTING OF DATA GIVEN BY CLIENT!!
     .then(data => {
       res.status(200).json(data);
@@ -78,7 +78,7 @@ router.put("/:beerId", isLogedIn, (req, res, next) => {
 });
 
 // Delete a beer
-router.delete("/:beerId", isLogedIn, (req, res, next) => {
+router.delete("/:beerId", isLoggedIn, (req, res, next) => {
   const id = req.params.beerId;
   Beer.deleteOne({ _id: id })
     .then(data => {

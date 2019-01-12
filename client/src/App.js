@@ -13,6 +13,7 @@ import ProfilePage from "./components/profile/ProfilePage";
 
 import isEmpty from "./utilityFns/isEmpty";
 
+
 import "./styles/styles.scss";
 
 class App extends Component {

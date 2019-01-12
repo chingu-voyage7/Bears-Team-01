@@ -18,8 +18,8 @@ const Footer = () => (
             <div className="col-sm-4 col-md-4 col-lg-4">
               <h5 className="title">Explore</h5>
                 <ul className="list-unstyled footer-list">
-                  <li><Link className="footer-link" to="/">Trending</Link></li>
-                  <li><Link className="footer-link" to="/">Latest</Link></li>
+                  <li><Link className="footer-link" to="/browse">Trending</Link></li>
+                  <li><Link className="footer-link" to="/browse">Latest</Link></li>
                   <li><Link className="footer-link" to="/browse">Browse</Link></li>
                 </ul>
             </div>
@@ -27,17 +27,26 @@ const Footer = () => (
               <h5 className="title">Share</h5>
               <ul className="list-unstyled footer-list">
                 <li>
-                  <Link className="footer-link" to="/">
+                  <Link 
+                    className="footer-link" 
+                    to="//twitter.com/intent/tweet?source=http%3A%2F%2Fwww.beercraft.io&text=Check%20out%20Beercraft:%20http%3A%2F%2Fwww.beercraft.io" 
+                    target="_blank" >
                     <i className="fab fa-twitter footer-icon"></i> Twitter
                   </Link>
                 </li>
                 <li>
-                  <Link className="footer-link" to="/">
+                  <Link 
+                    className="footer-link" 
+                    to="//www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.beercraft.io&quote=Check%20out%20Beercraft" 
+                    target="_blank">
                     <i className="fab fa-facebook footer-icon"></i> Facebook
                   </Link>
                 </li>
                 <li>
-                  <Link className="footer-link" to="/">
+                  <Link 
+                    className="footer-link" 
+                    to="//www.reddit.com/submit?url=http%3A%2F%2Fwww.beercraft.io&title=Check%20out%20Beercraft" 
+                    target="_blank" >
                     <i className="fab fa-reddit footer-icon"></i> Reddit
                   </Link>
                 </li>

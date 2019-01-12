@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const Beer = require("../models/beer.model.js");
+const User = require("../models/user.model.js");
 const Review = require("../models/review.model.js");
 const isLoggedIn = require("../middlewares/requireLogin");
 const checkReviewOwnership = require("../middlewares/checkReviewOwnership");
@@ -11,9 +12,6 @@ router.get("/all/:beerId", (req, res, next) => {
   Beer.findById(req.params.beerId)
     .then(beer => {
       if (beer) {
-        console.log(
-          beer.reviews.map(reviewId => new mongoose.Types.ObjectId(reviewId))
-        );
         Review.find({
           _id: {
             $in: beer.reviews.map(
@@ -42,6 +40,7 @@ router.get("/all/:beerId", (req, res, next) => {
     });
 });
 
+
 // Get all of a user's reviews
 router.get("/user/:userId", async (req, res) => {
   const reviews = await Review.find({ author: { id: req.params.userId } });
@@ -65,6 +64,7 @@ router.get("/:reviewId", (req, res, next) => {
       res.status(404).json({ error: err });
     });
 });
+
 
 //Reviews Create
 router.post("/:beerId", isLoggedIn, function(req, res) {
@@ -94,9 +94,6 @@ router.post("/:beerId", isLoggedIn, function(req, res) {
           }
         }
       );
-    }
-  });
-});
 
 //Delete review route
 
@@ -109,6 +106,7 @@ router.delete("/:reviewId", checkReviewOwnership, function(req, res) {
       res.status(200).json({ msg: "successfully deleted review." });
     }
   });
+
 });
 
 module.exports = router;

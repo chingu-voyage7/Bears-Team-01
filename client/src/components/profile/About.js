@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import EditAboutMe from './EditAboutMe';
 
 class AboutSection extends Component {
-  //TODO: Make about text automatically update (The text display updates only on a hard refresh,
-  //but saving to the database is working.)
+  //TODO: Save the state in local storage so it persists.
   constructor() {
     super();
     this.state = {
-      editIsActive : false
+      editIsActive : false,
+      bio: ''
     }
   }
   handleEditToggle = () => {
@@ -16,16 +16,24 @@ class AboutSection extends Component {
     }));
   }    
   handleSaveBio = (bio) => {
-    const id = this.props.userData._id;
+    const id = this.props.userData.id;
     fetch("/users/" + id, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({about:bio})
+      body: JSON.stringify({ bio })
     }).then(() => {
       this.setState(() => ({ 
+        bio,
         editIsActive: !this.state.editIsActive
       }));
     });
+  }
+  componentDidMount(){
+    if(this.props.userData.bio){
+      this.setState(() => ({ 
+        bio: this.props.userData.bio
+      }));
+    }
   }
   renderAbout = () => {
     if (this.state.editIsActive){
@@ -33,15 +41,15 @@ class AboutSection extends Component {
         <EditAboutMe 
           handleSaveBio={this.handleSaveBio} 
           handleEditToggle={this.handleEditToggle} 
-          bio={this.props.userData.about}
+          bio={this.props.userData.bio}
         />
       )
     }
     return (
       <div>
-        {!!this.props.userData.about && <p>{this.props.userData.about}</p>}
+        <p>{this.state.bio}</p>
         <button className="btn btn-primary-outline edit-btn" onClick={this.handleEditToggle}>
-          <i class="far fa-edit"></i> Edit</button>
+          <i className="far fa-edit"></i> Edit</button>
       </div>
     )
   }

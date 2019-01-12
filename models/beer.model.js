@@ -24,7 +24,7 @@ const BeerSchema = mongoose.Schema({
        type: mongoose.Schema.Types.ObjectId,
        ref: "Review"
     }
-    ]
+  ]
 })
 
 module.exports = mongoose.model("Beer", BeerSchema);

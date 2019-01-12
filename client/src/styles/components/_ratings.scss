@@ -6,10 +6,6 @@
   align-items: center;
 }
 
-/* .rate-beer-container button {
-
-} */
-
 .rating-categories {
   display: flex;
 }
@@ -26,4 +22,8 @@
 .rate-beer-container textarea {
   width: 25em;
   height: 15em;
+}
+
+.rating-icon {
+  font-size: $md-size;
 }
