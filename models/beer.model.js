@@ -20,7 +20,7 @@ const BeerSchema = mongoose.Schema({
     feel: Number,
     overall: Number
   },
-  picture: String,
+  image: String,
   style: String,
   abv: String,
   availability: String,

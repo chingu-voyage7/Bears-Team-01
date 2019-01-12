@@ -3,8 +3,8 @@ const router = express.Router();
 const Beer = require("../models/beer.model.js");
 const isLoggedIn = require("../middlewares/requireLogin");
 const multer = require("multer");
-const upload = multer({ dest: 'uploads/'});
-
+const path = require('path');
+const upload = multer({ dest: path.join(__dirname, '../client/public/images')});
 
 // Get all beers
 router.get("/", function(req, res, next) {
@@ -39,26 +39,30 @@ router.get("/:beerId", (req, res, next) => {
 
 // Create a beer instance
 router.post("/", isLoggedIn, upload.single('beerImage'), (req, res, next) => {
-console.log("***BODY** ", req.body)
+  const beerData = JSON.parse(req.body.beerData);
+    // console.log(beerData);
+    // console.log(req.file);
+
   // if (!req.body.brewer.name) {
   //   return res.status(400).json({
   //     message: "Brewer name must be filled out"
   //   });
   // }
   const beer = new Beer({
-    beerName: req.body.beerName,
+    beerName: beerData.beerName,
     brewer: {
-      name: req.body.brewer.name,
-      location: req.body.brewer.location,
-      url: req.body.brewer.url
+      name: beerData.brewer.name,
+      location: beerData.brewer.location,
+      url: beerData.brewer.url
     },
     author: {
       id: req.user._id
     },
-    style: req.body.style,
-    abv: req.body.abv,
-    availability: req.body.availability,
-    notes: req.body.description
+    style: beerData.style,
+    abv: beerData.abv,
+    availability: beerData.availability,
+    notes: beerData.description,
+    image: req.file.filename
   });
   beer
     .save()

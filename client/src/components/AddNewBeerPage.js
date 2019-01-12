@@ -14,7 +14,6 @@ class AddNewBeerPage extends Component {
       IBU: '',
       ABV: '',
       style: '',
-      pictureIsSelected: false,
       selectedPicture: null,
       status: ''
     }
@@ -32,47 +31,27 @@ class AddNewBeerPage extends Component {
   };
   handleSelectImage = (e) => {
     this.setState({ 
-      pictureIsSelected: true,
       selectedPicture: e.target.files[0]
     });
-    console.log("State : ", this.state.selectedPicture)
-  };
-  handleUploadImage = (e) => {
-    let formData = new FormData();
-    formData.append('beerImage', this.state.selectedPicture, this.state.selectedPicture.name);
-    axios.post('/beers/', formData, {
-      onUploadProgress: progressEvent => {
-        console.log('Upload Progress: ', Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
-      }
-    })  
-    .catch(e => console.error(e));
   };
   onSubmit = (e) => {
     e.preventDefault();
     const data = { ...this.state };
-    this.postNewBeer(data)
-    //this.handleUploadImage()
+    this.postNewBeer(e, data);
   };
-  postNewBeer = (data) => {
-    if(data.beerName.length >= 3 /*&& data.description.length > 20*/){
-      fetch('/beers/', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include' // include session cookie
-      })
-        .then(res => res.json())
-        .then(newBeer => {
-          if(newBeer.author){
-            this.setState({ 
-              status: 'Beer successfully created.'
-            });
-          }
-          else {
-            this.setState({ status: 'You must be logged in to do that!'});
-          }
-        })
-        .catch(e => console.error(e));
+  postNewBeer = (e, data) => {
+    if(data.beerName.length >= 3 && data.description.length > 20){
+
+      let formData = new FormData();
+      formData.append('beerData', JSON.stringify(this.state));
+      formData.append('beerImage', this.state.selectedPicture, this.state.selectedPicture.name);
+
+      axios.post('/beers/', formData, {
+        onUploadProgress: progressEvent => {
+          console.log('Upload Progress: ', Math.round(progressEvent.loaded / progressEvent.total * 100) + '%')
+        }
+      })  
+      .catch(e => console.error(e));
     } else {
       if (data.beerName.length < 3){
         this.setState({ status: 'Beer name must be at least 3 characters long'});
@@ -123,12 +102,6 @@ class AddNewBeerPage extends Component {
                 name="beerImage"
                 className="btn-block btn-sm mt-1 add-beer-image"
                 placeholder="Choose Picture" />
-              {
-                !!this.state.pictureIsSelected && <button
-                className="btn btn-sm mt-1 btn-secondary"
-                onClick={this.handleUploadImage}
-                >Upload Selected Image</button>
-              }
             </div>
             <div className="form-group mt-3 p-1">
               <label htmlFor="description">

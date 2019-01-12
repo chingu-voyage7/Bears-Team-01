@@ -10,7 +10,11 @@ const BeerList = ({beers}) => {
             <div className="beer-container">
               <div className="row">
                 <div className="col-lg-1 col-md-2 beer-icon-container">
-                  <img className="beer-icon" alt="beer-icon" src="https://i.imgur.com/oLXSUJP.png"></img>
+                  {!!beer.image ? (
+                    <img className="beer-icon" alt="beer-icon" src={"/images/" + beer.image}></img>
+                  ) : (
+                    <img className="beer-icon" alt="beer-icon" src="https://i.imgur.com/oLXSUJP.png"></img>
+                  )}
                 </div>
                 <div className="col-lg-11 col-md-10 align-text-bottom">
                   <Link to={"/beer/" + beer._id} className="text-dark font-weight-bold"><h4>{beer.beerName}</h4></Link>
