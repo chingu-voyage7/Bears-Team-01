@@ -38,11 +38,11 @@ export default class ReviewBeer extends Component {
     this.setState({ textValue: e.target.value });
   };
 
-  handleSubmitClick = e => {
+  handleSubmitClick = async e => {
     e.preventDefault();
     const data = { ...this.state };
     data.beerId = this.props.beerId;
-    this.postBeerReview(data);
+    const res = await this.postBeerReview(data);
   };
 
   render() {

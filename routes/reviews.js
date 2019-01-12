@@ -40,7 +40,6 @@ router.get("/all/:beerId", (req, res, next) => {
     });
 });
 
-
 // Get all of a user's reviews
 router.get("/user/:userId", async (req, res) => {
   const reviews = await Review.find({ author: { id: req.params.userId } });
@@ -65,16 +64,16 @@ router.get("/:reviewId", (req, res, next) => {
     });
 });
 
-
 //Reviews Create
 router.post("/:beerId", isLoggedIn, function(req, res) {
-  //console.log("****debug**** : ", req.body);
+  console.log("BEER REVIEW ROUTE", req.body);
   Beer.findById(req.body.beerId, function(err, beer) {
     if (err) {
       res.status(404).json({ error: err });
     } else {
       Review.create(
         {
+          // TODO: include more relevant data
           text: req.body.textValue
         },
         function(err, review) {
@@ -94,6 +93,9 @@ router.post("/:beerId", isLoggedIn, function(req, res) {
           }
         }
       );
+    }
+  });
+});
 
 //Delete review route
 
@@ -106,7 +108,6 @@ router.delete("/:reviewId", checkReviewOwnership, function(req, res) {
       res.status(200).json({ msg: "successfully deleted review." });
     }
   });
-
 });
 
 module.exports = router;
