@@ -7,6 +7,7 @@ import Dashboard from "./components/Dashboard";
 import Browse from "./components/BrowsePage";
 import NotFoundPage from "./components/NotFoundPage";
 import BeerPage from "./components/BeerPage";
+import ReviewBeer from "./components/ReviewBeer";
 import PrivacyPage from "./components/PrivacyPage";
 import ProfilePage from "./components/profile/ProfilePage";
 
@@ -54,6 +55,11 @@ class App extends Component {
                 exact={true}
               />
               <Route path="/browse" component={Browse} exact={true} />
+              <Route
+                path="/review"
+                render={() => <ReviewBeer userData={userData} />}
+                exact={true}
+              />
               <Route
                 path="/beer/:id"
                 userId={userData.id}
