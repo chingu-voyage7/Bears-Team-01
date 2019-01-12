@@ -12,21 +12,8 @@ export default class ReviewBeer extends Component {
       overall: ""
     },
     textValue: "",
-    favorite: false,
-    reviewSuccess: {
-      error: false,
-      success: false
-    }
+    favorite: false
   };
-
-  componentWillUnmount() {
-    this.setState({
-      reviewSuccess: {
-        error: false,
-        success: false
-      }
-    });
-  }
 
   postBeerReview = data =>
     fetch("/beers/reviews/" + data.beerId, {
@@ -57,9 +44,9 @@ export default class ReviewBeer extends Component {
     const data = { ...this.state, beerName, beerId, userData };
     const res = await this.postBeerReview(data);
 
-    return res.error
-      ? this.setState({ reviewSuccess: { error: true } })
-      : this.setState({ reviewSuccess: { success: true } });
+    window.location.reload(false);
+
+    return res.error ? this.props.setError(true) : this.props.setSuccess(true);
   };
 
   render() {

@@ -11,9 +11,16 @@ class BeerPage extends Component {
       reviewIsActive: false,
       reviews: [],
       status: "",
-      likeButtonClass: ""
+      likeButtonClass: "",
+      reviewSuccess: {
+        error: false,
+        success: false
+      }
     };
   }
+
+  setError = error => this.setState({ reviewSuccess: { error } });
+  setSuccess = success => this.setState({ reviewSuccess: { success } });
   createBeerRating = () => {
     let ratingDisplay = [];
     let reviews = this.state.reviews;
@@ -210,6 +217,8 @@ class BeerPage extends Component {
                       beerId={this.props.match.params.id}
                       beerName={this.state.beer.beerName}
                       userData={this.props.userData}
+                      setError={this.setError}
+                      setSuccess={this.setSuccess}
                     />
                   )}
                   <div>

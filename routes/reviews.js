@@ -42,8 +42,8 @@ router.get("/all/:beerId", (req, res, next) => {
 
 // Get all of a user's reviews
 router.get("/user/:userId", async (req, res) => {
-  const reviews = await Review.find({ author: { id: req.params.userId } });
-  console.log("user reviews", reviews);
+  const id = mongoose.Types.ObjectId(req.params.userId);
+  const reviews = await Review.find({ "author.id": id });
 
   res.send({ reviews });
 });
@@ -77,7 +77,7 @@ router.post("/:beerId", isLoggedIn, async function(req, res) {
         name: beerName
       },
       author: {
-        id: userData.id,
+        id: mongoose.Types.ObjectId(userData.id),
         username: "",
         name: userData.name,
         picture: userData.picture
