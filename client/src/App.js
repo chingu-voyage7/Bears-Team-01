@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navbar from './components/layout/Navbar';
-import Footer from './components/layout/Footer';
-import Welcome from './components/WelcomePage';
-import Browse from './components/BrowsePage';
-import NotFoundPage from './components/NotFoundPage';
-import BeerPage from './components/BeerPage';
-import PrivacyPage from './components/PrivacyPage';
-import ProfilePage from './components/profile/ProfilePage';
+import React, { Component } from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import Welcome from "./components/WelcomePage";
+import Dashboard from "./components/Dashboard";
+import Browse from "./components/BrowsePage";
+import NotFoundPage from "./components/NotFoundPage";
+import BeerPage from "./components/BeerPage";
+import PrivacyPage from "./components/PrivacyPage";
+import ProfilePage from "./components/profile/ProfilePage";
 
-import './styles/styles.scss';
-
+import "./styles/styles.scss";
 
 class App extends Component {
   constructor() {
@@ -20,7 +20,7 @@ class App extends Component {
     };
   }
   getUser = () => {
-    fetch('/users/current')
+    fetch("/users/current")
       .then(response => response.json())
       .then(json => this.setState({ userData: json }))
       .catch(err => console.log(err));
@@ -29,7 +29,6 @@ class App extends Component {
     this.getUser();
   };
   render() {
-    // const userID = this.state.userData.id;
     const { userData } = this.state;
     return (
       <BrowserRouter>
@@ -39,7 +38,12 @@ class App extends Component {
             <Switch>
               <Route path="/" component={Welcome} exact={true} />
               <Route path="/browse" component={Browse} exact={true} />
-              <Route path="/beer/:id" userId={userData.id} component={BeerPage} exact={true} />
+              <Route
+                path="/beer/:id"
+                userId={userData.id}
+                component={BeerPage}
+                exact={true}
+              />
               <Route path="/privacy" component={PrivacyPage} exact={true} />
               {!!userData.id && (
                 <Route
