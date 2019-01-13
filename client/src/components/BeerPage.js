@@ -101,7 +101,7 @@ class BeerPage extends Component {
   postBeerReview = data => {
     //TODO: Save and render paragraphs & line breaks
     if (
-      data.textValue.length > 10 &&
+      data.textValue.length >= 10 &&
       data.categoryValues.overall.length !== 0
     ) {
       fetch("/beers/reviews/" + data.beerId, {
@@ -111,18 +111,23 @@ class BeerPage extends Component {
         credentials: "include" // include session cookie
       })
         .then(res => res.json())
-        .then(newReview => {
-          if (newReview.author) {
-            this.setState({
-              reviews: [newReview, ...this.state.reviews],
-              status: "Thank you for your review."
-            });
-          } else {
-            this.setState({ status: "You must be logged in to do that!" });
-          }
+        .then(({ updatedReviews: reviews }) => {
+          // if (newReview.author) {
+          //   this.setState({
+          //     reviews: [newReview, ...this.state.reviews],
+          //     status: "Thank you for your review."
+          //   });
+          // } else {
+          //   this.setState({ status: "You must be logged in to do that!" });
+          // }
+          console.log("reviews is", reviews);
+          this.setState({
+            reviews,
+            status: "Thank you for your review"
+          });
         })
         .then(this.handleReviewToggle())
-        .catch(e => console.error(e));
+        .catch(e => console.error("postBeerReview error", e));
     } else {
       if (data.categoryValues.overall.length === 0) {
         this.setState({ status: "You must choose an overall rating." });
@@ -161,6 +166,7 @@ class BeerPage extends Component {
   };
   render() {
     const { beer } = this.state;
+    console.log(beer);
     return (
       <div>
         <div className="row">
@@ -177,10 +183,8 @@ class BeerPage extends Component {
                       />
                     </div>
                     <div className="name col-sm-10">
-                      <h2>{beer.beerName}</h2>
-                      {!!beer.brewer && (
-                        <p className="brewery">{beer.brewer.name}</p>
-                      )}
+                      <h2>{beer.name}</h2>
+                      <p className="brewery">Style: {beer.style}</p>
                       <div className="row rating-section">
                         {this.createBeerRating()}
                       </div>

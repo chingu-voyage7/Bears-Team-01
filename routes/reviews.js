@@ -7,11 +7,14 @@ const Review = require("../models/review.model.js");
 const isLoggedIn = require("../middlewares/requireLogin");
 const checkReviewOwnership = require("../middlewares/checkReviewOwnership");
 
-const clearAllBeerReviews = async () => {
-  const allBeers = await Beer.updateMany({}, { $set: { reviews: [] } });
+// FOR DEV ONLY!!
+const clearAllBeerReviews = async () =>
+  await Beer.updateMany({}, { $set: { reviews: [] } });
 
-  console.log(allBeers);
-};
+const clearAllUserReviews = async () =>
+  await User.updateMany({}, { $set: { reviews: [] } });
+
+const clearAllReviews = async () => await Review.remove({});
 
 // Get all the reviews of a beer
 router.get("/all/:beerId", (req, res, next) => {
@@ -48,6 +51,9 @@ router.get("/all/:beerId", (req, res, next) => {
 
 // Get all of a user's reviews
 router.get("/user/:userId", async (req, res) => {
+  // clearAllBeerReviews();
+  // clearAllUserReviews();
+  // clearAllReviews();
   const id = mongoose.Types.ObjectId(req.params.userId);
   const reviews = await Review.find({ "author.id": id });
 
@@ -102,10 +108,15 @@ router.post("/:beerId", isLoggedIn, async function(req, res) {
         { new: true }
       )
     ]);
-    console.log("updatedBeer is", updatedBeer);
-    console.log("updatedUser is", updatedUser);
+    const updatedReviews = await Review.find({
+      _id: {
+        $in: updatedBeer.reviews.map(
+          reviewId => new mongoose.Types.ObjectId(reviewId)
+        )
+      }
+    });
 
-    res.send({ updatedBeer });
+    res.send({ updatedReviews });
   } catch (e) {
     res.status(500).send({ error: "An error occurred" });
   }
