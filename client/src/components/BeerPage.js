@@ -15,7 +15,8 @@ class BeerPage extends Component {
       reviewSuccess: {
         error: false,
         success: false
-      }
+      },
+      loginWarning: false
     };
   }
 
@@ -90,13 +91,20 @@ class BeerPage extends Component {
       .catch(err => console.log(err));
   }
   handleReviewToggle = () => {
-    this.setState(() => ({ reviewIsActive: !this.state.reviewIsActive }));
+    return this.props.userData.id
+      ? this.setState(() => ({ reviewIsActive: !this.state.reviewIsActive }))
+      : this.setState({
+          loginWarning: true
+        });
   };
   componentDidMount() {
     window.scrollTo(0, 0);
     const beerId = this.props.match.params.id;
     this.getBeer(beerId);
     this.getReviews(beerId);
+  }
+  componentWillUnmount() {
+    this.setState({ loginWarning: false });
   }
   postBeerReview = data => {
     //TODO: Save and render paragraphs & line breaks
@@ -166,7 +174,7 @@ class BeerPage extends Component {
   };
   render() {
     const { beer } = this.state;
-    console.log(beer);
+
     return (
       <div>
         <div className="row">
@@ -206,6 +214,11 @@ class BeerPage extends Component {
                 </div>
               </div>
               <div className="col-lg-12 mt-4 padding-mobile" id="reviews">
+                {this.state.loginWarning ? (
+                  <h5 className="text-danger">
+                    You must be logged in to review!
+                  </h5>
+                ) : null}
                 <div className="beer-container reviews">
                   <h4 className="mb-4">Reviews</h4>
                   <button
