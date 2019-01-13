@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const BeerSchema = mongoose.Schema({
-  beerName: String,
+  name: String,
   brewer: {
     name: String,
     location: String,

@@ -47,7 +47,7 @@ router.post("/", isLoggedIn, upload.single('beerImage'), (req, res, next) => {
   //   });
   // }
   const beer = new Beer({
-    beerName: beerData.beerName,
+    name: beerData.beerName,
     brewer: {
       name: beerData.brewer.name,
       location: beerData.brewer.location,

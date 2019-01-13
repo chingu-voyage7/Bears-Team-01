@@ -177,7 +177,7 @@ class BeerPage extends Component {
                     )}
                     </div>
                     <div className="name col-sm-10">
-                      <h2>{beer.beerName}</h2>
+                      <h2>{beer.name}</h2>
                       {!!beer.brewer && (
                         <p className="brewery">{beer.brewer.name}</p>
                       )}
@@ -215,7 +215,7 @@ class BeerPage extends Component {
                       postBeerReview={this.postBeerReview}
                       handleReviewToggle={this.handleReviewToggle}
                       beerId={this.props.match.params.id}
-                      beerName={this.state.beer.beerName}
+                      beerName={this.state.beer.name}
                       userData={this.props.userData}
                       setError={this.setError}
                       setSuccess={this.setSuccess}
