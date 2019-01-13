@@ -27,7 +27,7 @@ class BeerPage extends Component {
     let reviews = this.state.reviews;
     let rating = 0;
 
-    if (!reviews.category) {
+    if (reviews && !reviews.category) {
       //TODO: store and fetch the beer's overall rating in the database instead.
       //TODO: Show half-star ratings
 
