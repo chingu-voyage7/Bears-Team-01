@@ -44,7 +44,7 @@ export default class ReviewBeer extends Component {
     const data = { ...this.state, beerName, beerId, userData };
     const res = await this.postBeerReview(data);
 
-    window.location.reload(false);
+    console.log("res is", res);
 
     return res.error ? this.props.setError(true) : this.props.setSuccess(true);
   };

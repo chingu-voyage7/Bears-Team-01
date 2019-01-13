@@ -7,6 +7,12 @@ const Review = require("../models/review.model.js");
 const isLoggedIn = require("../middlewares/requireLogin");
 const checkReviewOwnership = require("../middlewares/checkReviewOwnership");
 
+const clearAllBeerReviews = async () => {
+  const allBeers = await Beer.updateMany({}, { $set: { reviews: [] } });
+
+  console.log(allBeers);
+};
+
 // Get all the reviews of a beer
 router.get("/all/:beerId", (req, res, next) => {
   Beer.findById(req.params.beerId)
@@ -84,11 +90,20 @@ router.post("/:beerId", isLoggedIn, async function(req, res) {
       },
       category: { ...categoryValues }
     }).save();
-    const updatedBeer = await Beer.findByIdAndUpdate(
-      beerId,
-      { $push: { reviews: review } },
-      { new: true }
-    );
+    const [updatedBeer, updatedUser] = await Promise.all([
+      Beer.findByIdAndUpdate(
+        beerId,
+        { $push: { reviews: review } },
+        { new: true }
+      ),
+      User.findByIdAndUpdate(
+        userData.id,
+        { $push: { reviews: review } },
+        { new: true }
+      )
+    ]);
+    console.log("updatedBeer is", updatedBeer);
+    console.log("updatedUser is", updatedUser);
 
     res.send({ updatedBeer });
   } catch (e) {
