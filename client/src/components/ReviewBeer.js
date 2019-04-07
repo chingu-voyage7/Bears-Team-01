@@ -15,16 +15,6 @@ export default class ReviewBeer extends Component {
     favorite: false
   };
 
-  postBeerReview = data =>
-    fetch("/beers/reviews/" + data.beerId, {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" },
-      credentials: "include" // include session cookie
-    })
-      .then(res => res.json())
-      .catch(e => console.error(e));
-
   handleSelectChange = e => {
     let categoryValues = this.state.categoryValues;
     categoryValues[e.target.name] = e.target.value;
@@ -42,11 +32,8 @@ export default class ReviewBeer extends Component {
     e.preventDefault();
     const { beerName, beerId, userData } = this.props;
     const data = { ...this.state, beerName, beerId, userData };
-    const res = await this.postBeerReview(data);
 
-    window.location.reload(false);
-
-    return res.error ? this.props.setError(true) : this.props.setSuccess(true);
+    return await this.props.postBeerReview(data);
   };
 
   render() {

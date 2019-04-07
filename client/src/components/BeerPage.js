@@ -15,7 +15,8 @@ class BeerPage extends Component {
       reviewSuccess: {
         error: false,
         success: false
-      }
+      },
+      loginWarning: false
     };
   }
 
@@ -26,7 +27,7 @@ class BeerPage extends Component {
     let reviews = this.state.reviews;
     let rating = 0;
 
-    if (!reviews.category) {
+    if (reviews && !reviews.category) {
       //TODO: store and fetch the beer's overall rating in the database instead.
       //TODO: Show half-star ratings
 
@@ -90,7 +91,11 @@ class BeerPage extends Component {
       .catch(err => console.log(err));
   }
   handleReviewToggle = () => {
-    this.setState(() => ({ reviewIsActive: !this.state.reviewIsActive }));
+    return this.props.userData.id
+      ? this.setState(() => ({ reviewIsActive: !this.state.reviewIsActive }))
+      : this.setState({
+          loginWarning: true
+        });
   };
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -98,10 +103,13 @@ class BeerPage extends Component {
     this.getBeer(beerId);
     this.getReviews(beerId);
   }
+  componentWillUnmount() {
+    this.setState({ loginWarning: false });
+  }
   postBeerReview = data => {
     //TODO: Save and render paragraphs & line breaks
     if (
-      data.textValue.length > 10 &&
+      data.textValue.length >= 10 &&
       data.categoryValues.overall.length !== 0
     ) {
       fetch("/beers/reviews/" + data.beerId, {
@@ -111,18 +119,23 @@ class BeerPage extends Component {
         credentials: "include" // include session cookie
       })
         .then(res => res.json())
-        .then(newReview => {
-          if (newReview.author) {
-            this.setState({
-              reviews: [newReview, ...this.state.reviews],
-              status: "Thank you for your review."
-            });
-          } else {
-            this.setState({ status: "You must be logged in to do that!" });
-          }
+        .then(({ updatedReviews: reviews }) => {
+          // if (newReview.author) {
+          //   this.setState({
+          //     reviews: [newReview, ...this.state.reviews],
+          //     status: "Thank you for your review."
+          //   });
+          // } else {
+          //   this.setState({ status: "You must be logged in to do that!" });
+          // }
+          console.log("reviews is", reviews);
+          this.setState({
+            reviews,
+            status: "Thank you for your review"
+          });
         })
         .then(this.handleReviewToggle())
-        .catch(e => console.error(e));
+        .catch(e => console.error("postBeerReview error", e));
     } else {
       if (data.categoryValues.overall.length === 0) {
         this.setState({ status: "You must choose an overall rating." });
@@ -161,6 +174,7 @@ class BeerPage extends Component {
   };
   render() {
     const { beer } = this.state;
+
     return (
       <div>
         <div className="row">
@@ -177,10 +191,8 @@ class BeerPage extends Component {
                     )}
                     </div>
                     <div className="name col-sm-10">
-                      <h2>{beer.beerName}</h2>
-                      {!!beer.brewer && (
-                        <p className="brewery">{beer.brewer.name}</p>
-                      )}
+                      <h2>{beer.name}</h2>
+                      <p className="brewery">Style: {beer.style}</p>
                       <div className="row rating-section">
                         {this.createBeerRating()}
                       </div>
@@ -202,6 +214,11 @@ class BeerPage extends Component {
                 </div>
               </div>
               <div className="col-lg-12 mt-4 padding-mobile" id="reviews">
+                {this.state.loginWarning ? (
+                  <h5 className="text-danger">
+                    You must be logged in to review!
+                  </h5>
+                ) : null}
                 <div className="beer-container reviews">
                   <h4 className="mb-4">Reviews</h4>
                   <button

@@ -5,6 +5,7 @@ const isLogedIn = require("../middlewares/requireLogin");
 
 // get info about currently logged in user
 router.get("/current", (req, res, next) => {
+  console.log(req.user);
   if (!req.user) {
     res.status(400).json({
       message: "Currently no user logged in",

@@ -7,6 +7,15 @@ const Review = require("../models/review.model.js");
 const isLoggedIn = require("../middlewares/requireLogin");
 const checkReviewOwnership = require("../middlewares/checkReviewOwnership");
 
+// FOR DEV ONLY!!
+const clearAllBeerReviews = async () =>
+  await Beer.updateMany({}, { $set: { reviews: [] } });
+
+const clearAllUserReviews = async () =>
+  await User.updateMany({}, { $set: { reviews: [] } });
+
+const clearAllReviews = async () => await Review.remove({});
+
 // Get all the reviews of a beer
 router.get("/all/:beerId", (req, res, next) => {
   Beer.findById(req.params.beerId)
@@ -42,6 +51,9 @@ router.get("/all/:beerId", (req, res, next) => {
 
 // Get all of a user's reviews
 router.get("/user/:userId", async (req, res) => {
+  // clearAllBeerReviews();
+  // clearAllUserReviews();
+  // clearAllReviews();
   const id = mongoose.Types.ObjectId(req.params.userId);
   const reviews = await Review.find({ "author.id": id });
 
@@ -84,13 +96,27 @@ router.post("/:beerId", isLoggedIn, async function(req, res) {
       },
       category: { ...categoryValues }
     }).save();
-    const updatedBeer = await Beer.findByIdAndUpdate(
-      beerId,
-      { $push: { reviews: review } },
-      { new: true }
-    );
+    const [updatedBeer, updatedUser] = await Promise.all([
+      Beer.findByIdAndUpdate(
+        beerId,
+        { $push: { reviews: review } },
+        { new: true }
+      ),
+      User.findByIdAndUpdate(
+        userData.id,
+        { $push: { reviews: review } },
+        { new: true }
+      )
+    ]);
+    const updatedReviews = await Review.find({
+      _id: {
+        $in: updatedBeer.reviews.map(
+          reviewId => new mongoose.Types.ObjectId(reviewId)
+        )
+      }
+    });
 
-    res.send({ updatedBeer });
+    res.send({ updatedReviews });
   } catch (e) {
     res.status(500).send({ error: "An error occurred" });
   }
